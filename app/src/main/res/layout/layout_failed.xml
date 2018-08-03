@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/failed_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/failed_bg"
+        android:layout_width="87dp"
+        android:layout_height="87dp"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rotate_layout_bg"
+        android:padding="10dp">
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="87dp"
+        android:layout_height="87dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:background="@android:color/transparent"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/failed_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/failed"/>
+    </RelativeLayout>
+
+</RelativeLayout>
