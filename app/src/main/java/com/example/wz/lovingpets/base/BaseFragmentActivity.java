@@ -4,13 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
-import com.example.wz.lovingpets.activity.MyApp;
-import com.example.wz.lovingpets.common.ActivityManager;
-import com.example.wz.lovingpets.utils.StatusBarUtil;
-
-public abstract class BaseActivity extends Activity {
+public abstract class BaseFragmentActivity extends FragmentActivity {
     public boolean isActive = false;
     protected final String TAG = this.getClass().getSimpleName();
 
@@ -45,18 +42,7 @@ public abstract class BaseActivity extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        int theme = MyApp.getInstance().getCurrentTheme();
-        setTheme(theme);
         super.onCreate(savedInstanceState);
-        StatusBarUtil.transparencyBar(this); //设置状态栏全透明
-        StatusBarUtil.StatusBarLightMode(this); //设置白底黑字
-        ActivityManager.getInstance().add(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ActivityManager.getInstance().remove(this);
     }
 
     protected abstract void findViews();

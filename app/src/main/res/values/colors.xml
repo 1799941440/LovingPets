@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#7adfb8</color>
+    <color name="colorPrimary_dog">#c56f1a</color>
+    <color name="colorPrimaryDark_dog">#c56f1a</color>
+    <color name="colorAccent_dog">#d6802b</color>
+    <color name="colorPrimary_cat">#e74186</color>
+    <color name="colorPrimaryDark_cat">#e74186</color>
+    <color name="colorAccent_cat">#f85297</color>
+    <color name="colorPrimary_bird">#4e9a36</color>
+    <color name="colorPrimaryDark_bird">#4e9a36</color>
+    <color name="colorAccent_bird">#5fab47</color>
+    <color name="colorPrimary_fish">#139ddf</color>
+    <color name="colorPrimaryDark_fish">#139ddf</color>
+    <color name="colorAccent_fish">#24aeef</color>
     <color name="myorange">#f19237</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#ff0000</color>
+    <color name="selector_grey">#DDDDDD</color>
+    //底部导航背景色
+    <color name="tab_gb">#ffffff</color>
+    //
+    <color name="launch_background">#7adfb8</color>
+    <color name="tab_normal_color">#515051</color>
+    <color name="tab_selected_color">#D33D3C</color>
+    //半透明灰底背景
+    <color name="bg_change_favorite">#55000000</color>
+    <color name="unreadTextColor">#00ff00</color>
+    <color name="msgTextColor">#00ff00</color>
 </resources>

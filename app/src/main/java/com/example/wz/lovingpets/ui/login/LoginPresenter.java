@@ -1,6 +1,7 @@
 package com.example.wz.lovingpets.ui.login;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
@@ -54,8 +55,10 @@ public class LoginPresenter implements LoginContract.Presenter {
                     return;
                 }
                 if(listResponse.getRows().size()!=0){
+                    Log.d("Tag", "登录onNext : 登录成功");
                     view.loginSuccess(listResponse.getRows().get(0),listResponse.isSuccess());
                 }else {
+                    Log.d("Tag", "登录onNext : 登录失败，没有该用户");
                     view.loginSuccess(null,listResponse.isSuccess());
                 }
             }
@@ -67,7 +70,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
             @Override
             public void onComplete() {
-
+                Log.d("Tag", "登录 onComplete: ");
             }
         });
     }

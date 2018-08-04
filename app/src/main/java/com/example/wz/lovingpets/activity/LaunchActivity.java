@@ -1,5 +1,6 @@
 package com.example.wz.lovingpets.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import com.example.wz.lovingpets.ui.login.LoginActivity;
 
 public class LaunchActivity extends Activity {
 
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

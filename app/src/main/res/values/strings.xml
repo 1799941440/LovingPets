@@ -14,4 +14,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favorite_dog">狗狗主站</string>
+    <string name="favorite_cat">猫猫主站</string>
+    <string name="favorite_bird">鸟儿主站</string>
+    <string name="favorite_fish">鱼儿主站</string>
 </resources>

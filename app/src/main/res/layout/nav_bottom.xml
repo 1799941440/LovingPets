@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/tab_normal_color"/>
+    <com.example.wz.lovingpets.widget.BottomBarLayout
+        android:id="@+id/main_bbl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@color/tab_gb"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.example.wz.lovingpets.widget.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconHeight="24dp"
+            app:iconNormal="?attr/main_icon"
+            app:iconSelected="?attr/main_icon"
+            app:iconWidth="24dp"
+            app:itemText="首页"
+            app:itemTextSize="12sp"
+            app:textColorNormal="@color/tab_normal_color"
+            app:textColorSelected="?attr/nav_bottom_text_selected_color" />
+
+        <com.example.wz.lovingpets.widget.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconHeight="24dp"
+            app:iconNormal="@mipmap/classify"
+            app:iconSelected="@mipmap/classify"
+            app:iconWidth="24dp"
+            app:itemText="分类"
+            app:itemTextSize="12sp"
+            app:textColorNormal="@color/tab_normal_color"
+            app:textColorSelected="?attr/nav_bottom_text_selected_color" />
+
+
+        <com.example.wz.lovingpets.widget.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconHeight="24dp"
+            app:iconNormal="@mipmap/circle"
+            app:iconSelected="@mipmap/circle"
+            app:iconWidth="24dp"
+            app:itemText="爱宠圈"
+            app:itemTextSize="12sp"
+            app:textColorNormal="@color/tab_normal_color"
+            app:textColorSelected="?attr/nav_bottom_text_selected_color" />
+
+        <com.example.wz.lovingpets.widget.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconHeight="24dp"
+            app:iconNormal="@mipmap/shopping_trolley"
+            app:iconSelected="@mipmap/shopping_trolley"
+            app:iconWidth="24dp"
+            app:itemText="购物车"
+            app:itemTextSize="12sp"
+            app:textColorNormal="@color/tab_normal_color"
+            app:textColorSelected="?attr/nav_bottom_text_selected_color" />
+
+        <com.example.wz.lovingpets.widget.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconHeight="24dp"
+            app:iconNormal="@mipmap/mine"
+            app:iconSelected="@mipmap/mine"
+            app:iconWidth="24dp"
+            app:itemText="我的"
+            app:itemTextSize="12sp"
+            app:textColorNormal="@color/tab_normal_color"
+            app:textColorSelected="?attr/nav_bottom_text_selected_color" />
+
+    </com.example.wz.lovingpets.widget.BottomBarLayout>
+</LinearLayout>

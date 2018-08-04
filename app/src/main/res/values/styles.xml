@@ -1,18 +1,56 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme_dog" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary_dog</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_dog</item>
+        <item name="colorAccent">@color/colorAccent_dog</item>
         <item name="windowNoTitle">true</item>
+        <item name="main_icon">@mipmap/dog</item>
+        <item name="nav_bottom_text_selected_color">@color/colorPrimary_dog</item>
     </style>
-    <style name="FullScreenTheme" parent="AppTheme">
+    <style name="AppTheme_cat" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_cat</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_cat</item>
+        <item name="colorAccent">@color/colorAccent_cat</item>
+        <item name="windowNoTitle">true</item>
+        <item name="main_icon">@mipmap/cat</item>
+        <item name="nav_bottom_text_selected_color">@color/colorPrimary_cat</item>
+    </style>
+    <style name="AppTheme_bird" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_bird</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_bird</item>
+        <item name="colorAccent">@color/colorAccent_bird</item>
+        <item name="windowNoTitle">true</item>
+        <item name="main_icon">@mipmap/bird</item>
+        <item name="nav_bottom_text_selected_color">@color/colorPrimary_bird</item>
+    </style>
+    <style name="AppTheme_fish" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_fish</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_fish</item>
+        <item name="colorAccent">@color/colorAccent_fish</item>
+        <item name="windowNoTitle">true</item>
+        <item name="main_icon">@mipmap/fish</item>
+        <item name="nav_bottom_text_selected_color">@color/colorPrimary_fish</item>
+    </style>
+
+    <style name="FullScreenTheme" parent="AppTheme_dog">
         <item name="android:windowFullscreen">true</item>
     </style>
+
     <style name="LaunchTheme" parent="FullScreenTheme">
         <item name="android:windowBackground">@drawable/launch_layout</item>
+    </style>
+    //可以看到上一个activity的主题
+
+    <style name="translucent" parent="FullScreenTheme">
+        <item name="android:windowBackground">@color/bg_change_favorite</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
     </style>
 
 </resources>

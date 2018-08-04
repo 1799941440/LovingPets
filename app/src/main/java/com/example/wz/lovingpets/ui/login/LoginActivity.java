@@ -6,11 +6,14 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -21,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.activity.MainActivity;
@@ -31,10 +35,11 @@ import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.utils.Md5Util;
 import com.example.wz.lovingpets.utils.UserUtil;
 
-public class LoginActivity extends BaseActivity implements View.OnFocusChangeListener, LoginContract.View {
+public class LoginActivity extends Activity implements View.OnFocusChangeListener, LoginContract.View {
 
     private TextView mBtnLogin;//登录按钮
     private View logining,mInputLayout;//
+    private long exitTime;
     private float mWidth, mHeight;//
     private RelativeLayout root, rl_un, rl_pw,rl_failed, rl_success;//input根布局、username、password、失败、成功的id
     private ImageView icon, ic_after,iv_failed, iv_success;//一开始显示的图标以及变化后的位置，成功以及失败图片
@@ -42,6 +47,7 @@ public class LoginActivity extends BaseActivity implements View.OnFocusChangeLis
     private Handler handler;
     private LoginContract.Presenter presenter;
     private ObjectAnimator animator3;
+    public boolean isActive = false,isLogining;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +58,6 @@ public class LoginActivity extends BaseActivity implements View.OnFocusChangeLis
         initData();
     }
 
-    @Override
     protected void findViews() {
         mBtnLogin = findViewById(R.id.main_btn_login);
         logining = findViewById(R.id.layout_progress);
@@ -70,7 +75,6 @@ public class LoginActivity extends BaseActivity implements View.OnFocusChangeLis
         rl_success = findViewById(R.id.layout_success);
     }
 
-    @Override
     protected void initData() {
         presenter = new LoginPresenter(this, HttpRequest.getApiservice());
         root.setAlpha(0);
@@ -83,6 +87,7 @@ public class LoginActivity extends BaseActivity implements View.OnFocusChangeLis
                 rl_un.setVisibility(View.INVISIBLE);
                 rl_pw.setVisibility(View.INVISIBLE);
                 handler.sendEmptyMessage(1);
+                isLogining = true;
             }
         });
         et_un.setOnFocusChangeListener(this);
@@ -377,7 +382,7 @@ public class LoginActivity extends BaseActivity implements View.OnFocusChangeLis
 
     @Override
     public void showTip(String s) {
-        showToast(s);
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -388,4 +393,36 @@ public class LoginActivity extends BaseActivity implements View.OnFocusChangeLis
         }
         super.onDestroy();
     }
+    public void intent2Activity(Class<? extends Activity> tarActivity) {
+        Intent intent = new Intent(this, tarActivity);
+        startActivity(intent);
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isActive = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isActive = false;
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if(isLogining){
+
+            }else {
+                if (System.currentTimeMillis() - exitTime > 1500) {
+                    showTip("再按一次退出爱宠APP");
+                    exitTime = System.currentTimeMillis();
+                } else {
+                    LoginActivity.this.finish();
+                }
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

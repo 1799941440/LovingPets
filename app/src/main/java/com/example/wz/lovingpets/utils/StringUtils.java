@@ -36,7 +36,7 @@ public class StringUtils {
 
         @Override
         public void updateDrawState(TextPaint ds) {
-            ds.setColor(context.getResources().getColor(R.color.colorPrimary));
+            ds.setColor(context.getResources().getColor(R.color.colorPrimary_dog));
             ds.setUnderlineText(false);
         }
     }
