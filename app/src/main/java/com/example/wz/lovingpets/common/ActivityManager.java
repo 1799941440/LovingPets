@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import java.util.Stack;
 
-/*
+/**
  * 统一Activity的栈管理
  * 涉及activity的增加，删除指定，删除所有，删除当前，返回栈大小
  */

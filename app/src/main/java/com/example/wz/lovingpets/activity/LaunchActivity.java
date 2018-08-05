@@ -11,7 +11,18 @@ import android.view.KeyEvent;
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.ui.login.LoginActivity;
 
+/**
+ * 应用启动的第一个activity，由于方法较少，直接继承activity而非baseactivity
+ * 用于检测登录状态、版本更新
+ */
 public class LaunchActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_launch);
+        gotoLogin();
+    }
 
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
@@ -32,13 +43,9 @@ public class LaunchActivity extends Activity {
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_launch);
-        gotoLogin();
-    }
-
+    /**
+     * 跳转进入登录页面
+     */
     private void gotoLogin() {
         new Thread(){
             @Override
@@ -68,6 +75,7 @@ public class LaunchActivity extends Activity {
     protected void onDestroy() {
         if (handler != null) {
             //If token is null, all callbacks and messages will be removed.
+            //清空handler的消息，防止内存泄漏
             handler.removeCallbacksAndMessages(null);
         }
         super.onDestroy();

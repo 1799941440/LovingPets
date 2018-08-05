@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 以下为本自定义控件的作者，因为我不喜欢项目引入多个module，便集成进项目了
  * @author ChayChan
  * @description: 底部页签根节点
  * @date 2017/6/23  11:02

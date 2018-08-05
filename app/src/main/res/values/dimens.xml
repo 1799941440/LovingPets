@@ -5,4 +5,6 @@
     <dimen name="dp10">10dp</dimen>
     <dimen name="dp14">14dp</dimen>
     <dimen name="change_favorite_iv_size">90dp</dimen>
+    <dimen name="nav_bottom_icon_size">24dp</dimen>
+    <dimen name="nav_bottom_font_size">12sp</dimen>
 </resources>

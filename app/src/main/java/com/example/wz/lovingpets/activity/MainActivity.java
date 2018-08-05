@@ -28,23 +28,26 @@ import com.example.wz.lovingpets.widget.BottomBarLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * APP的主界面，包含五个fragment
+ * 由于含有fragment，继承baseactivity不能获取碎片管理器，
+ */
 public class MainActivity extends BaseFragmentActivity {
 
-    private long exitTime;
-    private List<Fragment> mFragmentList = new ArrayList<>();
-    private FrameLayout mFlContent;
+    private long exitTime;//记录上一次点击返回键的时间，若再次点击时间间隔小于临界值时就退出
+    private List<Fragment> mFragmentList = new ArrayList<>();//承载碎片的list
+    private FrameLayout mFlContent;//碎片填充的地方
     private BottomBarLayout mBottomBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int theme = MyApp.getInstance().getCurrentTheme();
-        setTheme(theme);
+        int theme = MyApp.getInstance().getCurrentTheme();//从sharedprefre获取存储的主题
+        setTheme(theme);//设置主题为该主题，要放在setcontentview前
         setContentView(R.layout.activity_main);
         StatusBarUtil.transparencyBar(this); //设置状态栏全透明
         StatusBarUtil.StatusBarLightMode(this); //设置白底黑字
-        Log.d("Tag", "onCreate: theme id"+theme);
-        ActivityManager.getInstance().add(this);
+        ActivityManager.getInstance().add(this);//由于没继承baseactivity，手动添加进入栈管理器
         findViews();
         initData();
         initListener();
@@ -66,18 +69,20 @@ public class MainActivity extends BaseFragmentActivity {
         changeFragment(0); //默认显示第一页
     }
 
+    /**
+     * 使用网上一个开源的bottombarlayout，设置点击事件，跳转到不同的fragment
+     */
     private void initListener() {
         mBottomBarLayout.setOnItemSelectedListener(new BottomBarLayout.OnItemSelectedListener() {
             @Override
             public void onItemSelected(final BottomBarItem bottomBarItem, int previousPosition, final int currentPosition) {
                 Log.i("MainActivity", "position: " + currentPosition);
-
+//                执行跳转
                 changeFragment(currentPosition);
 
                 if (currentPosition == 0) {
-                    //如果是第一个，即首页
+                    //如果是第一个，即首页，还是点击首页的话则跳转到切换站点
                     if (previousPosition == currentPosition) {
-                        //数据刷新完毕
                         intent2Activity(ChangeFavoriteActivity.class);
                     }
                 }
@@ -89,12 +94,22 @@ public class MainActivity extends BaseFragmentActivity {
 //        mBottomBarLayout.setMsg(3, "NEW");//设置第四个页签显示NEW提示文字
     }
 
+    /**
+     * 切换fragment
+     * @param currentPosition
+     */
     private void changeFragment(int currentPosition) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fl_content, mFragmentList.get(currentPosition));
         transaction.commit();
     }
 
+    /**
+     * 对返回键进行拦截，实现双击退出应用
+     * @param keyCode
+     * @param event
+     * @return
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

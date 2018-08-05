@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.common.ActivityManager;
 
+/**
+ * 主页更换主站的activity
+ */
 public class ChangeFavoriteActivity extends Activity implements View.OnClickListener {
 
     private LinearLayout ll_left, ll_dog, ll_cat, ll_bird, ll_fish;
@@ -39,13 +42,16 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
         ll_fish = findViewById(R.id.change_favorite_ll_fish);
     }
 
+    /**
+     * 初始化数据
+     */
     protected void initData() {
         ll_left.setOnClickListener(this);
         ll_dog.setOnClickListener(this);
         ll_cat.setOnClickListener(this);
         ll_bird.setOnClickListener(this);
         ll_fish.setOnClickListener(this);
-        intent = new Intent(this,MainActivity.class);
+        intent = new Intent(this, MainActivity.class);
         instance = MyApp.getInstance();
         sp = instance.sp;
         currentTheme = MyApp.getInstance().getCurrentTheme();
@@ -58,53 +64,54 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
                 ChangeFavoriteActivity.this.finish();
                 break;
             case R.id.change_favorite_ll_dog:
-                if(currentTheme != allThemes[0]){
-                    instance.setCurrentTheme(0);
-                    ActivityManager.getInstance().removeAll();
+                if (currentTheme != allThemes[0]) {//如果当前主题不是0
+                    instance.setCurrentTheme(0);//将主题切换为0
+                    ActivityManager.getInstance().removeAll();//用自定义的activity管理器清空其余activity
                     startActivity(intent);
-                    overridePendingTransition(0,0);
-                }else {
+                    overridePendingTransition(0, 0);//移除动画
+                } else {
                     Toast.makeText(this, "当前已经是狗狗主站了哦", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.change_favorite_ll_cat:
-                if(currentTheme != allThemes[1]){
+                if (currentTheme != allThemes[1]) {
                     instance.setCurrentTheme(1);
                     ActivityManager.getInstance().removeAll();
                     startActivity(intent);
-                    overridePendingTransition(0,0);
-                }else {
+                    overridePendingTransition(0, 0);
+                } else {
                     Toast.makeText(this, "当前已经是猫猫主站了哦", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.change_favorite_ll_bird:
-                if(currentTheme != allThemes[2]){
+                if (currentTheme != allThemes[2]) {
                     instance.setCurrentTheme(2);
                     ActivityManager.getInstance().removeAll();
                     startActivity(intent);
-                    overridePendingTransition(0,0);
-                }else {
+                    overridePendingTransition(0, 0);
+                } else {
                     Toast.makeText(this, "当前已经是鸟儿主站了哦", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.change_favorite_ll_fish:
-                if(currentTheme != allThemes[3]){
+                if (currentTheme != allThemes[3]) {
                     instance.setCurrentTheme(3);
                     ActivityManager.getInstance().removeAll();
                     startActivity(intent);
-                    overridePendingTransition(0,0);
-                }else {
+                    overridePendingTransition(0, 0);
+                } else {
                     Toast.makeText(this, "当前已经是鱼儿主站了哦", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            default: break;
+            default:
+                break;
         }
     }
 
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(0, 0);
+        overridePendingTransition(0, 0);//设置的退场动画无效要在这里设置
     }
 
     @Override

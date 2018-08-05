@@ -13,12 +13,20 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
+/**
+ * 使用retrofit2+Rxjava2+OkHttp3+自定义的网络日志记录器构建的网络访问类
+ * LoggingInterceptor：带格式化json的自定义日志记录器，继承于okhttp3的日志记录器
+ */
 public class HttpRequest {
-    public static final String BASE_URL = "http://119.29.250.84:8080";
+    public static final String BASE_URL = "http://119.29.250.84:8080";//网络访问基地址
     private static OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
             .addNetworkInterceptor(new LoggingInterceptor());
     private static ApiService apiService;
 
+    /**
+     * 获取单例
+     * @return
+     */
     public static ApiService getApiservice(){
         if(apiService == null){
             Retrofit retrofit = new Retrofit.Builder()
@@ -33,7 +41,7 @@ public class HttpRequest {
     }
 
     public interface ApiService {
-        // 登录用户
+        // 用户登录
         @FormUrlEncoded
         @POST("/IntergratedPlatform/UserAction/login")
         Observable<ListResponse<User>> login(

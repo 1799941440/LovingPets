@@ -1,23 +1,17 @@
 <resources>
     <string name="app_name">LovingPets</string>
-    <string name="title_activity_login">Sign in</string>
-
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="favorite_dog">狗狗主站</string>
     <string name="favorite_cat">猫猫主站</string>
     <string name="favorite_bird">鸟儿主站</string>
     <string name="favorite_fish">鱼儿主站</string>
+    <string name="nav_bottom_1">主站</string>
+    <string name="nav_bottom_2">分类</string>
+    <string name="nav_bottom_3">爱宠圈</string>
+    <string name="nav_bottom_4">购物车</string>
+    <string name="nav_bottom_5">我的</string>
+    <string name="login_title1">爱宠APP</string>
+    <string name="login_title2">爱宠物，爱生活</string>
+    <string name="forgot_password">忘记密码?</string>
+    <string name="regist_now">立即注册</string>
+    <string name="login_button_text">登 录</string>
 </resources>

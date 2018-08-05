@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--在style.xml中的LaunchTheme作为启动界面的背景，防止闪屏-->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/launch_background" />
     <item android:width="165dp"

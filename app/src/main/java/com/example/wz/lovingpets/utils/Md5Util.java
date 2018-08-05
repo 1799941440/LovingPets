@@ -2,6 +2,9 @@ package com.example.wz.lovingpets.utils;
 
 import java.security.MessageDigest;
 
+/**
+ * MD5加密
+ */
 public class Md5Util {
 	public static String md5(String source){
         String des = "";

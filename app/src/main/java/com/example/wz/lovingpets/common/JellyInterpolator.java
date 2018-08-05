@@ -2,6 +2,9 @@ package com.example.wz.lovingpets.common;
 
 import android.view.animation.LinearInterpolator;
 
+/**
+ * 自定义的插值器
+ */
 public class JellyInterpolator extends LinearInterpolator {
 	private float factor;
 

@@ -11,6 +11,9 @@ import android.view.WindowManager;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+/**
+ * 源于网络，一款管理状态栏颜色的工具类，带有多种适配
+ */
 public class StatusBarUtil {
 
     /**

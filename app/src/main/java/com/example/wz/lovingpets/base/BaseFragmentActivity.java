@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
+/**
+ * 功能与BaseActivity基本相似
+ */
 public abstract class BaseFragmentActivity extends FragmentActivity {
     public boolean isActive = false;
     protected final String TAG = this.getClass().getSimpleName();

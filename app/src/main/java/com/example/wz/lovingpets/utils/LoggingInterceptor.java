@@ -9,6 +9,7 @@ import okhttp3.ResponseBody;
 
 /**
  * Created by wz on 2018/7/12.
+ * 带格式化json的自定义日志记录器，继承s于okhttp3的日志记录器
  */
 
 public class LoggingInterceptor implements Interceptor {

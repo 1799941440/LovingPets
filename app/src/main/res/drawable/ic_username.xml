@@ -5,3 +5,4 @@
     <path android:fillColor="#ffffff" android:pathData="M313.99,607h393.46v40.96h-393.46v-40.96z"/>
     <path android:fillColor="#ffffff" android:pathData="M491.52,702.01c0,11.31 9.17,20.48 20.48,20.48s20.48,-9.17 20.48,-20.48c0,-11.31 -9.17,-20.48 -20.48,-20.48 -11.31,0 -20.48,9.17 -20.48,20.48z"/>
 </vector>
+    <!--用户名输入框左侧图标-->
