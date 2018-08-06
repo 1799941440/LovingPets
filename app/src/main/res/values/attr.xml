@@ -49,4 +49,5 @@
 
     <attr name="main_icon" format="reference"/>
     <attr name="nav_bottom_text_selected_color" format="reference"/>
+    <attr name="nav_bottom_text" format="reference"/>
 </resources>

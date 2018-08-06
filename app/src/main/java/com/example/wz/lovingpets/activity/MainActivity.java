@@ -1,24 +1,19 @@
 package com.example.wz.lovingpets.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 import com.example.wz.lovingpets.R;
-import com.example.wz.lovingpets.base.BaseActivity;
 import com.example.wz.lovingpets.base.BaseFragmentActivity;
 import com.example.wz.lovingpets.common.ActivityManager;
+import com.example.wz.lovingpets.common.Constant;
 import com.example.wz.lovingpets.fragment.CircleFragment;
 import com.example.wz.lovingpets.fragment.ClassifyFragment;
-import com.example.wz.lovingpets.fragment.HomeFragment;
+import com.example.wz.lovingpets.ui.main_home.HomeFragment;
 import com.example.wz.lovingpets.fragment.MineFragment;
 import com.example.wz.lovingpets.fragment.ShoppingTrolleyFragment;
 import com.example.wz.lovingpets.utils.StatusBarUtil;
@@ -43,7 +38,7 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int theme = MyApp.getInstance().getCurrentTheme();//从sharedprefre获取存储的主题
-        setTheme(theme);//设置主题为该主题，要放在setcontentview前
+        setTheme(Constant.allThemes[theme]);//设置主题为该主题，要放在setcontentview前
         setContentView(R.layout.activity_main);
         StatusBarUtil.transparencyBar(this); //设置状态栏全透明
         StatusBarUtil.StatusBarLightMode(this); //设置白底黑字

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--底部导航条目的右上角未读消息背景-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="4dp" />
+    <solid android:color="#e2e2e2" />
+</shape>

@@ -26,7 +26,7 @@
             app:iconNormal="?attr/main_icon"
             app:iconSelected="?attr/main_icon"
             app:iconWidth="@dimen/nav_bottom_icon_size"
-            app:itemText="@string/nav_bottom_1"
+            app:itemText="?attr/nav_bottom_text"
             app:itemTextSize="@dimen/nav_bottom_font_size"
             app:textColorNormal="@color/tab_normal_color"
             app:textColorSelected="?attr/nav_bottom_text_selected_color" />

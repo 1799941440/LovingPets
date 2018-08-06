@@ -22,7 +22,6 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
     private int currentTheme;
     private MyApp instance;
     private SharedPreferences sp;
-    private final int[] allThemes = {R.style.AppTheme_dog, R.style.AppTheme_cat, R.style.AppTheme_bird, R.style.AppTheme_fish};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,7 +63,7 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
                 ChangeFavoriteActivity.this.finish();
                 break;
             case R.id.change_favorite_ll_dog:
-                if (currentTheme != allThemes[0]) {//如果当前主题不是0
+                if (currentTheme != 0) {//如果当前主题不是0
                     instance.setCurrentTheme(0);//将主题切换为0
                     ActivityManager.getInstance().removeAll();//用自定义的activity管理器清空其余activity
                     startActivity(intent);
@@ -74,7 +73,7 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
                 }
                 break;
             case R.id.change_favorite_ll_cat:
-                if (currentTheme != allThemes[1]) {
+                if (currentTheme != 1) {
                     instance.setCurrentTheme(1);
                     ActivityManager.getInstance().removeAll();
                     startActivity(intent);
@@ -84,7 +83,7 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
                 }
                 break;
             case R.id.change_favorite_ll_bird:
-                if (currentTheme != allThemes[2]) {
+                if (currentTheme != 2) {
                     instance.setCurrentTheme(2);
                     ActivityManager.getInstance().removeAll();
                     startActivity(intent);
@@ -94,7 +93,7 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
                 }
                 break;
             case R.id.change_favorite_ll_fish:
-                if (currentTheme != allThemes[3]) {
+                if (currentTheme != 3) {
                     instance.setCurrentTheme(3);
                     ActivityManager.getInstance().removeAll();
                     startActivity(intent);
