@@ -2,6 +2,7 @@ package com.example.wz.lovingpets.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -31,8 +32,9 @@ public class MainActivity extends BaseFragmentActivity {
 
     private long exitTime;//记录上一次点击返回键的时间，若再次点击时间间隔小于临界值时就退出
     private List<Fragment> mFragmentList = new ArrayList<>();//承载碎片的list
-    private FrameLayout mFlContent;//碎片填充的地方
+    private FrameLayout mFlContent;//碎片填充的目标View
     private BottomBarLayout mBottomBarLayout;
+    private FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,26 +63,23 @@ public class MainActivity extends BaseFragmentActivity {
         mFragmentList.add(CircleFragment.newInstance("爱宠圈"));
         mFragmentList.add(ShoppingTrolleyFragment.newInstance("购物车"));
         mFragmentList.add(MineFragment.newInstance("我的"));
-        changeFragment(0); //默认显示第一页
+        switchFragment(0); //默认显示第一页
     }
 
     /**
+     * 初始化各种监听
      * 使用网上一个开源的bottombarlayout，设置点击事件，跳转到不同的fragment
      */
     private void initListener() {
         mBottomBarLayout.setOnItemSelectedListener(new BottomBarLayout.OnItemSelectedListener() {
             @Override
             public void onItemSelected(final BottomBarItem bottomBarItem, int previousPosition, final int currentPosition) {
-                Log.i("MainActivity", "position: " + currentPosition);
-//                执行跳转
-                changeFragment(currentPosition);
-
-                if (currentPosition == 0) {
-                    //如果是第一个，即首页，还是点击首页的话则跳转到切换站点
-                    if (previousPosition == currentPosition) {
-                        intent2Activity(ChangeFavoriteActivity.class);
-                    }
+                Log.i("Tag", "currentposition: " + currentPosition+"previousPosition: " + previousPosition);
+                if(previousPosition == currentPosition && currentPosition == 0){
+                    intent2Activity(ChangeFavoriteActivity.class);
+                    return;
                 }
+                switchFragment(currentPosition);
             }
         });
 //        mBottomBarLayout.setUnread(0, 20);//设置第一个页签的未读数为20
@@ -89,18 +88,20 @@ public class MainActivity extends BaseFragmentActivity {
 //        mBottomBarLayout.setMsg(3, "NEW");//设置第四个页签显示NEW提示文字
     }
 
-    /**
-     * 切换fragment
-     * @param currentPosition
-     */
-    private void changeFragment(int currentPosition) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fl_content, mFragmentList.get(currentPosition));
-        transaction.commit();
-    }
+//    /**
+//     * 切换fragment
+//     *
+//     * @param currentPosition
+//     */
+//    private void changeFragment(int currentPosition) {
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.fl_content, mFragmentList.get(currentPosition));
+//        transaction.commit();
+//    }
 
     /**
      * 对返回键进行拦截，实现双击退出应用
+     *
      * @param keyCode
      * @param event
      * @return
@@ -119,6 +120,59 @@ public class MainActivity extends BaseFragmentActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    /**
+     * 主页界面的切换
+     * @param position 切换目标碎片的position
+     */
+    private void switchFragment(int position) {
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        hideFragments();
+        switch (position) {
+            case 0:
+                if (!mFragmentList.get(position).isAdded()) {
+                    transaction.add(R.id.fl_content, mFragmentList.get(position));
+                }
+                transaction.show(mFragmentList.get(position));
+                break;
+            case 1:
+                if (!mFragmentList.get(position).isAdded()) {
+                    transaction.add(R.id.fl_content, mFragmentList.get(position));
+                }
+                transaction.show(mFragmentList.get(position));
+                break;
+            case 2:
+                if (!mFragmentList.get(position).isAdded()) {
+                    transaction.add(R.id.fl_content, mFragmentList.get(position));
+                }
+                transaction.show(mFragmentList.get(position));
+                break;
+            case 3:
+                if (!mFragmentList.get(position).isAdded()) {
+                    transaction.add(R.id.fl_content, mFragmentList.get(position));
+                }
+                transaction.show(mFragmentList.get(position));
+                break;
+            case 4:
+                if (!mFragmentList.get(position).isAdded()) {
+                    transaction.add(R.id.fl_content, mFragmentList.get(position));
+                }
+                transaction.show(mFragmentList.get(position));
+                break;
+        }
+        transaction.commit();
+    }
+
+    /**
+     * 切换时隐藏所有fragment
+     */
+    private void hideFragments() {
+        for(Fragment mFragment : mFragmentList){
+            if(mFragment != null){
+                transaction.hide(mFragment);
+            }
+        }
+    }
 //    跳转回传数据
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {

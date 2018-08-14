@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary_dog">#c56f1a</color>
+    <color name="colorPrimary_dog">#c56f1a</color>//197，111，26
     <color name="colorPrimaryDark_dog">#c56f1a</color>
     <color name="colorAccent_dog">#d6802b</color>
-    <color name="colorPrimary_cat">#e74186</color>
+    <color name="colorPrimary_cat">#e74186</color>//231,65,134
     <color name="colorPrimaryDark_cat">#e74186</color>
     <color name="colorAccent_cat">#f85297</color>
-    <color name="colorPrimary_bird">#4e9a36</color>
+    <color name="colorPrimary_bird">#4e9a36</color>//78,154,54
     <color name="colorPrimaryDark_bird">#4e9a36</color>
     <color name="colorAccent_bird">#5fab47</color>
-    <color name="colorPrimary_fish">#139ddf</color>
+    <color name="colorPrimary_fish">#139ddf</color>//19,157,223
     <color name="colorPrimaryDark_fish">#139ddf</color>
     <color name="colorAccent_fish">#24aeef</color>
     <color name="myorange">#f19237</color>
@@ -26,4 +26,6 @@
     <color name="bg_change_favorite">#55000000</color>
     <color name="unreadTextColor">#00ff00</color>
     <color name="msgTextColor">#00ff00</color>
+    <color name="divide_line_color">#d2d2d2</color>
+    <color name="divide10_line_color">#f3f4f5</color>
 </resources>

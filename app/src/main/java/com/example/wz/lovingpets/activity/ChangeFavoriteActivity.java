@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.common.ActivityManager;
+import com.example.wz.lovingpets.utils.StatusBarUtil;
 
 /**
  * 主页更换主站的activity
@@ -27,6 +28,8 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_favorite);
+        StatusBarUtil.transparencyBar(this); //设置状态栏全透明
+        StatusBarUtil.StatusBarLightMode(this); //设置白底黑字
         overridePendingTransition(0, 0);
         ActivityManager.getInstance().add(this);
         findViews();

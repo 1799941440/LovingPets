@@ -10,6 +10,7 @@
         <item name="nav_bottom_text">@string/favorite_dog</item>
         //主页导航条目被选中时文字的颜色
         <item name="nav_bottom_text_selected_color">@color/colorPrimary_dog</item>
+        <item name="mine_bg">@mipmap/mine_bg_dog</item>
     </style>
     <!-- 猫主站主题颜色. -->
     <style name="AppTheme_cat" parent="Theme.AppCompat.Light.NoActionBar">
@@ -20,6 +21,7 @@
         <item name="main_icon">@mipmap/cat</item>
         <item name="nav_bottom_text">@string/favorite_cat</item>
         <item name="nav_bottom_text_selected_color">@color/colorPrimary_cat</item>
+        <item name="mine_bg">@mipmap/mine_bg_cat</item>
     </style>
     <!-- 鸟主站主题颜色. -->
     <style name="AppTheme_bird" parent="Theme.AppCompat.Light.NoActionBar">
@@ -30,6 +32,7 @@
         <item name="main_icon">@mipmap/bird</item>
         <item name="nav_bottom_text">@string/favorite_bird</item>
         <item name="nav_bottom_text_selected_color">@color/colorPrimary_bird</item>
+        <item name="mine_bg">@mipmap/mine_bg_bird</item>
     </style>
     <!-- 鱼主站主题颜色. -->
     <style name="AppTheme_fish" parent="Theme.AppCompat.Light.NoActionBar">
@@ -40,6 +43,7 @@
         <item name="main_icon">@mipmap/fish</item>
         <item name="nav_bottom_text">@string/favorite_fish</item>
         <item name="nav_bottom_text_selected_color">@color/colorPrimary_fish</item>
+        <item name="mine_bg">@mipmap/mine_bg_fish</item>
     </style>
 
     <style name="FullScreenTheme" parent="AppTheme_dog">
@@ -51,7 +55,7 @@
     </style>
 
     //可以看到上一个activity的主题
-    <style name="translucent" parent="FullScreenTheme">
+    <style name="translucent" parent="AppTheme_dog">
         <item name="android:windowBackground">@color/bg_change_favorite</item>
         <item name="android:windowIsTranslucent">true</item>
         <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->

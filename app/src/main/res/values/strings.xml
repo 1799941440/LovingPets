@@ -15,4 +15,12 @@
     <string name="regist_now">立即注册</string>
     <string name="login_button_text">登 录</string>
     <string name="search_hint">搜索品牌、类目、关键字</string>
+    <string name="my_wallet">我的钱包</string>
+    <string name="my_balance">余额</string>
+    <string name="my_coin">爱宠币</string>
+    <string name="my_coupon">优惠券</string>
+    <string name="unpay">待付款</string>
+    <string name="to_be_revceive">待收货</string>
+    <string name="to_be_evaluated">待评价</string>
+    <string name="all_orders">全部订单</string>
 </resources>

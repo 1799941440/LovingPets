@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.activity.MyApp;
+import com.example.wz.lovingpets.fragment.ClassifyFragment;
 import com.example.wz.lovingpets.fragment.MineFragment;
 
 import java.util.ArrayList;
@@ -31,10 +32,10 @@ public class HomeFragment extends Fragment {
     private View view;
     private List<Fragment> viewList = new ArrayList<>();
     private List<List<String>> lists = Arrays.asList(
-            Arrays.asList("狗狗首页", "狗狗主粮", "狗狗商城", "医疗保健", "玩具", "外出"),
-            Arrays.asList("猫猫首页", "猫猫主粮", "猫猫商城", "猫砂猫厕", "医疗保健", "玩具"),
-            Arrays.asList("鸟儿首页", "鸟儿主粮", "鸟儿商城", "医疗保健", "玩具", "外出"),
-            Arrays.asList("鱼儿首页", "鱼儿饲料", "水族商城", "水族药剂", "水缸摆设", "新鱼课堂"));
+            Arrays.asList("狗狗首页", "狗狗主粮", "医疗保健", "玩具", "外出"),
+            Arrays.asList("猫猫首页", "猫猫主粮", "猫砂猫厕", "医疗保健", "玩具"),
+            Arrays.asList("鸟儿首页", "鸟儿主粮", "医疗保健", "玩具", "外出"),
+            Arrays.asList("鱼儿首页", "鱼儿饲料", "水族药剂", "水缸摆设", "新鱼课堂"));
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,7 @@ public class HomeFragment extends Fragment {
 
     public void initDatas() {
         for (int i = 0; i < lists.get(currentTheme).size(); i++) {
-            viewList.add(MineFragment.newInstance(lists.get(currentTheme).get(i)));
+            viewList.add(ClassifyFragment.newInstance(lists.get(currentTheme).get(i)));
         }
         for (int i = 0; i < lists.get(currentTheme).size(); i++) {
             tab.addTab(tab.newTab().setText(lists.get(currentTheme).get(i)));//添加tab选项

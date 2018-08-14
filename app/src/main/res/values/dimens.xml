@@ -7,4 +7,11 @@
     <dimen name="change_favorite_iv_size">90dp</dimen>
     <dimen name="nav_bottom_icon_size">24dp</dimen>
     <dimen name="nav_bottom_font_size">12sp</dimen>
+    <dimen name="sp12">12sp</dimen>
+    <dimen name="mine_bg_height">155dp</dimen>
+    <dimen name="dp65">65dp</dimen>
+    <dimen name="dp60">60dp</dimen>
+    <dimen name="dp20">20dp</dimen>
+    <dimen name="dp70">70dp</dimen>
+    <dimen name="dp30">30dp</dimen>
 </resources>
