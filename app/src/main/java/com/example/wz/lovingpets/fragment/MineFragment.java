@@ -1,5 +1,6 @@
 package com.example.wz.lovingpets.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
+import com.example.wz.lovingpets.ui.login.LoginActivity;
+import com.example.wz.lovingpets.ui.register.RegisterActivity;
 import com.example.wz.lovingpets.widget.MyScrollView;
 
 public class MineFragment extends Fragment implements View.OnClickListener,MyScrollView.ScrollListener{
@@ -26,7 +29,7 @@ public class MineFragment extends Fragment implements View.OnClickListener,MyScr
     private MyScrollView scrollView;
     private ImageView iv_setting,iv_banner;
     private RelativeLayout rl_title;
-    private TextView tv_title;
+    private TextView tv_title,tv_login,tv_register;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,8 @@ public class MineFragment extends Fragment implements View.OnClickListener,MyScr
     }
     public void findViews(View view){
         tv_title = view.findViewById(R.id.mine_tv_title);
+        tv_register = view.findViewById(R.id.mine_tv_register);
+        tv_login = view.findViewById(R.id.mine_tv_login);
         rl_title = view.findViewById(R.id.mine_rl_title);
         scrollView = view.findViewById(R.id.mine_scroll);
         iv_setting = view.findViewById(R.id.mine_iv_setting);
@@ -63,6 +68,8 @@ public class MineFragment extends Fragment implements View.OnClickListener,MyScr
     public void initDatas(){
         iv_setting.setOnClickListener(this);
         iv_banner.setOnClickListener(this);
+        tv_register.setOnClickListener(this);
+        tv_login.setOnClickListener(this);
     }
 
     @Override
@@ -73,6 +80,12 @@ public class MineFragment extends Fragment implements View.OnClickListener,MyScr
                 break;
             case R.id.mine_background:
                 Toast.makeText(getContext(),"banner clicked",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.mine_tv_login:
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                break;
+            case R.id.mine_tv_register:
+                startActivity(new Intent(getActivity(), RegisterActivity.class));
                 break;
             default:
                 break;

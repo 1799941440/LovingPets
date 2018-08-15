@@ -22,9 +22,4 @@ public interface BaseView<T> {
 
     boolean isActive();
 
-    void showProgress();
-
-    void dismissProgress();
-
-    void showTip(String s);
 }

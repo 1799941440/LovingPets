@@ -1,4 +1,4 @@
-package com.example.wz.lovingpets.ui.login;
+package com.example.wz.lovingpets.ui.register;
 
 import com.example.wz.lovingpets.base.BasePresenter;
 import com.example.wz.lovingpets.base.BaseView;
@@ -7,18 +7,15 @@ import com.example.wz.lovingpets.entity.User;
 /**
  * This specifies the contract between the view and the presenter.
  */
-public interface LoginContract {
+public interface RegisterContract {
 
     interface View extends BaseView<Presenter> {
 
-        void loginSuccess(User user, boolean success);
-        void showLoginAnim();
-        void showTip(String s);
+        void registerSuccess(User user, boolean success);
     }
 
     interface Presenter extends BasePresenter {
 
-        void login(String username, String password);
-
+        void register(String username, String password);
     }
 }

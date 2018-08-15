@@ -31,16 +31,6 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void login(String username, String password) {
-        if (StringUtils.isEmpty(username)) {
-            view.showTip("用户名不能为空");
-            return;
-        }
-
-        if (StringUtils.isEmpty(password)) {
-            view.showTip("密码不能为空");
-            return;
-        }
-
         Observable<ListResponse<User>> observable = api.login(username, password);
         observable.subscribeOn(Schedulers.newThread())//它为指定任务启动一个新的线程。
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ListResponse<User>>() {

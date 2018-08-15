@@ -6,6 +6,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,26 +29,29 @@ import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.activity.MainActivity;
-import com.example.wz.lovingpets.base.BaseActivity;
 import com.example.wz.lovingpets.common.JellyInterpolator;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.net.HttpRequest;
+import com.example.wz.lovingpets.ui.register.RegisterActivity;
 import com.example.wz.lovingpets.utils.Md5Util;
+import com.example.wz.lovingpets.utils.StringUtils;
 import com.example.wz.lovingpets.utils.UserUtil;
 
-public class LoginActivity extends Activity implements View.OnFocusChangeListener, LoginContract.View {
+public class LoginActivity extends Activity implements View.OnFocusChangeListener
+        , LoginContract.View, View.OnClickListener {
 
     private TextView mBtnLogin;//登录按钮
-    private View logining,mInputLayout;//
+    private View logining, mInputLayout;//
     private long exitTime;
     private float mWidth, mHeight;//
-    private RelativeLayout root, rl_un, rl_pw,rl_failed, rl_success;//input根布局、username、password、失败、成功的id
-    private ImageView icon, ic_after,iv_failed, iv_success;//一开始显示的图标以及变化后的位置，成功以及失败图片
+    private RelativeLayout root, rl_un, rl_pw, rl_failed, rl_success;//input根布局、username、password、失败、成功的id
+    private ImageView icon, ic_after, iv_failed, iv_success;//一开始显示的图标以及变化后的位置，成功以及失败图片
     private EditText et_un, et_pw;
+    private TextView tv_forgot,tv_goto_register;
     private Handler handler;
     private LoginContract.Presenter presenter;
     private ObjectAnimator animator3;
-    public boolean isActive = false,isLogining;
+    public boolean isActive = false, isLogining;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,8 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         iv_success = findViewById(R.id.success_iv);
         rl_failed = findViewById(R.id.layout_failed);
         rl_success = findViewById(R.id.layout_success);
+        tv_forgot = findViewById(R.id.login_tv_forgot_pw);
+        tv_goto_register = findViewById(R.id.login_tv_goto_register);
     }
 
     protected void initData() {
@@ -82,18 +88,16 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mWidth = mBtnLogin.getMeasuredWidth();
-                mHeight = mBtnLogin.getMeasuredHeight();
-                rl_un.setVisibility(View.INVISIBLE);
-                rl_pw.setVisibility(View.INVISIBLE);
-                handler.sendEmptyMessage(1);
-                isLogining = true;
+//
             }
         });
         et_un.setOnFocusChangeListener(this);
         et_pw.setOnFocusChangeListener(this);
+        tv_forgot.setOnClickListener(this);
+        tv_goto_register.setOnClickListener(this);
     }
 
+    @SuppressLint("HandlerLeak")
     @Override
     protected void onResume() {
         super.onResume();
@@ -121,11 +125,16 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
             public void run() {
                 handler.sendEmptyMessage(0);
             }
-        }, 500);
+        }, 300);
     }
 
     public void showLoginAnim() {
         startInputAnim(mInputLayout, mWidth, mHeight);
+    }
+
+    @Override
+    public void showTip(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
     //输入框边框的动画
@@ -176,7 +185,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         });
     }
 
-    private void reshowInputAnim(){
+    private void reshowInputAnim() {
         AnimatorSet set = new AnimatorSet();
         mInputLayout.setVisibility(View.VISIBLE);
         ValueAnimator animator = ValueAnimator.ofFloat(mWidth, 0);
@@ -213,6 +222,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
             }
         });
     }
+
     //登录中转圈的动画
     private void loginingAnimator(final View view) {
         PropertyValuesHolder animator = PropertyValuesHolder.ofFloat("scaleX",
@@ -284,7 +294,40 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
     }
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.main_btn_login:
+                if (!StringUtils.isMobileNO(et_un.getText().toString().trim())) {
+//                    showTip("请输入正确格式的手机号码");
+//                    return;
+//                }else
+                    if (StringUtils.isEmpty(et_un.getText().toString().trim())) {
+                        showTip("请输入用户名");
+                        return;
+                    }
+                    if (StringUtils.isEmpty(et_pw.getText().toString().trim())) {
+                        showTip("请输入密码");
+                        return;
+                    }
+                    mWidth = mBtnLogin.getMeasuredWidth();
+                    mHeight = mBtnLogin.getMeasuredHeight();
+                    rl_un.setVisibility(View.INVISIBLE);
+                    rl_pw.setVisibility(View.INVISIBLE);
+                    handler.sendEmptyMessage(1);
+                    isLogining = true;
+                }break;
+            case R.id.login_tv_forgot_pw:
+                break;
+
+            case R.id.login_tv_goto_register:
+                intent2Activity(RegisterActivity.class);
+                break;
+        }
+    }
+
+    @Override
     public void loginSuccess(User user, boolean success) {
+        isLogining = false;
         if (success) {
             new UserUtil(this).saveUser(user);
             showSuccessAnim();
@@ -371,21 +414,6 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
     }
 
     @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void dismissProgress() {
-
-    }
-
-    @Override
-    public void showTip(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     protected void onDestroy() {
         if (handler != null) {
             //If token is null, all callbacks and messages will be removed.
@@ -393,10 +421,12 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         }
         super.onDestroy();
     }
+
     public void intent2Activity(Class<? extends Activity> tarActivity) {
         Intent intent = new Intent(this, tarActivity);
         startActivity(intent);
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -408,11 +438,12 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         super.onStop();
         isActive = false;
     }
+
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if(isLogining){
-
-            }else {
+            if (isLogining) {
+                //reshowInputAnim();
+            } else {
                 if (System.currentTimeMillis() - exitTime > 1500) {
                     showTip("再按一次退出爱宠APP");
                     exitTime = System.currentTimeMillis();
@@ -424,5 +455,4 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         }
         return super.onKeyDown(keyCode, event);
     }
-
 }

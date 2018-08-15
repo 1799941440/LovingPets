@@ -39,6 +39,9 @@
             android:name=".ui.login.LoginActivity"
             android:theme="@style/FullScreenTheme" />
         <activity
+            android:name=".ui.register.RegisterActivity"
+            android:theme="@style/FullScreenTheme" />
+        <activity
             android:name=".activity.ChangeFavoriteActivity"
             android:theme="@style/translucent" />
     </application>

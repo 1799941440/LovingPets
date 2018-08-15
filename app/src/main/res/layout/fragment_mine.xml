@@ -39,7 +39,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp60"
                         android:layout_height="@dimen/dp60"
-                        android:layout_marginStart="@dimen/dp20" />
+                        android:layout_marginStart="@dimen/dp20"
+                        android:src="@mipmap/mine_head_unlogin" />
 
                     <TextView
                         android:id="@+id/mine_un"
@@ -53,6 +54,7 @@
                         android:gravity="center_vertical">
 
                         <TextView
+                            android:id="@+id/mine_tv_login"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dp20"
@@ -60,11 +62,12 @@
                             android:textColor="@android:color/white" />
 
                         <ImageView
-                            android:layout_width="2dp"
+                            android:layout_width="1dp"
                             android:layout_height="@dimen/dp20"
                             android:background="@android:color/white" />
 
                         <TextView
+                            android:id="@+id/mine_tv_register"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dp20"
@@ -285,6 +288,8 @@
                     android:id="@+id/ll_pets_info"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -319,6 +324,8 @@
                     android:id="@+id/ll_my_evaluate"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -353,6 +360,8 @@
                     android:id="@+id/ll_my_collection"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -387,6 +396,8 @@
                     android:id="@+id/ll_my_address"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -409,6 +420,11 @@
                         android:layout_margin="5dp"
                         android:src="@mipmap/ic_right_arrow" />
                 </LinearLayout>
+                <!--分割线-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/divide_line_color" />
 
             </LinearLayout>
 
@@ -423,11 +439,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!--分割线-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/divide_line_color" />
                 <!--联系客服-->
                 <LinearLayout
                     android:id="@+id/ll_contact_customer_service"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -462,6 +485,8 @@
                     android:id="@+id/ll_feedback"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -496,6 +521,8 @@
                     android:id="@+id/ll_check_version"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -518,7 +545,11 @@
                         android:layout_margin="5dp"
                         android:src="@mipmap/ic_right_arrow" />
                 </LinearLayout>
-
+                <!--分割线-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/divide_line_color" />
             </LinearLayout>
 
             <!--分割线-->
@@ -531,12 +562,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
+                <!--分割线-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/divide_line_color" />
                 <!--关于-->
                 <LinearLayout
                     android:id="@+id/ll_about"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -568,34 +605,34 @@
         android:id="@+id/mine_rl_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:background="@android:color/transparent">
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/mine_tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp10"
-            android:textSize="18sp"
             android:layout_centerInParent="true"
-            android:textColor="@android:color/transparent"
+            android:layout_margin="@dimen/dp10"
             android:text="我的"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@android:color/transparent"
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/mine_iv_setting"
             android:layout_width="@dimen/dp20"
             android:layout_height="@dimen/dp20"
             android:layout_alignParentEnd="true"
-            android:layout_margin="@dimen/dp10"
             android:layout_centerVertical="true"
+            android:layout_margin="@dimen/dp10"
             android:src="@mipmap/setting_white" />
 
         <ImageView
             android:layout_width="@dimen/dp20"
             android:layout_height="@dimen/dp20"
-            android:layout_margin="@dimen/dp10"
             android:layout_centerVertical="true"
+            android:layout_margin="@dimen/dp10"
             android:layout_toStartOf="@id/mine_iv_setting"
             android:src="@mipmap/message_white" />
     </RelativeLayout>
