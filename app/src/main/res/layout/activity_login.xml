@@ -11,22 +11,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout android:id="@+id/main_title"
+        <RelativeLayout android:id="@+id/login_bar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/dp50"
             android:padding="@dimen/dp10" >
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/dp24"
+                android:layout_height="@dimen/dp24"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_left" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:text="@string/login_button_text"/>
         </RelativeLayout>
         <ImageView
             android:id="@+id/login_after_anim"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_below="@+id/main_title"
+            android:layout_below="@+id/login_bar"
             android:layout_centerHorizontal="true"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,37 +64,37 @@
             android:layout_centerInParent="true">
 
             <include
-                android:id="@+id/input_layout"
+                android:id="@+id/login_input_layout"
                 layout="@layout/input_layout_login"
                 android:layout_width="match_parent"
                 android:layout_height="170dp" />
 
             <include
-                android:id="@+id/layout_progress"
+                android:id="@+id/login_layout_progress"
                 layout="@layout/layout_progress"
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dp20"
                 android:layout_height="130dp"
                 android:visibility="gone" />
 
             <include
-                android:id="@+id/layout_success"
+                android:id="@+id/login_layout_success"
                 layout="@layout/layout_success"
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dp20"
                 android:layout_height="130dp"
                 android:visibility="gone" />
             <include
-                android:id="@+id/layout_failed"
+                android:id="@+id/login_layout_failed"
                 layout="@layout/layout_failed"
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dp20"
                 android:layout_height="130dip"
                 android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_below="@+id/input_layout"
+                android:layout_below="@+id/login_input_layout"
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/login_tv_forgot_pw"
@@ -95,24 +102,24 @@
                     android:layout_height="wrap_content"
                     android:text="@string/forgot_password"
                     android:textColor="#ffffff"
-                    android:layout_marginStart="20dp"/>
+                    android:layout_marginStart="@dimen/dp20"/>
                 <TextView
                     android:id="@+id/login_tv_goto_register"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textAlignment="textEnd"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="@dimen/dp20"
                     android:text="@string/regist_now"
                     android:textColor="#ffffff" />
             </LinearLayout>
             <TextView
-                android:id="@+id/main_btn_login"
+                android:id="@+id/main_bt_login"
                 android:layout_width="150dp"
                 android:layout_height="48dp"
-                android:layout_below="@+id/input_layout"
+                android:layout_below="@+id/login_input_layout"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/dp30"
                 android:background="@drawable/text_bg"
                 android:gravity="center"
                 android:paddingBottom="2dp"

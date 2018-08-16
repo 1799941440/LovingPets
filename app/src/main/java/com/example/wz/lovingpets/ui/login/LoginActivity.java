@@ -4,21 +4,14 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -29,13 +22,14 @@ import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.activity.MainActivity;
-import com.example.wz.lovingpets.common.JellyInterpolator;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.ui.register.RegisterActivity;
+import com.example.wz.lovingpets.utils.AnimUtils;
 import com.example.wz.lovingpets.utils.Md5Util;
 import com.example.wz.lovingpets.utils.StringUtils;
 import com.example.wz.lovingpets.utils.UserUtil;
+
 
 public class LoginActivity extends Activity implements View.OnFocusChangeListener
         , LoginContract.View, View.OnClickListener {
@@ -47,7 +41,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
     private RelativeLayout root, rl_un, rl_pw, rl_failed, rl_success;//input根布局、username、password、失败、成功的id
     private ImageView icon, ic_after, iv_failed, iv_success;//一开始显示的图标以及变化后的位置，成功以及失败图片
     private EditText et_un, et_pw;
-    private TextView tv_forgot,tv_goto_register;
+    private TextView tv_forgot, tv_goto_register;
     private Handler handler;
     private LoginContract.Presenter presenter;
     private ObjectAnimator animator3;
@@ -62,35 +56,32 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         initData();
     }
 
+    //全都是findviewbyid
     protected void findViews() {
-        mBtnLogin = findViewById(R.id.main_btn_login);
-        logining = findViewById(R.id.layout_progress);
-        mInputLayout = findViewById(R.id.input_layout);
+        mBtnLogin = findViewById(R.id.main_bt_login);
+        logining = findViewById(R.id.login_layout_progress);
+        mInputLayout = findViewById(R.id.login_input_layout);
         rl_un = findViewById(R.id.input_rl_un);
         rl_pw = findViewById(R.id.input_rl_pw);
-        et_un = findViewById(R.id.login_et_un);
-        et_pw = findViewById(R.id.login_et_pw);
+        et_un = findViewById(R.id.register_et_un);
+        et_pw = findViewById(R.id.register_et_pw);
         icon = findViewById(R.id.login_icon);
         ic_after = findViewById(R.id.login_after_anim);
         root = findViewById(R.id.login_rl_root);
         iv_failed = findViewById(R.id.failed_iv);
         iv_success = findViewById(R.id.success_iv);
-        rl_failed = findViewById(R.id.layout_failed);
-        rl_success = findViewById(R.id.layout_success);
+        rl_failed = findViewById(R.id.login_layout_failed);
+        rl_success = findViewById(R.id.login_layout_success);
         tv_forgot = findViewById(R.id.login_tv_forgot_pw);
         tv_goto_register = findViewById(R.id.login_tv_goto_register);
     }
 
+    //为变量赋值、设置监听器等
     protected void initData() {
         presenter = new LoginPresenter(this, HttpRequest.getApiservice());
         root.setAlpha(0);
         //登录键点击后的动画
-        mBtnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//
-            }
-        });
+        mBtnLogin.setOnClickListener(this);
         et_un.setOnFocusChangeListener(this);
         et_pw.setOnFocusChangeListener(this);
         tv_forgot.setOnClickListener(this);
@@ -140,27 +131,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
     //输入框边框的动画
     private void startInputAnim(final View view, float w, float h) {
 
-        AnimatorSet set = new AnimatorSet();
-
-        ValueAnimator animator = ValueAnimator.ofFloat(0, w);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (Float) animation.getAnimatedValue();
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view
-                        .getLayoutParams();
-                params.leftMargin = (int) value;
-                params.rightMargin = (int) value;
-                view.setLayoutParams(params);
-            }
-        });
-
-        ObjectAnimator animator2 = ObjectAnimator.ofFloat(mInputLayout,
-                "scaleX", 1f, 0.5f);
-        set.setDuration(1000);
-        set.setInterpolator(new AccelerateDecelerateInterpolator());
-        set.playTogether(animator, animator2);
+        AnimatorSet set = AnimUtils.getInputAnim(view, w, 0);
         set.start();
         set.addListener(new Animator.AnimatorListener() {
 
@@ -185,27 +156,10 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         });
     }
 
+    //登录失败后重新显示输入框的动画
     private void reshowInputAnim() {
-        AnimatorSet set = new AnimatorSet();
         mInputLayout.setVisibility(View.VISIBLE);
-        ValueAnimator animator = ValueAnimator.ofFloat(mWidth, 0);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (Float) animation.getAnimatedValue();
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mInputLayout
-                        .getLayoutParams();
-                params.leftMargin = (int) value;
-                params.rightMargin = (int) value;
-                mInputLayout.setLayoutParams(params);
-            }
-        });
-        ObjectAnimator animator2 = ObjectAnimator.ofFloat(mInputLayout,
-                "scaleX", 0.5f, 1f);
-        set.setDuration(1000);
-        set.setInterpolator(new AccelerateDecelerateInterpolator());
-        set.playTogether(animator, animator2);
+        AnimatorSet set = AnimUtils.getInputAnim(mInputLayout, mWidth, 1);
         set.start();
         set.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -225,15 +179,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
 
     //登录中转圈的动画
     private void loginingAnimator(final View view) {
-        PropertyValuesHolder animator = PropertyValuesHolder.ofFloat("scaleX",
-                0.5f, 1f);
-        PropertyValuesHolder animator2 = PropertyValuesHolder.ofFloat("scaleY",
-                0.5f, 1f);
-        animator3 = ObjectAnimator.ofPropertyValuesHolder(view,
-                animator, animator2);
-        animator3.setDuration(1000);
-        animator3.setRepeatCount(10);
-        animator3.setInterpolator(new JellyInterpolator());
+        animator3 = AnimUtils.getLoginingAnim(animator3, view);
         animator3.start();
         animator3.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -256,23 +202,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
 
     //icon入场动画,完成动画后自动调用startRootAnim()
     protected void startIconAnim() {
-        //获取屏幕高度
-        WindowManager manager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics metrics = new DisplayMetrics();
-        manager.getDefaultDisplay().getMetrics(metrics);
-        int screenHeight = metrics.heightPixels;
-        //通过测量，获取ivLogo的高度
-        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        ic_after.measure(w, h);
-        int logoHeight = ic_after.getMeasuredHeight();
-        float transY = (screenHeight - logoHeight) * 0.3924f;
-        ObjectAnimator tranLogo = ObjectAnimator.ofFloat(icon, "translationY", 0, -transY);
-        ObjectAnimator scaleXLogo = ObjectAnimator.ofFloat(icon, "scaleX", 1f, 1f / 3);
-        ObjectAnimator scaleYLogo = ObjectAnimator.ofFloat(icon, "scaleY", 1f, 1f / 3);
-        AnimatorSet logoAnim = new AnimatorSet();
-        logoAnim.setDuration(1000);
-        logoAnim.play(tranLogo).with(scaleXLogo).with(scaleYLogo);
+        AnimatorSet logoAnim = AnimUtils.getIconIncomeAnim(this, ic_after, icon);
         logoAnim.start();
         logoAnim.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -287,7 +217,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
     //login界面根布局的动画
     public void startRootAnim() {
         ObjectAnimator alphaRoot = ObjectAnimator.ofFloat(root, "alpha", 0, 1);
-        final AnimatorSet rootAnim = new AnimatorSet();
+        AnimatorSet rootAnim = new AnimatorSet();
         rootAnim.setDuration(1000);
         rootAnim.play(alphaRoot);
         rootAnim.start();
@@ -296,26 +226,26 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.main_btn_login:
-                if (!StringUtils.isMobileNO(et_un.getText().toString().trim())) {
+            case R.id.main_bt_login:
+//                if (!StringUtils.isMobileNO(et_un.getText().toString().trim())) {
 //                    showTip("请输入正确格式的手机号码");
 //                    return;
 //                }else
-                    if (StringUtils.isEmpty(et_un.getText().toString().trim())) {
-                        showTip("请输入用户名");
-                        return;
-                    }
-                    if (StringUtils.isEmpty(et_pw.getText().toString().trim())) {
-                        showTip("请输入密码");
-                        return;
-                    }
-                    mWidth = mBtnLogin.getMeasuredWidth();
-                    mHeight = mBtnLogin.getMeasuredHeight();
-                    rl_un.setVisibility(View.INVISIBLE);
-                    rl_pw.setVisibility(View.INVISIBLE);
-                    handler.sendEmptyMessage(1);
-                    isLogining = true;
-                }break;
+                if (StringUtils.isEmpty(et_un.getText().toString().trim())) {
+                    showTip("请输入用户名");
+                    return;
+                }
+                if (StringUtils.isEmpty(et_pw.getText().toString().trim())) {
+                    showTip("请输入密码");
+                    return;
+                }
+                mWidth = mBtnLogin.getMeasuredWidth();
+                mHeight = mBtnLogin.getMeasuredHeight();
+                rl_un.setVisibility(View.INVISIBLE);
+                rl_pw.setVisibility(View.INVISIBLE);
+                handler.sendEmptyMessage(1);
+                isLogining = true;
+                break;
             case R.id.login_tv_forgot_pw:
                 break;
 
@@ -323,12 +253,15 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
                 intent2Activity(RegisterActivity.class);
                 break;
         }
+
     }
 
+    //由p层实例调用该方法，参数为返回的圆弧信息和是否成功
     @Override
-    public void loginSuccess(User user, boolean success) {
+    public void loginSuccess(User user, boolean issuccess) {
         isLogining = false;
-        if (success) {
+        logining.setVisibility(View.INVISIBLE);
+        if (issuccess) {
             new UserUtil(this).saveUser(user);
             showSuccessAnim();
         } else {
@@ -336,8 +269,8 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         }
     }
 
+    //登录失败显示叉叉，完成动画后调用reShow....方法重新显示登录框
     private void showFailedAnim() {
-        logining.setVisibility(View.INVISIBLE);
         rl_failed.setVisibility(View.VISIBLE);
         Animation animation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.bounce_anim);
         iv_failed.startAnimation(animation);
@@ -361,8 +294,8 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         });
     }
 
+    //登录成功，跳转进入主页
     private void showSuccessAnim() {
-        logining.setVisibility(View.INVISIBLE);
         rl_success.setVisibility(View.VISIBLE);
         Animation animation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.bounce_anim);
         iv_success.startAnimation(animation);
@@ -383,16 +316,17 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         });
     }
 
+    //为输入框点击变色
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         switch (v.getId()) {
-            case R.id.login_et_un:
+            case R.id.register_et_un:
                 if (hasFocus) {
                     rl_un.setActivated(true);
                     rl_pw.setActivated(false);
                 }
                 break;
-            case R.id.login_et_pw:
+            case R.id.register_et_pw:
                 if (hasFocus) {
                     rl_un.setActivated(false);
                     rl_pw.setActivated(true);

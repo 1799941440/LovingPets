@@ -11,6 +11,7 @@
     <string name="nav_bottom_5">我的</string>
     <string name="login_title1">爱宠APP</string>
     <string name="login_title2">爱宠物，爱生活</string>
+    <string name="register_title2">爱宠物？一起加入爱宠吧！</string>
     <string name="forgot_password">忘记密码?</string>
     <string name="regist_now">立即注册</string>
     <string name="login_button_text">登 录</string>
@@ -24,4 +25,7 @@
     <string name="to_be_revceive">待收货</string>
     <string name="to_be_evaluated">待评价</string>
     <string name="all_orders">全部订单</string>
+    <string name="register_et_un_hint">输入用户名注册，作为登录账号</string>
+    <string name="et_hint">密码</string>
+    <string name="et_code_hint">验证码</string>
 </resources>

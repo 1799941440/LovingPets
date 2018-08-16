@@ -19,13 +19,11 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private final LoginContract.View view;
     private final HttpRequest.ApiService api;
-    private Context context;
     public ListResponse<User> list;
 
     public LoginPresenter(LoginContract.View view, HttpRequest.ApiService api) {
         this.view = view;
         this.api = api;
-        this.context = context;
         this.view.setPresenter(this);
     }
 
