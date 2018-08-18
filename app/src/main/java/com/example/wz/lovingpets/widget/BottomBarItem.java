@@ -33,6 +33,7 @@ public class BottomBarItem extends LinearLayout {
     private int mIconNormalResourceId;//普通状态图标的资源id
     private int mIconSelectedResourceId;//选中状态图标的资源id
     private String mText;//文本
+    private boolean fixableText;
     private int mTextSize = 12;//文字大小 默认为12sp
     private int mTextColorNormal = 0xFF999999;    //描述文本的默认显示颜色
     private int mTextColorSelected = 0xFF46C01B;  //述文本的默认选中显示颜色
@@ -89,6 +90,7 @@ public class BottomBarItem extends LinearLayout {
         mIconSelectedResourceId = ta.getResourceId(R.styleable.BottomBarItem_iconSelected, -1);
 
         mText = ta.getString(R.styleable.BottomBarItem_itemText);
+        fixableText = ta.getBoolean(R.styleable.BottomBarItem_fixableText,true);
         mTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarItem_itemTextSize, UIUtils.sp2px(mContext, mTextSize));
 
         mTextColorNormal = ta.getColor(R.styleable.BottomBarItem_textColorNormal, mTextColorNormal);
@@ -221,8 +223,11 @@ public class BottomBarItem extends LinearLayout {
     }
 
     public void setStatus(boolean isSelected) {
-        mImageView.setImageDrawable(getResources().getDrawable(isSelected ? mIconSelectedResourceId : mIconNormalResourceId));
+        mImageView.setImageResource(isSelected ? mIconSelectedResourceId : mIconNormalResourceId);
         mTextView.setTextColor(isSelected ? mTextColorSelected : mTextColorNormal);
+        if (!fixableText){
+            mTextView.setText(isSelected ? "切换主站" : mText);
+        }
     }
 
     private void setTvVisiable(TextView tv) {
@@ -264,6 +269,12 @@ public class BottomBarItem extends LinearLayout {
     public void setMsg(String msg) {
         setTvVisiable(mTvMsg);
         mTvMsg.setText(msg);
+    }
+    public void setText(Context context,int resId){
+        mTextView.setTextAppearance(context, resId);
+    }
+    public void setText(String s){
+        mTextView.setText(s);
     }
 
     public void hideMsg() {

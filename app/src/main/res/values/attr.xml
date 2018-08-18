@@ -7,6 +7,8 @@
         <attr name="iconSelected" format="reference"/>
         <!--底部文字-->
         <attr name="itemText" format="string"/>
+        <!--是否为确定的文字-->
+        <attr name="fixableText" format="boolean"/>
         <!--文字大小-->
         <attr name="itemTextSize" format="dimension"/>
         <!--默认状态下的文字颜色-->
@@ -48,7 +50,6 @@
     </declare-styleable>
 
     <attr name="main_icon" format="reference"/>
-    <attr name="nav_bottom_text_selected_color" format="reference"/>
     <attr name="nav_bottom_text" format="reference"/>
     <attr name="mine_bg" format="reference"/>
 </resources>

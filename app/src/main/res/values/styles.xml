@@ -8,8 +8,6 @@
         <item name="windowNoTitle">true</item>
         <item name="main_icon">@mipmap/dog</item>//为当前主题是主页左下角导航的图标
         <item name="nav_bottom_text">@string/favorite_dog</item>
-        //主页导航条目被选中时文字的颜色
-        <item name="nav_bottom_text_selected_color">@color/colorPrimary_dog</item>
         <item name="mine_bg">@mipmap/mine_bg_dog</item>
     </style>
     <!-- 猫主站主题颜色. -->
@@ -20,7 +18,6 @@
         <item name="windowNoTitle">true</item>
         <item name="main_icon">@mipmap/cat</item>
         <item name="nav_bottom_text">@string/favorite_cat</item>
-        <item name="nav_bottom_text_selected_color">@color/colorPrimary_cat</item>
         <item name="mine_bg">@mipmap/mine_bg_cat</item>
     </style>
     <!-- 鸟主站主题颜色. -->
@@ -31,7 +28,6 @@
         <item name="windowNoTitle">true</item>
         <item name="main_icon">@mipmap/bird</item>
         <item name="nav_bottom_text">@string/favorite_bird</item>
-        <item name="nav_bottom_text_selected_color">@color/colorPrimary_bird</item>
         <item name="mine_bg">@mipmap/mine_bg_bird</item>
     </style>
     <!-- 鱼主站主题颜色. -->
@@ -42,7 +38,6 @@
         <item name="windowNoTitle">true</item>
         <item name="main_icon">@mipmap/fish</item>
         <item name="nav_bottom_text">@string/favorite_fish</item>
-        <item name="nav_bottom_text_selected_color">@color/colorPrimary_fish</item>
         <item name="mine_bg">@mipmap/mine_bg_fish</item>
     </style>
 

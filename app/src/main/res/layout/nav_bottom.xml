@@ -19,6 +19,7 @@
         android:orientation="horizontal">
 
         <com.example.wz.lovingpets.widget.BottomBarItem
+            android:id="@+id/nav_item1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -27,9 +28,10 @@
             app:iconSelected="?attr/main_icon"
             app:iconWidth="@dimen/nav_bottom_icon_size"
             app:itemText="?attr/nav_bottom_text"
+            app:fixableText="false"
             app:itemTextSize="@dimen/nav_bottom_font_size"
             app:textColorNormal="@color/tab_normal_color"
-            app:textColorSelected="?attr/nav_bottom_text_selected_color" />
+            app:textColorSelected="?attr/colorPrimary" />
 
         <com.example.wz.lovingpets.widget.BottomBarItem
             android:layout_width="0dp"
@@ -42,7 +44,7 @@
             app:itemText="@string/nav_bottom_2"
             app:itemTextSize="@dimen/nav_bottom_font_size"
             app:textColorNormal="@color/tab_normal_color"
-            app:textColorSelected="?attr/nav_bottom_text_selected_color" />
+            app:textColorSelected="?attr/colorPrimary" />
 
 
         <com.example.wz.lovingpets.widget.BottomBarItem
@@ -56,33 +58,33 @@
             app:itemText="@string/nav_bottom_3"
             app:itemTextSize="@dimen/nav_bottom_font_size"
             app:textColorNormal="@color/tab_normal_color"
-            app:textColorSelected="?attr/nav_bottom_text_selected_color" />
+            app:textColorSelected="?attr/colorPrimary" />
 
         <com.example.wz.lovingpets.widget.BottomBarItem
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:iconHeight="@dimen/nav_bottom_icon_size"
-            app:iconNormal="@mipmap/shopping_trolley"
-            app:iconSelected="@mipmap/shopping_trolley"
+            app:iconNormal="@drawable/ic_shopping_trolley_unselected"
+            app:iconSelected="@drawable/ic_shopping_trolley_selected"
             app:iconWidth="@dimen/nav_bottom_icon_size"
             app:itemText="@string/nav_bottom_4"
             app:itemTextSize="@dimen/nav_bottom_font_size"
             app:textColorNormal="@color/tab_normal_color"
-            app:textColorSelected="?attr/nav_bottom_text_selected_color" />
+            app:textColorSelected="?attr/colorPrimary" />
 
         <com.example.wz.lovingpets.widget.BottomBarItem
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:iconHeight="@dimen/nav_bottom_icon_size"
-            app:iconNormal="@mipmap/mine"
-            app:iconSelected="@mipmap/mine"
+            app:iconNormal="@drawable/ic_mine"
+            app:iconSelected="@drawable/ic_mine_selected"
             app:iconWidth="@dimen/nav_bottom_icon_size"
             app:itemText="@string/nav_bottom_5"
             app:itemTextSize="@dimen/nav_bottom_font_size"
             app:textColorNormal="@color/tab_normal_color"
-            app:textColorSelected="?attr/nav_bottom_text_selected_color" />
+            app:textColorSelected="?attr/colorPrimary" />
 
     </com.example.wz.lovingpets.widget.BottomBarLayout>
 </LinearLayout>

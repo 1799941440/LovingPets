@@ -38,7 +38,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
     private View logining, mInputLayout;//
     private long exitTime;
     private float mWidth, mHeight;//
-    private RelativeLayout root, rl_un, rl_pw, rl_failed, rl_success;//input根布局、username、password、失败、成功的id
+    private RelativeLayout rl_root, rl_un, rl_pw, rl_failed, rl_success;//input根布局、username、password、失败、成功的id
     private ImageView icon, ic_after, iv_failed, iv_success;//一开始显示的图标以及变化后的位置，成功以及失败图片
     private EditText et_un, et_pw;
     private TextView tv_forgot, tv_goto_register;
@@ -67,7 +67,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         et_pw = findViewById(R.id.register_et_pw);
         icon = findViewById(R.id.login_icon);
         ic_after = findViewById(R.id.login_after_anim);
-        root = findViewById(R.id.login_rl_root);
+        rl_root = findViewById(R.id.login_rl_root);
         iv_failed = findViewById(R.id.failed_iv);
         iv_success = findViewById(R.id.success_iv);
         rl_failed = findViewById(R.id.login_layout_failed);
@@ -79,7 +79,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
     //为变量赋值、设置监听器等
     protected void initData() {
         presenter = new LoginPresenter(this, HttpRequest.getApiservice());
-        root.setAlpha(0);
+        rl_root.setAlpha(0);
         //登录键点击后的动画
         mBtnLogin.setOnClickListener(this);
         et_un.setOnFocusChangeListener(this);
@@ -98,8 +98,8 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
                 switch (msg.what) {
                     //开始登录根布局的动画
                     case 0:
-                        if (root.getAlpha() == 1) {
-                            root.setAlpha(0);
+                        if (rl_root.getAlpha() == 1) {
+                            rl_root.setAlpha(0);
                         }
                         startIconAnim();
                         break;
@@ -216,7 +216,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
 
     //login界面根布局的动画
     public void startRootAnim() {
-        ObjectAnimator alphaRoot = ObjectAnimator.ofFloat(root, "alpha", 0, 1);
+        ObjectAnimator alphaRoot = ObjectAnimator.ofFloat(rl_root, "alpha", 0, 1);
         AnimatorSet rootAnim = new AnimatorSet();
         rootAnim.setDuration(1000);
         rootAnim.play(alphaRoot);
@@ -256,7 +256,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
 
     }
 
-    //由p层实例调用该方法，参数为返回的圆弧信息和是否成功
+    //由p层实例调用该方法，参数为返回的用户信息和是否成功
     @Override
     public void loginSuccess(User user, boolean issuccess) {
         isLogining = false;

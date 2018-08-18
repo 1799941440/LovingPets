@@ -34,6 +34,7 @@ public class MainActivity extends BaseFragmentActivity {
     private List<Fragment> mFragmentList = new ArrayList<>();//承载碎片的list
     private FrameLayout mFlContent;//碎片填充的目标View
     private BottomBarLayout mBottomBarLayout;
+    private BottomBarItem item1;
     private FragmentTransaction transaction;
 
     @Override
@@ -54,6 +55,7 @@ public class MainActivity extends BaseFragmentActivity {
     protected void findViews() {
         mFlContent = findViewById(R.id.fl_content);
         mBottomBarLayout = findViewById(R.id.main_bbl);
+        item1 = findViewById(R.id.nav_item1);
     }
 
     @Override
@@ -133,6 +135,7 @@ public class MainActivity extends BaseFragmentActivity {
                 if (!mFragmentList.get(position).isAdded()) {
                     transaction.add(R.id.fl_content, mFragmentList.get(position));
                 }
+                item1.setText("切换主站");
                 transaction.show(mFragmentList.get(position));
                 break;
             case 1:

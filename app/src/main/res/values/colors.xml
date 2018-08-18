@@ -28,4 +28,5 @@
     <color name="msgTextColor">#00ff00</color>
     <color name="divide_line_color">#d2d2d2</color>
     <color name="divide10_line_color">#f3f4f5</color>
+    <color name="nav_icon_unselected_color">#707070</color>
 </resources>
