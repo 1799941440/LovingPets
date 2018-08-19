@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.activity.MyApp;
+import com.example.wz.lovingpets.base.BaseFragment;
 import com.example.wz.lovingpets.fragment.ClassifyFragment;
 import com.example.wz.lovingpets.fragment.MineFragment;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
     public static final String TEXT_TITLE = "content";
     private String mParam1;
     private String mParam2;

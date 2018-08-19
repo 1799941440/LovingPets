@@ -7,6 +7,9 @@ import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.utils.StringUtils;
+import com.google.gson.Gson;
+
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -58,7 +61,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
             @Override
             public void onComplete() {
-                Log.d("Tag", "登录 onComplete: ");
+
             }
         });
     }

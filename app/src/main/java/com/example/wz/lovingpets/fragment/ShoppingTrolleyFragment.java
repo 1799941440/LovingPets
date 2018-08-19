@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class ShoppingTrolleyFragment extends Fragment {
+import com.example.wz.lovingpets.base.BaseFragment;
+
+public class ShoppingTrolleyFragment extends BaseFragment {
     public static final String TEXT_TITLE = "content";
     private String mParam1;
     private String mParam2;

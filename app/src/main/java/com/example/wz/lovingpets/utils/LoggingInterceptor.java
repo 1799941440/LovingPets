@@ -1,5 +1,9 @@
 package com.example.wz.lovingpets.utils;
 
+import android.annotation.SuppressLint;
+
+import com.orhanobut.logger.Logger;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -9,19 +13,21 @@ import okhttp3.ResponseBody;
 
 /**
  * Created by wz on 2018/7/12.
- * 带格式化json的自定义日志记录器，继承s于okhttp3的日志记录器
+ * 结合com.orhanobut:logger的自定义日志记录器，继承于okhttp3的日志记录器
  */
 
 public class LoggingInterceptor implements Interceptor {
     HttpLogger logger = new HttpLogger();
+    @SuppressLint("DefaultLocale")
     @Override
     public Response intercept(Chain chain) throws IOException {
         //这个chain里面包含了request和response，所以你要什么都可以从这里拿
         Request request = chain.request();
 
         long t1 = System.nanoTime();//请求发起的时间
-        logger.log(String.format("发送请求 %s on %s%n%s",
-                request.url(), chain.connection(), request.headers()));
+        Logger.i("发出请求  " + request.url().toString());
+//        logger.log(String.format(" \n发送请求 %s on %s%n%s",
+//                request.url(), chain.connection(), Thread.currentThread().getName()));
 
         Response response = chain.proceed(request);
 
@@ -32,11 +38,15 @@ public class LoggingInterceptor implements Interceptor {
         //个新的response给应用层处理
         ResponseBody responseBody = response.peekBody(1024 * 1024);
 
-        logger.log(String.format("接收响应: [%s] %n返回json:【%s】 %n响应耗时：%.1fms%n%s",
+        Logger.i(String.format(" \n接收响应: [%s] %n响应耗时：%.1fms %n返回json:【%s】 %n",
                 response.request().url(),
-                LoggingInterceptor.formatJson(responseBody.string()),
                 (t2 - t1) / 1e6d,
-                response.headers()));
+                LoggingInterceptor.formatJson(responseBody.string())));
+//        logger.log(String.format(" \n接收响应: [%s] %n返回json:【%s】 %n响应耗时：%.1fms%n%s",
+//                response.request().url(),
+//                LoggingInterceptor.formatJson(responseBody.string()),
+//                (t2 - t1) / 1e6d,
+//                Thread.currentThread().getName()));
 
         return response;
     }

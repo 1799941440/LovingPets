@@ -34,6 +34,13 @@ public class StringUtils {
         return "￥" + decimalFormat.format(cost);
     }
 
+//    用于分割地址的方法
+    public static String[] splitWithBlank(String s){
+        String[] temp = null;
+        temp = s.split(" ");
+        return temp;
+    }
+
     public static class PrimaryClickableSpan extends ClickableSpan {
 
         private Context context;

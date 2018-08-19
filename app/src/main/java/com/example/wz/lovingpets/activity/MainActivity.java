@@ -84,7 +84,7 @@ public class MainActivity extends BaseFragmentActivity {
                 switchFragment(currentPosition);
             }
         });
-//        mBottomBarLayout.setUnread(0, 20);//设置第一个页签的未读数为20
+        mBottomBarLayout.setUnread(3, 20);//设置第4个页签的未读数为20
 //        mBottomBarLayout.setUnread(1, 1001);//设置第二个页签的未读数
 //        mBottomBarLayout.showNotify(2);//设置第三个页签显示提示的小红点
 //        mBottomBarLayout.setMsg(3, "NEW");//设置第四个页签显示NEW提示文字
@@ -115,7 +115,8 @@ public class MainActivity extends BaseFragmentActivity {
                 showToast("再按一次退出爱宠APP");
                 exitTime = System.currentTimeMillis();
             } else {
-                MainActivity.this.finish();
+                ActivityManager.getInstance().removeAll();
+                System.exit(0);//使进程死亡，完全退出
             }
             return true;
         }

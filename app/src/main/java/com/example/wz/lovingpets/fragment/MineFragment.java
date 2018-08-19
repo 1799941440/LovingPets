@@ -12,16 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
+import com.example.wz.lovingpets.activity.MyPetsActivity;
+import com.example.wz.lovingpets.base.BaseFragment;
 import com.example.wz.lovingpets.ui.login.LoginActivity;
 import com.example.wz.lovingpets.ui.register.RegisterActivity;
 import com.example.wz.lovingpets.widget.MyScrollView;
 
-public class MineFragment extends Fragment implements View.OnClickListener,MyScrollView.ScrollListener{
+public class MineFragment extends BaseFragment implements View.OnClickListener,MyScrollView.ScrollListener{
     public static final String TEXT_TITLE = "content";
     private String mParam1;
     private String mParam2;
@@ -30,6 +33,7 @@ public class MineFragment extends Fragment implements View.OnClickListener,MyScr
     private ImageView iv_setting,iv_banner;
     private RelativeLayout rl_title;
     private TextView tv_title,tv_login,tv_register;
+    private LinearLayout ll_pets_info;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,12 +68,14 @@ public class MineFragment extends Fragment implements View.OnClickListener,MyScr
         scrollView = view.findViewById(R.id.mine_scroll);
         iv_setting = view.findViewById(R.id.mine_iv_setting);
         iv_banner = view.findViewById(R.id.mine_background);
+        ll_pets_info = view.findViewById(R.id.ll_pets_info);
     }
     public void initDatas(){
         iv_setting.setOnClickListener(this);
         iv_banner.setOnClickListener(this);
         tv_register.setOnClickListener(this);
         tv_login.setOnClickListener(this);
+        ll_pets_info.setOnClickListener(this);
     }
 
     @Override
@@ -86,6 +92,9 @@ public class MineFragment extends Fragment implements View.OnClickListener,MyScr
                 break;
             case R.id.mine_tv_register:
                 startActivity(new Intent(getActivity(), RegisterActivity.class));
+                break;
+            case R.id.ll_pets_info:
+                startActivity(new Intent(getActivity(), MyPetsActivity.class));
                 break;
             default:
                 break;

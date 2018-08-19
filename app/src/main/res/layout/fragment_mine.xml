@@ -57,8 +57,8 @@
                             android:id="@+id/mine_tv_login"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dp20"
-                            android:text="登录"
+                            android:padding="@dimen/dp10"
+                            android:text="@string/login_button_text"
                             android:textColor="@android:color/white" />
 
                         <ImageView
@@ -70,8 +70,8 @@
                             android:id="@+id/mine_tv_register"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dp20"
-                            android:text="注册"
+                            android:padding="@dimen/dp10"
+                            android:text="@string/register_button_text"
                             android:textColor="@android:color/white" />
                     </LinearLayout>
                 </LinearLayout>
@@ -290,6 +290,7 @@
                     android:layout_height="50dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -297,14 +298,14 @@
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_margin="@dimen/dp10"
-                        android:src="@mipmap/ic_services" />
+                        android:src="@drawable/ic_pets_info" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="宠物资料" />
+                        android:text="@string/pets_info" />
 
                     <ImageView
                         android:layout_width="@dimen/dp20"
@@ -326,6 +327,7 @@
                     android:layout_height="50dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -333,14 +335,14 @@
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_margin="@dimen/dp10"
-                        android:src="@mipmap/ic_services" />
+                        android:src="@drawable/ic_my_evaluate" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="我的评价" />
+                        android:text="@string/my_evaluate" />
 
                     <ImageView
                         android:layout_width="@dimen/dp20"
@@ -362,6 +364,7 @@
                     android:layout_height="50dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -369,14 +372,14 @@
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_margin="@dimen/dp10"
-                        android:src="@mipmap/ic_services" />
+                        android:src="@drawable/ic_my_collection" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="我的收藏" />
+                        android:text="@string/my_collection" />
 
                     <ImageView
                         android:layout_width="@dimen/dp20"
@@ -398,6 +401,7 @@
                     android:layout_height="50dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -405,14 +409,14 @@
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_margin="@dimen/dp10"
-                        android:src="@mipmap/ic_services" />
+                        android:src="@drawable/ic_manage_address" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="管理收货地址" />
+                        android:text="@string/manage_address" />
 
                     <ImageView
                         android:layout_width="@dimen/dp20"
@@ -451,6 +455,7 @@
                     android:layout_height="50dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -458,14 +463,14 @@
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_margin="@dimen/dp10"
-                        android:src="@mipmap/ic_services" />
+                        android:src="@drawable/ic_services" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="联系客服" />
+                        android:text="@string/connect_to_service" />
 
                     <ImageView
                         android:layout_width="@dimen/dp20"
@@ -487,6 +492,7 @@
                     android:layout_height="50dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -494,14 +500,14 @@
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_margin="@dimen/dp10"
-                        android:src="@mipmap/ic_services" />
+                        android:src="@drawable/ic_feed_back" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="意见反馈" />
+                        android:text="@string/feed_back" />
 
                     <ImageView
                         android:layout_width="@dimen/dp20"
@@ -530,14 +536,14 @@
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_margin="@dimen/dp10"
-                        android:src="@mipmap/ic_services" />
+                        android:src="@drawable/ic_check_version" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="版本检测" />
+                        android:text="@string/check_version" />
 
                     <ImageView
                         android:layout_width="@dimen/dp20"
@@ -574,6 +580,7 @@
                     android:layout_height="50dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -581,14 +588,14 @@
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_margin="@dimen/dp10"
-                        android:src="@mipmap/ic_services" />
+                        android:src="@drawable/ic_my_about" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="关于" />
+                        android:text="@string/my_about" />
 
                     <ImageView
                         android:layout_width="@dimen/dp20"
@@ -614,7 +621,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_margin="@dimen/dp10"
-            android:text="我的"
+            android:text="@string/nav_bottom_5"
             android:textAlignment="center"
             android:textColor="@android:color/transparent"
             android:textSize="18sp" />

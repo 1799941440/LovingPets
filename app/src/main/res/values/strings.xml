@@ -21,6 +21,7 @@
     <string name="my_balance">余额</string>
     <string name="my_coin">爱宠币</string>
     <string name="my_coupon">优惠券</string>
+    <string name="my_about">关于</string>
     <string name="unpay">待付款</string>
     <string name="to_be_revceive">待收货</string>
     <string name="to_be_evaluated">待评价</string>
@@ -28,4 +29,11 @@
     <string name="register_et_un_hint">输入用户名注册，作为登录账号</string>
     <string name="et_hint">密码</string>
     <string name="et_code_hint">验证码</string>
+    <string name="check_version">版本检测</string>
+    <string name="feed_back">意见反馈</string>
+    <string name="connect_to_service">联系客服</string>
+    <string name="manage_address">管理收货地址</string>
+    <string name="my_collection">我的收藏</string>
+    <string name="my_evaluate">我的评价</string>
+    <string name="pets_info">宠物资料</string>
 </resources>
