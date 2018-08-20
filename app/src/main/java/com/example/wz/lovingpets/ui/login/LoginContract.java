@@ -2,6 +2,7 @@ package com.example.wz.lovingpets.ui.login;
 
 import com.example.wz.lovingpets.base.BasePresenter;
 import com.example.wz.lovingpets.base.BaseView;
+import com.example.wz.lovingpets.db.UserDao;
 import com.example.wz.lovingpets.entity.User;
 
 /**
@@ -14,6 +15,7 @@ public interface LoginContract {
         void loginSuccess(User user, boolean success);
         void showLoginAnim();
         void showTip(String s);
+        UserDao getUserDao();
     }
 
     interface Presenter extends BasePresenter {

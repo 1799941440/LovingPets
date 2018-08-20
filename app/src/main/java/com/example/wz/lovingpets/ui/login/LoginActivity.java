@@ -22,15 +22,20 @@ import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.activity.MainActivity;
+import com.example.wz.lovingpets.common.BindEventBus;
+import com.example.wz.lovingpets.db.UserDao;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.ui.register.RegisterActivity;
 import com.example.wz.lovingpets.utils.AnimUtils;
+import com.example.wz.lovingpets.utils.GreenDaoManager;
 import com.example.wz.lovingpets.utils.Md5Util;
 import com.example.wz.lovingpets.utils.StringUtils;
 import com.example.wz.lovingpets.utils.UserUtil;
 
+import org.greenrobot.eventbus.Subscribe;
 
+@BindEventBus
 public class LoginActivity extends Activity implements View.OnFocusChangeListener
         , LoginContract.View, View.OnClickListener {
 
@@ -125,7 +130,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
 
     @Override
     public void showTip(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
     }
 
     //输入框边框的动画
@@ -223,6 +228,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         rootAnim.start();
     }
 
+    @Subscribe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -388,5 +394,15 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+
+    public UserDao getUserDao() {
+        return GreenDaoManager.getInstance().getmDaoSession().getUserDao();
+    }
+
+
+    public User getUser(Long id) {
+        return getUserDao().loadByRowId(id);
     }
 }

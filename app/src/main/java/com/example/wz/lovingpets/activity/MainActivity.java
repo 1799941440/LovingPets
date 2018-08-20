@@ -43,9 +43,6 @@ public class MainActivity extends BaseFragmentActivity {
         int theme = MyApp.getInstance().getCurrentTheme();//从sharedprefre获取存储的主题
         setTheme(Constant.allThemes[theme]);//设置主题为该主题，要放在setcontentview前
         setContentView(R.layout.activity_main);
-        StatusBarUtil.transparencyBar(this); //设置状态栏全透明
-        StatusBarUtil.StatusBarLightMode(this); //设置白底黑字
-        ActivityManager.getInstance().add(this);//由于没继承baseactivity，手动添加进入栈管理器
         findViews();
         initData();
         initListener();
@@ -195,9 +192,4 @@ public class MainActivity extends BaseFragmentActivity {
 //        startActivityForResult(it,0x123);
 //    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ActivityManager.getInstance().remove(this);
-    }
 }

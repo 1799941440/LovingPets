@@ -3,9 +3,11 @@ package com.example.wz.lovingpets.ui.login;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.net.HttpRequest;
+import com.example.wz.lovingpets.utils.EventBusUtils;
 import com.example.wz.lovingpets.utils.StringUtils;
 import com.google.gson.Gson;
 
@@ -47,6 +49,8 @@ public class LoginPresenter implements LoginContract.Presenter {
                 }
                 if(listResponse.getRows().size()!=0){
                     Log.d("Tag", "登录onNext : 登录成功");
+                    view.getUserDao().insert(listResponse.getRows().get(0));
+                    EventBusUtils.sendEvent(new Event<User>(1,listResponse.getRows().get(0)));
                     view.loginSuccess(listResponse.getRows().get(0),listResponse.isSuccess());
                 }else {
                     Log.d("Tag", "登录onNext : 登录失败，没有该用户");

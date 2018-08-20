@@ -7,12 +7,29 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
+import com.example.wz.lovingpets.common.ActivityManager;
+import com.example.wz.lovingpets.common.BindEventBus;
+import com.example.wz.lovingpets.utils.StatusBarUtil;
+
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * 功能与BaseActivity基本相似
  */
 public abstract class BaseFragmentActivity extends FragmentActivity {
     public boolean isActive = false;
     protected final String TAG = this.getClass().getSimpleName();
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        StatusBarUtil.transparencyBar(this); //设置状态栏全透明
+        StatusBarUtil.StatusBarLightMode(this); //设置白底黑字
+        if (this.getClass().isAnnotationPresent(BindEventBus.class)) {
+            EventBus.getDefault().register(this);
+        }
+        ActivityManager.getInstance().add(this);
+    }
 
     protected void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
@@ -43,12 +60,16 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         isActive = false;
     }
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     protected abstract void findViews();
 
     protected abstract void initData();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (this.getClass().isAnnotationPresent(BindEventBus.class)) {
+            EventBus.getDefault().unregister(this);
+        }
+        ActivityManager.getInstance().remove(this);
+    }
 }

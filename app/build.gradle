@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'//配置greendao 2、app目录下依赖插件
 
 android {
     compileSdkVersion 27
@@ -9,13 +10,30 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //  EventBus使用：2、设置索引路径 3、在基类添加注册，解除注册 4、再次封装一个EventbusUtil便于使用
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ eventBusIndex : 'com.example.wz.lovingpets.common.MyEventBusIndex' ]
+            }
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
+            //如果要混淆要小心类库的混淆规则
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+//greendao配置 3、设置目录
+greendao{
+    //版本号，升级时可配置,对应当前数据库版本
+    schemaVersion 1
+    //由GreenDao自动生成代码所在的包名，默认的是在项目包下面新建一个gen
+    daoPackage 'com.example.wz.lovingpets.db'
+    //设置自动生成代码的目录
+    targetGenDir 'src/main/java'
 }
 
 dependencies {
@@ -31,7 +49,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'//Gson 库
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
-    //下面两个是RxJava 和 RxAndroid
+    //下面是RxJava 和 RxAndroid
     //rxjava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.10'
     //rxandroid
@@ -49,8 +67,16 @@ dependencies {
     //日志打印
     implementation 'com.orhanobut:logger:2.2.0'
 
+    //泄漏检测
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
     // Optional, if you use support library fragments:
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
+
+//  EventBus使用：1、导入eventbus和索引
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.0'
+
+    //greendao配置 4、导入依赖
+    implementation 'org.greenrobot:greendao:3.2.2'
 }

@@ -8,7 +8,10 @@ import android.widget.Toast;
 
 import com.example.wz.lovingpets.activity.MyApp;
 import com.example.wz.lovingpets.common.ActivityManager;
+import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.utils.StatusBarUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * activity基类，封装了一些基本常用的方法
@@ -31,7 +34,7 @@ public abstract class BaseActivity extends Activity {
     }
 
     /**
-     * 带参数的条阻焊
+     * 带参数的跳转
      * @param tarActivity 目标activity
      * @param b 数据载体，Bundle类型
      */
@@ -63,11 +66,17 @@ public abstract class BaseActivity extends Activity {
         StatusBarUtil.transparencyBar(this); //设置状态栏全透明
         StatusBarUtil.StatusBarLightMode(this); //设置白底黑字
         ActivityManager.getInstance().add(this);//统一使用自定义的activity管理器管理
+        if (this.getClass().isAnnotationPresent(BindEventBus.class)) {
+            EventBus.getDefault().register(this);
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (this.getClass().isAnnotationPresent(BindEventBus.class)) {
+            EventBus.getDefault().unregister(this);
+        }
         ActivityManager.getInstance().remove(this);
     }
 
