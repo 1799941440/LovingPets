@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.db.UserDao;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.net.HttpRequest;

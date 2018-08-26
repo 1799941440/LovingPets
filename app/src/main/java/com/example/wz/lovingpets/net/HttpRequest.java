@@ -18,7 +18,7 @@ import retrofit2.http.POST;
  * LoggingInterceptor：带格式化json的自定义日志记录器，继承于okhttp3的日志记录器
  */
 public class HttpRequest {
-    public static final String BASE_URL = "http://119.29.250.84:8080";//网络访问基地址
+    public static final String BASE_URL = "http://193.112.48.16:8080";//网络访问基地址
     private static OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
             .addNetworkInterceptor(new LoggingInterceptor());
     private static ApiService apiService;

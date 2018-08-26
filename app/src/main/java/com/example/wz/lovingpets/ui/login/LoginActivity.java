@@ -245,12 +245,16 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
                     showTip("请输入密码");
                     return;
                 }
-                mWidth = mBtnLogin.getMeasuredWidth();
-                mHeight = mBtnLogin.getMeasuredHeight();
-                rl_un.setVisibility(View.INVISIBLE);
-                rl_pw.setVisibility(View.INVISIBLE);
-                handler.sendEmptyMessage(1);
-                isLogining = true;
+                if(isLogining){
+                    return;
+                }else{
+                    mWidth = mBtnLogin.getMeasuredWidth();
+                    mHeight = mBtnLogin.getMeasuredHeight();
+                    rl_un.setVisibility(View.INVISIBLE);
+                    rl_pw.setVisibility(View.INVISIBLE);
+                    handler.sendEmptyMessage(1);
+                    isLogining = true;
+                }
                 break;
             case R.id.login_tv_forgot_pw:
                 break;
@@ -359,6 +363,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
             //If token is null, all callbacks and messages will be removed.
             handler.removeCallbacksAndMessages(null);
         }
+        presenter = null;
         super.onDestroy();
     }
 

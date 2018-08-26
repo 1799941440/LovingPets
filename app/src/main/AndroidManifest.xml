@@ -46,7 +46,7 @@
         <activity
             android:name=".activity.ChangeFavoriteActivity"
             android:theme="@style/translucent" />
-        <activity android:name=".activity.MyPetsActivity"></activity>
+        <activity android:name=".activity.MyPetsActivity"/>
     </application>
 
 </manifest>

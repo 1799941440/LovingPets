@@ -15,7 +15,7 @@
 
     <!--底部导航条-->
     <include
-        android:id="@+id/ic_bottom_tab"
+        android:id="@+id/nav_bottom"
         layout="@layout/nav_bottom"
         android:layout_width="match_parent"
         android:layout_height="50dp"

@@ -31,7 +31,7 @@
             app:fixableText="false"
             app:itemTextSize="@dimen/nav_bottom_font_size"
             app:textColorNormal="@color/tab_normal_color"
-            app:textColorSelected="?attr/colorPrimary" />
+            app:textColorSelected="?android:attr/colorPrimary" />
 
         <com.example.wz.lovingpets.widget.BottomBarItem
             android:layout_width="0dp"
@@ -44,7 +44,7 @@
             app:itemText="@string/nav_bottom_2"
             app:itemTextSize="@dimen/nav_bottom_font_size"
             app:textColorNormal="@color/tab_normal_color"
-            app:textColorSelected="?attr/colorPrimary" />
+            app:textColorSelected="?android:attr/colorPrimary" />
 
 
         <com.example.wz.lovingpets.widget.BottomBarItem
@@ -58,7 +58,7 @@
             app:itemText="@string/nav_bottom_3"
             app:itemTextSize="@dimen/nav_bottom_font_size"
             app:textColorNormal="@color/tab_normal_color"
-            app:textColorSelected="?attr/colorPrimary" />
+            app:textColorSelected="?android:attr/colorPrimary" />
 
         <com.example.wz.lovingpets.widget.BottomBarItem
             android:layout_width="0dp"
@@ -71,7 +71,7 @@
             app:itemText="@string/nav_bottom_4"
             app:itemTextSize="@dimen/nav_bottom_font_size"
             app:textColorNormal="@color/tab_normal_color"
-            app:textColorSelected="?attr/colorPrimary" />
+            app:textColorSelected="?android:attr/colorPrimary" />
 
         <com.example.wz.lovingpets.widget.BottomBarItem
             android:layout_width="0dp"
@@ -84,7 +84,7 @@
             app:itemText="@string/nav_bottom_5"
             app:itemTextSize="@dimen/nav_bottom_font_size"
             app:textColorNormal="@color/tab_normal_color"
-            app:textColorSelected="?attr/colorPrimary" />
+            app:textColorSelected="?android:attr/colorPrimary" />
 
     </com.example.wz.lovingpets.widget.BottomBarLayout>
 </LinearLayout>

@@ -11,7 +11,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wz.lovingpets.base.BaseFragment;
+import com.example.wz.lovingpets.common.BindEventBus;
+import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.entity.User;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+@BindEventBus
 public class ClassifyFragment extends BaseFragment {
     public static final String TEXT_TITLE = "content";
     private String mParam1;
@@ -42,5 +49,10 @@ public class ClassifyFragment extends BaseFragment {
         args.putString(TEXT_TITLE, param1);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void loginSuccess(Event<User> event){
+
     }
 }
