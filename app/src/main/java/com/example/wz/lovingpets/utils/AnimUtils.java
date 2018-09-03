@@ -42,9 +42,9 @@ public class AnimUtils {
 
     public static ObjectAnimator getLoginingAnim( ObjectAnimator animator3,View view){
         PropertyValuesHolder animator = PropertyValuesHolder.ofFloat("scaleX",
-                0.5f, 1f);
+                0.01f, 1f);
         PropertyValuesHolder animator2 = PropertyValuesHolder.ofFloat("scaleY",
-                0.5f, 1f);
+                0.01f, 1f);
         animator3 = ObjectAnimator.ofPropertyValuesHolder(view,
                 animator, animator2);
         animator3.setDuration(1000);

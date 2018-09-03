@@ -15,13 +15,20 @@ import android.widget.TextView;
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.activity.MyApp;
 import com.example.wz.lovingpets.base.BaseFragment;
-import com.example.wz.lovingpets.fragment.ClassifyFragment;
-import com.example.wz.lovingpets.fragment.MineFragment;
+import com.example.wz.lovingpets.common.BindEventBus;
+import com.example.wz.lovingpets.common.Constant;
+import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.entity.User;
+import com.example.wz.lovingpets.fragment.CommonFragment;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@BindEventBus
 public class HomeFragment extends BaseFragment {
     public static final String TEXT_TITLE = "content";
     private String mParam1;
@@ -34,9 +41,9 @@ public class HomeFragment extends BaseFragment {
     private List<Fragment> viewList = new ArrayList<>();
     private List<List<String>> lists = Arrays.asList(
             Arrays.asList("狗狗首页", "狗狗主粮", "医疗保健", "玩具", "外出"),
-            Arrays.asList("猫猫首页", "猫猫主粮", "猫砂猫厕", "医疗保健", "玩具"),
+            Arrays.asList("猫猫首页", "猫猫主粮", "医疗保健", "猫砂猫厕", "玩具"),
             Arrays.asList("鸟儿首页", "鸟儿主粮", "医疗保健", "玩具", "外出"),
-            Arrays.asList("鱼儿首页", "鱼儿饲料", "水族药剂", "水缸摆设", "新鱼课堂"));
+            Arrays.asList("鱼儿首页", "鱼儿主粮", "水族药剂", "水缸摆设", "新鱼课堂"));
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,7 +95,7 @@ public class HomeFragment extends BaseFragment {
 
     public void initDatas() {
         for (int i = 0; i < lists.get(currentTheme).size(); i++) {
-            viewList.add(ClassifyFragment.newInstance(lists.get(currentTheme).get(i)));
+            viewList.add(CommonFragment.newInstance(lists.get(currentTheme).get(i),i));
         }
         for (int i = 0; i < lists.get(currentTheme).size(); i++) {
             tab.addTab(tab.newTab().setText(lists.get(currentTheme).get(i)));//添加tab选项
@@ -113,5 +120,10 @@ public class HomeFragment extends BaseFragment {
         vp.setAdapter(adapter);
         tab.setupWithViewPager(vp);
         tab.setTabsFromPagerAdapter(adapter);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void loginSuccess(Event<User> event){
+
     }
 }

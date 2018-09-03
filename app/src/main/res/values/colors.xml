@@ -29,4 +29,9 @@
     <color name="divide_line_color">#d2d2d2</color>
     <color name="divide10_line_color">#f3f4f5</color>
     <color name="nav_icon_unselected_color">#707070</color>
+
+    <color name="color_107">#f2f3f4</color>
+    <color name="color_002">#ff9700</color>
+    <color name="color_100">#222222</color>
+    <color name="color_109">#ffffffff</color>
 </resources>
