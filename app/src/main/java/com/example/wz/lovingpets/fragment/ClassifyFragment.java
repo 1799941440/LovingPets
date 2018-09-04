@@ -120,11 +120,11 @@ public class ClassifyFragment extends BaseFragment {
 
     private List<List<Integer>> getImages(){
         if(currentTheme == 3){
-            return null;
+            return Constant.classify_iv_fish;
         }else if(currentTheme == 2){
-            return null;
+            return Constant.classify_iv_bird;
         }else if(currentTheme == 1){
-            return null;
+            return Constant.classify_iv_cat;
         }else{
             return Constant.classify_iv_dog;
         }
@@ -132,11 +132,11 @@ public class ClassifyFragment extends BaseFragment {
 
     private List<List<String>> getTexts(){
         if(currentTheme == 3){
-            return null;
+            return Constant.classify_tv_fish;
         }else if(currentTheme == 2){
-            return null;
+            return Constant.classify_tv_bird;
         }else if(currentTheme == 1){
-            return null;
+            return Constant.classify_tv_cat;
         }else{
             return Constant.classify_tv_dog;
         }
