@@ -25,39 +25,45 @@ public class UserUtil {
 
     public User getUser() {
         User user = new User();
-        user.setUserId(sp.getString("userId",null));
-        user.setAuthority(sp.getInt("authority",0));
-        user.setPassword(sp.getString("password",null));
-        user.setPushId(sp.getString("pushId",null));
-        user.setRoleType(sp.getInt("role",0));
-        user.setDepartmentId(sp.getInt("departmentId",0));
-        user.setHead(sp.getString("head",null));
         user.setId(sp.getInt("id",0));
-        user.setStudentOrEmployee_id(sp.getInt("studentOrEmployee_id",0));
-        user.setPhoto(sp.getString("photo",null));
-        user.setToken(sp.getString("token",null));
         user.setUserName(sp.getString("userName",null));
+        user.setPassword(sp.getString("password",""));
+        user.setIdentity(sp.getInt("identify",2));
+        user.setPhone(sp.getString("phone",""));
+        user.setProvince(sp.getString("province",""));
+        user.setCity(sp.getString("city",""));
+        user.setFullAddress(sp.getString("fullAddress",""));
+        user.setBalance(sp.getFloat("balance",0f));
+        user.setSex(sp.getString("sex",""));
+        user.setAge(sp.getInt("age",0));
+        user.setShopId(sp.getInt("shopId",0));
+        user.setShoppingcartId(sp.getInt("shoppingcartId",0));
+        user.setShopName(sp.getString("shopName",""));
+        user.setCard(sp.getString("card",""));
+        user.setName(sp.getString("name",""));
+        user.setIcon(sp.getString("icon",""));
         return user;
     }
 
     public void saveUser(User user){
         editor = sp.edit();
+        editor.putInt("id",user.getId());
+        editor.putString("userName",user.getUserName());
         editor.putString("password", user.getPassword());
-        int authority=0;
-        if(user.getAuthority()!=0){
-            authority= user.getAuthority();
-        }
-        editor.putInt("authority", authority);
-        editor.putInt("id", user.getId());
-        editor.putInt("departmentId", user.getDepartmentId());
-        editor.putString("pushId", user.getPushId());
-        editor.putString("userId", user.getUserId());
-        editor.putString("token", user.getToken());
-        editor.putString("userName", user.getUserName());
-        editor.putString("head", user.getHead());
-        editor.putString("photo", user.getPhoto());
-        editor.putInt("role", user.getRoleType());
-        editor.putInt("studentOrEmployee_id", user.getStudentOrEmployee_id());
+        editor.putInt("identity",user.getIdentity());
+        editor.putString("phone", user.getPhone());
+        editor.putString("province", user.getProvince());
+        editor.putString("city", user.getCity());
+        editor.putString("fullAddress", user.getFullAddress());
+        editor.putFloat("balance",user.getBalance());
+        editor.putString("sex", user.getSex());
+        editor.putInt("age",user.getAge());
+        editor.putInt("shopId",user.getShopId() == null ? 0:user.getShopId());
+        editor.putInt("shoppingcartId",user.getShoppingcartId());
+        editor.putString("shopName", user.getShopName());
+        editor.putString("card", user.getCard());
+        editor.putString("name", user.getName());
+        editor.putString("icon", user.getIcon());
         editor.commit();
 
     }

@@ -3,8 +3,10 @@ package com.example.wz.lovingpets.activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 
 import com.example.wz.lovingpets.R;
+import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Constant;
 import com.example.wz.lovingpets.common.LogCatStrategy;
 import com.example.wz.lovingpets.utils.GreenDaoManager;
@@ -21,6 +23,7 @@ import com.squareup.leakcanary.RefWatcher;
 public class MyApp extends Application {
 
     public static int currentTheme; //当前主题
+    public static int currentColor; //当前颜色
     public static MyApp instance; //应用实例
     public static Context context; //
     public SharedPreferences sp; //
@@ -41,15 +44,20 @@ public class MyApp extends Application {
     public int getCurrentTheme() {
         return currentTheme;
     }
+    public int getCurrentColor() {
+        return currentColor;
+    }
 
     /**
      * 切换主题
      * @param currentTheme 0代表狗主题、1代表猫、2代表鸟、3代表鱼。
      */
-    public void setCurrentTheme(int currentTheme) {
+    public void setCurrentTheme(int currentTheme,int currentColor) {
         this.currentTheme = currentTheme;//
+        this.currentColor = currentColor;//
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt("currentTheme",currentTheme);
+        editor.putInt("currentColor",currentColor);
         editor.commit();
     }
 
@@ -60,8 +68,9 @@ public class MyApp extends Application {
         instance = this; //初始化实例
         sp = context.getSharedPreferences("theme", MODE_PRIVATE);//初始化sp
         currentTheme = sp.getInt("currentTheme",0);//获取sp存储的主题
+        currentColor = sp.getInt("currentColor",0);//获取sp存储的颜色
         initLogger();//初始化Logger日志记录器
-        initLeakCanary();//初始化内存泄漏检测
+//        initLeakCanary();//初始化内存泄漏检测
         GreenDaoManager.getInstance();
     }
 

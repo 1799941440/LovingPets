@@ -67,7 +67,7 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
                 break;
             case R.id.change_favorite_ll_dog:
                 if (currentTheme != 0) {//如果当前主题不是0
-                    instance.setCurrentTheme(0);//将主题切换为0
+                    instance.setCurrentTheme(0,-3838182);//将主题切换为0
                     ActivityManager.getInstance().removeAll();//用自定义的activity管理器清空其余activity
                     startActivity(intent);
                     overridePendingTransition(0, 0);//移除动画
@@ -77,7 +77,7 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
                 break;
             case R.id.change_favorite_ll_cat:
                 if (currentTheme != 1) {
-                    instance.setCurrentTheme(1);
+                    instance.setCurrentTheme(1,-1621626);
                     ActivityManager.getInstance().removeAll();
                     startActivity(intent);
                     overridePendingTransition(0, 0);
@@ -87,7 +87,7 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
                 break;
             case R.id.change_favorite_ll_bird:
                 if (currentTheme != 2) {
-                    instance.setCurrentTheme(2);
+                    instance.setCurrentTheme(2,-11625930);
                     ActivityManager.getInstance().removeAll();
                     startActivity(intent);
                     overridePendingTransition(0, 0);
@@ -97,7 +97,7 @@ public class ChangeFavoriteActivity extends Activity implements View.OnClickList
                 break;
             case R.id.change_favorite_ll_fish:
                 if (currentTheme != 3) {
-                    instance.setCurrentTheme(3);
+                    instance.setCurrentTheme(3,-15491617);
                     ActivityManager.getInstance().removeAll();
                     startActivity(intent);
                     overridePendingTransition(0, 0);

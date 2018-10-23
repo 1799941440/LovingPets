@@ -13,7 +13,7 @@ android {
         //  EventBus使用：2、设置索引路径 3、在基类添加注册，解除注册 4、再次封装一个EventbusUtil便于使用
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ eventBusIndex : 'com.example.wz.lovingpets.common.MyEventBusIndex' ]
+                arguments = [eventBusIndex: 'com.example.wz.lovingpets.common.MyEventBusIndex']
             }
         }
     }
@@ -27,7 +27,7 @@ android {
 }
 
 //greendao配置 3、设置目录
-greendao{
+greendao {
     //版本号，升级时可配置,对应当前数据库版本
     schemaVersion 1
     //由GreenDao自动生成代码所在的包名，默认的是在项目包下面新建一个gen

@@ -34,4 +34,5 @@
     <color name="color_002">#ff9700</color>
     <color name="color_100">#222222</color>
     <color name="color_109">#ffffffff</color>
+    <color name="divider">#999999</color>
 </resources>

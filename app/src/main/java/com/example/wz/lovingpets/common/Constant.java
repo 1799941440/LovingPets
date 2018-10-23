@@ -54,14 +54,14 @@ public class Constant {
     );
 
     public static final List<List<String>> classify_tv_cat = Arrays.asList(
-        Arrays.asList("进口猫粮","国产猫粮","处方狗粮"),
+        Arrays.asList("进口猫粮","国产猫粮","处方猫粮"),
         Arrays.asList("磨爪玩具","爬架/家具","休闲玩具","逗猫杆"),
         Arrays.asList("猫咪猫砂","猫咪厕所","清洁除臭"),
         Arrays.asList("强化免疫","补钙强骨","微量元素","美毛增毛","肠胃调理"),
         Arrays.asList("体内驱虫","体外驱虫","耳部护理","眼部护理","口腔护理","皮肤护理","家用常备"),
         Arrays.asList("猫碗专区","猫咪餐具","猫咪住所","智能黑科技","主人专享"),
         Arrays.asList("指甲剪","梳剪工具"),
-        Arrays.asList("玩出餐具","猫咪牵引","外出用具","防走丢"),
+        Arrays.asList("外出餐具","猫咪牵引","外出用具","防走丢"),
         Arrays.asList("猫咪服饰","猫咪饰品"),
         Arrays.asList("专用配方","日常洗护","护毛美毛","免洗干洗","洗澡工具")
     );

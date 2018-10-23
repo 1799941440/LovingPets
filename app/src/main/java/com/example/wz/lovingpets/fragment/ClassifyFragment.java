@@ -1,5 +1,6 @@
 package com.example.wz.lovingpets.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
+import com.example.wz.lovingpets.activity.GoodsList;
 import com.example.wz.lovingpets.activity.MyApp;
 import com.example.wz.lovingpets.adapter.LeftRecyclerAdapter;
 import com.example.wz.lovingpets.adapter.RightRecyclerAdapter;
@@ -22,6 +24,7 @@ import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Constant;
 import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.entity.User;
+import com.example.wz.lovingpets.ui.goods_list.GoodsListActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -92,6 +95,8 @@ public class ClassifyFragment extends BaseFragment {
         rightAdapter.setItemClickListener(new RightRecyclerAdapter.RightListener() {
             @Override
             public void onItemClick(int position) {
+                Intent intent = new Intent(getActivity(),GoodsListActivity.class);
+                startActivity(intent);
                 Toast.makeText(getActivity(),bigSortList.get(position),Toast.LENGTH_SHORT).show();
             }
         });
@@ -107,7 +112,6 @@ public class ClassifyFragment extends BaseFragment {
             }
         });
         rightRecyclerView.setAdapter(rightAdapter);
-
     }
 
     public static ClassifyFragment newInstance(String param1) {

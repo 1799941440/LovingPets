@@ -24,25 +24,23 @@ public class UserDao extends AbstractDao<User, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, int.class, "id", false, "ID");
-        public final static Property UserId = new Property(1, String.class, "userId", false, "USER_ID");
-        public final static Property UserName = new Property(2, String.class, "userName", false, "USER_NAME");
-        public final static Property Password = new Property(3, String.class, "password", false, "PASSWORD");
-        public final static Property DepartmentId = new Property(4, int.class, "departmentId", false, "DEPARTMENT_ID");
-        public final static Property RoleType = new Property(5, int.class, "roleType", false, "ROLE_TYPE");
-        public final static Property PushId = new Property(6, String.class, "pushId", false, "PUSH_ID");
-        public final static Property Head = new Property(7, String.class, "head", false, "HEAD");
-        public final static Property Photo = new Property(8, String.class, "photo", false, "PHOTO");
-        public final static Property StudentOrEmployee_id = new Property(9, int.class, "studentOrEmployee_id", false, "STUDENT_OR_EMPLOYEE_ID");
-        public final static Property BeLongToGroup = new Property(10, String.class, "beLongToGroup", false, "BE_LONG_TO_GROUP");
-        public final static Property DepartmentName = new Property(11, String.class, "departmentName", false, "DEPARTMENT_NAME");
-        public final static Property SectionName = new Property(12, String.class, "sectionName", false, "SECTION_NAME");
-        public final static Property CollegeName = new Property(13, String.class, "collegeName", false, "COLLEGE_NAME");
-        public final static Property IsDelete = new Property(14, String.class, "isDelete", false, "IS_DELETE");
-        public final static Property CollegeId = new Property(15, int.class, "collegeId", false, "COLLEGE_ID");
-        public final static Property IsWeb = new Property(16, boolean.class, "isWeb", false, "IS_WEB");
-        public final static Property Token = new Property(17, String.class, "token", false, "TOKEN");
-        public final static Property Authority = new Property(18, int.class, "authority", false, "AUTHORITY");
+        public final static Property Id = new Property(0, Integer.class, "id", false, "ID");
+        public final static Property UserName = new Property(1, String.class, "userName", false, "USER_NAME");
+        public final static Property Password = new Property(2, String.class, "password", false, "PASSWORD");
+        public final static Property Identity = new Property(3, Integer.class, "identity", false, "IDENTITY");
+        public final static Property Phone = new Property(4, String.class, "phone", false, "PHONE");
+        public final static Property Province = new Property(5, String.class, "province", false, "PROVINCE");
+        public final static Property City = new Property(6, String.class, "city", false, "CITY");
+        public final static Property FullAddress = new Property(7, String.class, "fullAddress", false, "FULL_ADDRESS");
+        public final static Property Balance = new Property(8, float.class, "balance", false, "BALANCE");
+        public final static Property Sex = new Property(9, String.class, "sex", false, "SEX");
+        public final static Property Age = new Property(10, Integer.class, "age", false, "AGE");
+        public final static Property ShopId = new Property(11, Integer.class, "shopId", false, "SHOP_ID");
+        public final static Property ShopName = new Property(12, String.class, "shopName", false, "SHOP_NAME");
+        public final static Property ShoppingcartId = new Property(13, Integer.class, "shoppingcartId", false, "SHOPPINGCART_ID");
+        public final static Property Card = new Property(14, String.class, "card", false, "CARD");
+        public final static Property Name = new Property(15, String.class, "name", false, "NAME");
+        public final static Property Icon = new Property(16, String.class, "icon", false, "ICON");
     }
 
 
@@ -58,25 +56,23 @@ public class UserDao extends AbstractDao<User, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"USER\" (" + //
-                "\"ID\" INTEGER NOT NULL ," + // 0: id
-                "\"USER_ID\" TEXT," + // 1: userId
-                "\"USER_NAME\" TEXT," + // 2: userName
-                "\"PASSWORD\" TEXT," + // 3: password
-                "\"DEPARTMENT_ID\" INTEGER NOT NULL ," + // 4: departmentId
-                "\"ROLE_TYPE\" INTEGER NOT NULL ," + // 5: roleType
-                "\"PUSH_ID\" TEXT," + // 6: pushId
-                "\"HEAD\" TEXT," + // 7: head
-                "\"PHOTO\" TEXT," + // 8: photo
-                "\"STUDENT_OR_EMPLOYEE_ID\" INTEGER NOT NULL ," + // 9: studentOrEmployee_id
-                "\"BE_LONG_TO_GROUP\" TEXT," + // 10: beLongToGroup
-                "\"DEPARTMENT_NAME\" TEXT," + // 11: departmentName
-                "\"SECTION_NAME\" TEXT," + // 12: sectionName
-                "\"COLLEGE_NAME\" TEXT," + // 13: collegeName
-                "\"IS_DELETE\" TEXT," + // 14: isDelete
-                "\"COLLEGE_ID\" INTEGER NOT NULL ," + // 15: collegeId
-                "\"IS_WEB\" INTEGER NOT NULL ," + // 16: isWeb
-                "\"TOKEN\" TEXT," + // 17: token
-                "\"AUTHORITY\" INTEGER NOT NULL );"); // 18: authority
+                "\"ID\" INTEGER," + // 0: id
+                "\"USER_NAME\" TEXT," + // 1: userName
+                "\"PASSWORD\" TEXT," + // 2: password
+                "\"IDENTITY\" INTEGER," + // 3: identity
+                "\"PHONE\" TEXT," + // 4: phone
+                "\"PROVINCE\" TEXT," + // 5: province
+                "\"CITY\" TEXT," + // 6: city
+                "\"FULL_ADDRESS\" TEXT," + // 7: fullAddress
+                "\"BALANCE\" REAL NOT NULL ," + // 8: balance
+                "\"SEX\" TEXT," + // 9: sex
+                "\"AGE\" INTEGER," + // 10: age
+                "\"SHOP_ID\" INTEGER," + // 11: shopId
+                "\"SHOP_NAME\" TEXT," + // 12: shopName
+                "\"SHOPPINGCART_ID\" INTEGER," + // 13: shoppingcartId
+                "\"CARD\" TEXT," + // 14: card
+                "\"NAME\" TEXT," + // 15: name
+                "\"ICON\" TEXT);"); // 16: icon
     }
 
     /** Drops the underlying database table. */
@@ -88,145 +84,173 @@ public class UserDao extends AbstractDao<User, Void> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, User entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
  
-        String userId = entity.getUserId();
-        if (userId != null) {
-            stmt.bindString(2, userId);
+        Integer id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
         }
  
         String userName = entity.getUserName();
         if (userName != null) {
-            stmt.bindString(3, userName);
+            stmt.bindString(2, userName);
         }
  
         String password = entity.getPassword();
         if (password != null) {
-            stmt.bindString(4, password);
-        }
-        stmt.bindLong(5, entity.getDepartmentId());
-        stmt.bindLong(6, entity.getRoleType());
- 
-        String pushId = entity.getPushId();
-        if (pushId != null) {
-            stmt.bindString(7, pushId);
+            stmt.bindString(3, password);
         }
  
-        String head = entity.getHead();
-        if (head != null) {
-            stmt.bindString(8, head);
+        Integer identity = entity.getIdentity();
+        if (identity != null) {
+            stmt.bindLong(4, identity);
         }
  
-        String photo = entity.getPhoto();
-        if (photo != null) {
-            stmt.bindString(9, photo);
-        }
-        stmt.bindLong(10, entity.getStudentOrEmployee_id());
- 
-        String beLongToGroup = entity.getBeLongToGroup();
-        if (beLongToGroup != null) {
-            stmt.bindString(11, beLongToGroup);
+        String phone = entity.getPhone();
+        if (phone != null) {
+            stmt.bindString(5, phone);
         }
  
-        String departmentName = entity.getDepartmentName();
-        if (departmentName != null) {
-            stmt.bindString(12, departmentName);
+        String province = entity.getProvince();
+        if (province != null) {
+            stmt.bindString(6, province);
         }
  
-        String sectionName = entity.getSectionName();
-        if (sectionName != null) {
-            stmt.bindString(13, sectionName);
+        String city = entity.getCity();
+        if (city != null) {
+            stmt.bindString(7, city);
         }
  
-        String collegeName = entity.getCollegeName();
-        if (collegeName != null) {
-            stmt.bindString(14, collegeName);
+        String fullAddress = entity.getFullAddress();
+        if (fullAddress != null) {
+            stmt.bindString(8, fullAddress);
+        }
+        stmt.bindDouble(9, entity.getBalance());
+ 
+        String sex = entity.getSex();
+        if (sex != null) {
+            stmt.bindString(10, sex);
         }
  
-        String isDelete = entity.getIsDelete();
-        if (isDelete != null) {
-            stmt.bindString(15, isDelete);
+        Integer age = entity.getAge();
+        if (age != null) {
+            stmt.bindLong(11, age);
         }
-        stmt.bindLong(16, entity.getCollegeId());
-        stmt.bindLong(17, entity.getIsWeb() ? 1L: 0L);
  
-        String token = entity.getToken();
-        if (token != null) {
-            stmt.bindString(18, token);
+        Integer shopId = entity.getShopId();
+        if (shopId != null) {
+            stmt.bindLong(12, shopId);
         }
-        stmt.bindLong(19, entity.getAuthority());
+ 
+        String shopName = entity.getShopName();
+        if (shopName != null) {
+            stmt.bindString(13, shopName);
+        }
+ 
+        Integer shoppingcartId = entity.getShoppingcartId();
+        if (shoppingcartId != null) {
+            stmt.bindLong(14, shoppingcartId);
+        }
+ 
+        String card = entity.getCard();
+        if (card != null) {
+            stmt.bindString(15, card);
+        }
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(16, name);
+        }
+ 
+        String icon = entity.getIcon();
+        if (icon != null) {
+            stmt.bindString(17, icon);
+        }
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, User entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
  
-        String userId = entity.getUserId();
-        if (userId != null) {
-            stmt.bindString(2, userId);
+        Integer id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
         }
  
         String userName = entity.getUserName();
         if (userName != null) {
-            stmt.bindString(3, userName);
+            stmt.bindString(2, userName);
         }
  
         String password = entity.getPassword();
         if (password != null) {
-            stmt.bindString(4, password);
-        }
-        stmt.bindLong(5, entity.getDepartmentId());
-        stmt.bindLong(6, entity.getRoleType());
- 
-        String pushId = entity.getPushId();
-        if (pushId != null) {
-            stmt.bindString(7, pushId);
+            stmt.bindString(3, password);
         }
  
-        String head = entity.getHead();
-        if (head != null) {
-            stmt.bindString(8, head);
+        Integer identity = entity.getIdentity();
+        if (identity != null) {
+            stmt.bindLong(4, identity);
         }
  
-        String photo = entity.getPhoto();
-        if (photo != null) {
-            stmt.bindString(9, photo);
-        }
-        stmt.bindLong(10, entity.getStudentOrEmployee_id());
- 
-        String beLongToGroup = entity.getBeLongToGroup();
-        if (beLongToGroup != null) {
-            stmt.bindString(11, beLongToGroup);
+        String phone = entity.getPhone();
+        if (phone != null) {
+            stmt.bindString(5, phone);
         }
  
-        String departmentName = entity.getDepartmentName();
-        if (departmentName != null) {
-            stmt.bindString(12, departmentName);
+        String province = entity.getProvince();
+        if (province != null) {
+            stmt.bindString(6, province);
         }
  
-        String sectionName = entity.getSectionName();
-        if (sectionName != null) {
-            stmt.bindString(13, sectionName);
+        String city = entity.getCity();
+        if (city != null) {
+            stmt.bindString(7, city);
         }
  
-        String collegeName = entity.getCollegeName();
-        if (collegeName != null) {
-            stmt.bindString(14, collegeName);
+        String fullAddress = entity.getFullAddress();
+        if (fullAddress != null) {
+            stmt.bindString(8, fullAddress);
+        }
+        stmt.bindDouble(9, entity.getBalance());
+ 
+        String sex = entity.getSex();
+        if (sex != null) {
+            stmt.bindString(10, sex);
         }
  
-        String isDelete = entity.getIsDelete();
-        if (isDelete != null) {
-            stmt.bindString(15, isDelete);
+        Integer age = entity.getAge();
+        if (age != null) {
+            stmt.bindLong(11, age);
         }
-        stmt.bindLong(16, entity.getCollegeId());
-        stmt.bindLong(17, entity.getIsWeb() ? 1L: 0L);
  
-        String token = entity.getToken();
-        if (token != null) {
-            stmt.bindString(18, token);
+        Integer shopId = entity.getShopId();
+        if (shopId != null) {
+            stmt.bindLong(12, shopId);
         }
-        stmt.bindLong(19, entity.getAuthority());
+ 
+        String shopName = entity.getShopName();
+        if (shopName != null) {
+            stmt.bindString(13, shopName);
+        }
+ 
+        Integer shoppingcartId = entity.getShoppingcartId();
+        if (shoppingcartId != null) {
+            stmt.bindLong(14, shoppingcartId);
+        }
+ 
+        String card = entity.getCard();
+        if (card != null) {
+            stmt.bindString(15, card);
+        }
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(16, name);
+        }
+ 
+        String icon = entity.getIcon();
+        if (icon != null) {
+            stmt.bindString(17, icon);
+        }
     }
 
     @Override
@@ -237,50 +261,46 @@ public class UserDao extends AbstractDao<User, Void> {
     @Override
     public User readEntity(Cursor cursor, int offset) {
         User entity = new User( //
-            cursor.getInt(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // userId
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // userName
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // password
-            cursor.getInt(offset + 4), // departmentId
-            cursor.getInt(offset + 5), // roleType
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // pushId
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // head
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // photo
-            cursor.getInt(offset + 9), // studentOrEmployee_id
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // beLongToGroup
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // departmentName
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // sectionName
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // collegeName
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // isDelete
-            cursor.getInt(offset + 15), // collegeId
-            cursor.getShort(offset + 16) != 0, // isWeb
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // token
-            cursor.getInt(offset + 18) // authority
+            cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // id
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // userName
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // password
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // identity
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // phone
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // province
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // city
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // fullAddress
+            cursor.getFloat(offset + 8), // balance
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // sex
+            cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10), // age
+            cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11), // shopId
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // shopName
+            cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13), // shoppingcartId
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // card
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // name
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16) // icon
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, User entity, int offset) {
-        entity.setId(cursor.getInt(offset + 0));
-        entity.setUserId(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setUserName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setPassword(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setDepartmentId(cursor.getInt(offset + 4));
-        entity.setRoleType(cursor.getInt(offset + 5));
-        entity.setPushId(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setHead(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setPhoto(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setStudentOrEmployee_id(cursor.getInt(offset + 9));
-        entity.setBeLongToGroup(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setDepartmentName(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setSectionName(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setCollegeName(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setIsDelete(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setCollegeId(cursor.getInt(offset + 15));
-        entity.setIsWeb(cursor.getShort(offset + 16) != 0);
-        entity.setToken(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setAuthority(cursor.getInt(offset + 18));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
+        entity.setUserName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setPassword(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setIdentity(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
+        entity.setPhone(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setProvince(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setCity(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setFullAddress(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setBalance(cursor.getFloat(offset + 8));
+        entity.setSex(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setAge(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));
+        entity.setShopId(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
+        entity.setShopName(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setShoppingcartId(cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13));
+        entity.setCard(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setName(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setIcon(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
      }
     
     @Override

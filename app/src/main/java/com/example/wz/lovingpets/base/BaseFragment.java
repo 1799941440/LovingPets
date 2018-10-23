@@ -26,7 +26,7 @@ public class BaseFragment extends Fragment {
         if (this.getClass().isAnnotationPresent(BindEventBus.class)) {
             EventBus.getDefault().unregister(this);
         }
-        RefWatcher refWatcher = MyApp.getRefWatcher(getActivity());
-        refWatcher.watch(this);//对所有fragment进行检测是否有泄漏
+//        RefWatcher refWatcher = MyApp.getRefWatcher(getActivity());
+//        refWatcher.watch(this);//对所有fragment进行检测是否有泄漏
     }
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/goodslist_iv_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/goodslist_tv_goodsName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="ddwvuyvbfebiubfeuwq辅导班内发出吧爱如封闭我的我的无nu"
+            android:textColor="#4f4f4f"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.example.wz.lovingpets.widget.PriceView
+                android:id="@+id/goodslist_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/goodslist_tv_sales"
+                android:layout_width="match_parent"
+                android:textAlignment="viewEnd"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="已售：22"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                tools:ignore="RtlCompat" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/goodslist_tv_classify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="国产狗粮"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/goodslist_tv_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="库存：99"
+                android:textAlignment="viewEnd"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/goodslist_tv_shopName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="铃铛宠物用品店"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
+            <com.example.wz.lovingpets.widget.NumberPickerView
+                android:id="@+id/goodslist_number_picker"
+                app:editextWidth="26dp"
+                app:individer="@drawable/divider_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/goodslist_iv_add"
+                android:src="@drawable/ic_add_to_cart"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

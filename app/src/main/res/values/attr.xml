@@ -49,6 +49,23 @@
         <attr name="smoothScroll" format="boolean"/>
     </declare-styleable>
 
+    <declare-styleable name="PriceView">
+        <attr name="price" format="float"/>
+        <attr name="price_type" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="NumberButton">
+        <attr name="editable" format="boolean"/>  //输入框是否就可以编辑
+        <attr name="buttonWidth" format="dimension" />  // 按钮的宽度
+        <attr name="editextWidth" format="dimension" />  // 输入框的宽度
+        <attr name="textSize" format="dimension"/>  // 字体大小
+        <attr name="textColor" format="color"/>  // 字体颜色
+        <attr name="backgroud" format="reference"/>  // 整体框的背景
+        <attr name="individer" format="reference"/>  // 内部垂直分割线
+        <attr name="addBackground" format="reference"/>  //左边按钮样式
+        <attr name="subBackground" format="reference"/>  //右边按钮样式
+    </declare-styleable>
+
     <attr name="main_icon" format="reference"/>
     <attr name="nav_bottom_text" format="reference"/>
     <attr name="mine_bg" format="reference"/>

@@ -35,6 +35,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void login(String username, String password) {
+        Logger.i("登录信息",username,password);
         Observable<ListResponse<User>> observable = api.login(username, password);
         observable.subscribeOn(Schedulers.newThread())//它为指定任务启动一个新的线程。
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ListResponse<User>>() {
@@ -50,7 +51,6 @@ public class LoginPresenter implements LoginContract.Presenter {
                 }
                 if(listResponse.getRows().size()!=0){
                     Log.d("Tag", "登录onNext : 登录成功");
-                    view.getUserDao().insert(listResponse.getRows().get(0));
                     EventBusUtils.sendEvent(new Event<User>(1,listResponse.getRows().get(0)));
                     view.loginSuccess(listResponse.getRows().get(0),listResponse.isSuccess());
                 }else {

@@ -1,5 +1,6 @@
 package com.example.wz.lovingpets.net;
 
+import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.utils.LoggingInterceptor;
@@ -18,8 +19,9 @@ import retrofit2.http.POST;
  * LoggingInterceptor：带格式化json的自定义日志记录器，继承于okhttp3的日志记录器
  */
 public class HttpRequest {
-    public static final String BASE_URL = "http://193.112.48.16:8080";//网络访问基地址
-    private static OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
+    public static final String BASE_URL = "http://192.168.43.234:8080";//网络访问基地址
+    private static OkHttpClient.Builder builder = new OkHttpClient()
+            .newBuilder()
             .addNetworkInterceptor(new LoggingInterceptor());
     private static ApiService apiService;
 
@@ -43,13 +45,33 @@ public class HttpRequest {
     public interface ApiService {
         // 用户登录
         @FormUrlEncoded
-        @POST("/IntergratedPlatform/UserAction/login")
+        @POST("/petserviceplatform/UserAction/login")
         Observable<ListResponse<User>> login(
                 @Field("userName") String username,
                 @Field("password") String password);
+        // 获取商品
+        @FormUrlEncoded
+        @POST("/petserviceplatform/GoodsAction/getByClassify")
+        Observable<ListResponse<GoodsDetailInfo>> getGoods(
+                @Field("classify") String classify,
+                @Field("condition") String condition);
+        // 加入购物车
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ShoppingCartAction/addGoodsToCart")
+        Observable<ListResponse> addToCart(
+                @Field("param") String param);
 
     }
+
     public Observable<ListResponse<User>> login(String username, String password) {
         return apiService.login(username, password);
+    }
+
+    public Observable<ListResponse<GoodsDetailInfo>> getGoods(String classify,String condition){
+        return apiService.getGoods(classify,condition);
+    }
+
+    public Observable<ListResponse> addToCart(String param){
+        return apiService.addToCart(param);
     }
 }

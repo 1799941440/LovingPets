@@ -1,6 +1,7 @@
 package com.example.wz.lovingpets.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 
 import com.example.wz.lovingpets.R;
+import com.example.wz.lovingpets.activity.GoodsList;
 import com.example.wz.lovingpets.widget.MyGridView;
 
 import java.util.List;
@@ -74,7 +76,10 @@ public class RightRecyclerAdapter extends RecyclerView.Adapter<RightRecyclerAdap
         holder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(context,smallSortList.get(position).get(i), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, GoodsList.class);
+                intent.putExtra("classify",smallSortList.get(position).get(i));
+                context.startActivity(intent);
+//                Toast.makeText(context,smallSortList.get(position).get(i), Toast.LENGTH_SHORT).show();
             }
         });
     }

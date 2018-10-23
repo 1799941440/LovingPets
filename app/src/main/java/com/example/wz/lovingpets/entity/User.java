@@ -8,68 +8,54 @@ import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class User {
-    private int id;
-    private String userId;
-    private String userName;
-    private String password;
-    private int departmentId;
-    private int roleType;
-    private String pushId;
-    private String head;
-    private String photo;
-    private int studentOrEmployee_id;
-    private String beLongToGroup;
-    private String departmentName;
-    private String sectionName;
-    private String collegeName;
-    @Transient
-    private List<Roles> roles;
-    private String isDelete;
-    private int collegeId;
-    private boolean isWeb;
-    private String token;
-    private int authority;
-    @Generated(hash = 1402632104)
-    public User(int id, String userId, String userName, String password,
-            int departmentId, int roleType, String pushId, String head,
-            String photo, int studentOrEmployee_id, String beLongToGroup,
-            String departmentName, String sectionName, String collegeName,
-            String isDelete, int collegeId, boolean isWeb, String token,
-            int authority) {
+    private Integer id;//用户表主键
+    private String userName;//用户名（不可重复）
+    private String password;//账户密码
+    private Integer identity;//用户身份（0：管理员 1：商家 2：普通用户）
+    private String phone;//手机号码
+    private String province;//地址的省名称或直辖市名
+    private String city;//地址的省名称或直辖市名
+    private String fullAddress;//市区以下的详细地址
+    private float balance;//账户余额
+    private String sex;//性别:男，女
+    private Integer age;//年龄
+    private Integer shopId;
+    private String shopName;
+    private Integer shoppingcartId;
+    private String card;//身份证号
+    private String name;//用户真实姓名
+    private String icon;//用户头像
+    @Generated(hash = 844711652)
+    public User(Integer id, String userName, String password, Integer identity,
+            String phone, String province, String city, String fullAddress,
+            float balance, String sex, Integer age, Integer shopId, String shopName,
+            Integer shoppingcartId, String card, String name, String icon) {
         this.id = id;
-        this.userId = userId;
         this.userName = userName;
         this.password = password;
-        this.departmentId = departmentId;
-        this.roleType = roleType;
-        this.pushId = pushId;
-        this.head = head;
-        this.photo = photo;
-        this.studentOrEmployee_id = studentOrEmployee_id;
-        this.beLongToGroup = beLongToGroup;
-        this.departmentName = departmentName;
-        this.sectionName = sectionName;
-        this.collegeName = collegeName;
-        this.isDelete = isDelete;
-        this.collegeId = collegeId;
-        this.isWeb = isWeb;
-        this.token = token;
-        this.authority = authority;
+        this.identity = identity;
+        this.phone = phone;
+        this.province = province;
+        this.city = city;
+        this.fullAddress = fullAddress;
+        this.balance = balance;
+        this.sex = sex;
+        this.age = age;
+        this.shopId = shopId;
+        this.shopName = shopName;
+        this.shoppingcartId = shoppingcartId;
+        this.card = card;
+        this.name = name;
+        this.icon = icon;
     }
     @Generated(hash = 586692638)
     public User() {
     }
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-    public String getUserId() {
-        return this.userId;
-    }
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
     public String getUserName() {
         return this.userName;
@@ -83,110 +69,88 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public int getDepartmentId() {
-        return this.departmentId;
+    public Integer getIdentity() {
+        return this.identity;
     }
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
+    public void setIdentity(Integer identity) {
+        this.identity = identity;
     }
-    public int getRoleType() {
-        return this.roleType;
+    public String getPhone() {
+        return this.phone;
     }
-    public void setRoleType(int roleType) {
-        this.roleType = roleType;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
-    public String getPushId() {
-        return this.pushId;
+    public String getProvince() {
+        return this.province;
     }
-    public void setPushId(String pushId) {
-        this.pushId = pushId;
+    public void setProvince(String province) {
+        this.province = province;
     }
-    public String getHead() {
-        return this.head;
+    public String getCity() {
+        return this.city;
     }
-    public void setHead(String head) {
-        this.head = head;
+    public void setCity(String city) {
+        this.city = city;
     }
-    public String getPhoto() {
-        return this.photo;
+    public String getFullAddress() {
+        return this.fullAddress;
     }
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setFullAddress(String fullAddress) {
+        this.fullAddress = fullAddress;
     }
-    public int getStudentOrEmployee_id() {
-        return this.studentOrEmployee_id;
+    public float getBalance() {
+        return this.balance;
     }
-    public void setStudentOrEmployee_id(int studentOrEmployee_id) {
-        this.studentOrEmployee_id = studentOrEmployee_id;
+    public void setBalance(float balance) {
+        this.balance = balance;
     }
-    public String getBeLongToGroup() {
-        return this.beLongToGroup;
+    public String getSex() {
+        return this.sex;
     }
-    public void setBeLongToGroup(String beLongToGroup) {
-        this.beLongToGroup = beLongToGroup;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
-    public String getDepartmentName() {
-        return this.departmentName;
+    public Integer getAge() {
+        return this.age;
     }
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
+    public void setAge(Integer age) {
+        this.age = age;
     }
-    public String getSectionName() {
-        return this.sectionName;
+    public Integer getShopId() {
+        return this.shopId;
     }
-    public void setSectionName(String sectionName) {
-        this.sectionName = sectionName;
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
     }
-    public String getCollegeName() {
-        return this.collegeName;
+    public String getShopName() {
+        return this.shopName;
     }
-    public void setCollegeName(String collegeName) {
-        this.collegeName = collegeName;
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
-    public String getIsDelete() {
-        return this.isDelete;
+    public Integer getShoppingcartId() {
+        return this.shoppingcartId;
     }
-    public void setIsDelete(String isDelete) {
-        this.isDelete = isDelete;
+    public void setShoppingcartId(Integer shoppingcartId) {
+        this.shoppingcartId = shoppingcartId;
     }
-    public int getCollegeId() {
-        return this.collegeId;
+    public String getCard() {
+        return this.card;
     }
-    public void setCollegeId(int collegeId) {
-        this.collegeId = collegeId;
+    public void setCard(String card) {
+        this.card = card;
     }
-    public boolean getIsWeb() {
-        return this.isWeb;
+    public String getName() {
+        return this.name;
     }
-    public void setIsWeb(boolean isWeb) {
-        this.isWeb = isWeb;
+    public void setName(String name) {
+        this.name = name;
     }
-    public String getToken() {
-        return this.token;
+    public String getIcon() {
+        return this.icon;
     }
-    public void setToken(String token) {
-        this.token = token;
-    }
-    public int getAuthority() {
-        return this.authority;
-    }
-    public void setAuthority(int authority) {
-        this.authority = authority;
-    }
-
-    public List<Roles> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Roles> roles) {
-        this.roles = roles;
-    }
-
-    public boolean isWeb() {
-        return isWeb;
-    }
-
-    public void setWeb(boolean web) {
-        isWeb = web;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

@@ -46,7 +46,11 @@
         <activity
             android:name=".activity.ChangeFavoriteActivity"
             android:theme="@style/translucent" />
-        <activity android:name=".activity.MyPetsActivity"/>
+        <activity android:name=".activity.MyPetsActivity" />
+        <activity android:name=".ui.goods_list.GoodsListActivity" />
+        <activity android:name=".activity.GoodsList" />
+        <activity android:name=".activity.ManageAddressActivity" />
+        <activity android:name=".activity.EditAddressActivity"></activity>
     </application>
 
 </manifest>

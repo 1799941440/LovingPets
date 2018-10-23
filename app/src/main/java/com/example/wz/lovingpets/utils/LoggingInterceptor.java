@@ -6,6 +6,7 @@ import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
 
+import okhttp3.FormBody;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -17,15 +18,28 @@ import okhttp3.ResponseBody;
  */
 
 public class LoggingInterceptor implements Interceptor {
-    HttpLogger logger = new HttpLogger();
+
     @SuppressLint("DefaultLocale")
     @Override
     public Response intercept(Chain chain) throws IOException {
         //这个chain里面包含了request和response，所以你要什么都可以从这里拿
         Request request = chain.request();
-
         long t1 = System.nanoTime();//请求发起的时间
-        Logger.i("发出请求  " + request.url().toString());
+        if ("POST".equals(request.method())) {
+            StringBuilder sb = new StringBuilder();
+            if (request.body() instanceof FormBody) {
+                FormBody body = (FormBody) request.body();
+                sb.append('?');
+                for (int i = 0; i < body.size(); i++) {
+                    sb.append(body.encodedName(i) + "=" + body.encodedValue(i) + "&");
+                }
+                sb.delete(sb.length() - 1, sb.length());
+                Logger.i("发出请求  " + request.url().toString() + sb.toString()
+                +"\n"+sb.toString());
+            }
+        }else{
+            Logger.i("发出请求  " + request.url().toString());
+        }
 //        logger.log(String.format(" \n发送请求 %s on %s%n%s",
 //                request.url(), chain.connection(), Thread.currentThread().getName()));
 
@@ -42,11 +56,6 @@ public class LoggingInterceptor implements Interceptor {
                 response.request().url(),
                 (t2 - t1) / 1e6d,
                 LoggingInterceptor.formatJson(responseBody.string())));
-//        logger.log(String.format(" \n接收响应: [%s] %n返回json:【%s】 %n响应耗时：%.1fms%n%s",
-//                response.request().url(),
-//                LoggingInterceptor.formatJson(responseBody.string()),
-//                (t2 - t1) / 1e6d,
-//                Thread.currentThread().getName()));
 
         return response;
     }

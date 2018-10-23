@@ -11,29 +11,48 @@ import android.widget.FrameLayout;
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.base.BaseFragmentActivity;
 import com.example.wz.lovingpets.common.ActivityManager;
+import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Constant;
+import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.entity.GoodsDetailInfo;
+import com.example.wz.lovingpets.entity.ListResponse;
+import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.fragment.CircleFragment;
 import com.example.wz.lovingpets.fragment.ClassifyFragment;
+import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.ui.main_home.HomeFragment;
 import com.example.wz.lovingpets.fragment.MineFragment;
 import com.example.wz.lovingpets.fragment.ShoppingTrolleyFragment;
 import com.example.wz.lovingpets.utils.StatusBarUtil;
 import com.example.wz.lovingpets.widget.BottomBarItem;
 import com.example.wz.lovingpets.widget.BottomBarLayout;
+import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.Logger;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * APP的主界面，包含五个fragment
  * 由于含有fragment，继承baseactivity不能获取碎片管理器，
  */
+@BindEventBus
 public class MainActivity extends BaseFragmentActivity {
 
     private long exitTime;//记录上一次点击返回键的时间，若再次点击时间间隔小于临界值时就退出
     private List<Fragment> mFragmentList = new ArrayList<>();//承载碎片的list
     private FrameLayout mFlContent;//碎片填充的目标View
     private BottomBarLayout mBottomBarLayout;
+    private final HttpRequest.ApiService api = HttpRequest.getApiservice();
     private BottomBarItem item1;
     private FragmentTransaction transaction;
 
@@ -65,6 +84,15 @@ public class MainActivity extends BaseFragmentActivity {
         switchFragment(0); //默认显示第一页
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void receive(Event<GoodsDetailInfo> event){
+        if(event.getCode() == 0x123){
+            String param = new Gson().toJson(event.getData());
+            com.orhanobut.logger.Logger.i("接受数据"+param);
+            addToCart(param);
+        }
+        showToast("成功加入购物车！");
+    }
     /**
      * 初始化各种监听
      * 使用网上一个开源的bottombarlayout，设置点击事件，跳转到不同的fragment
@@ -87,17 +115,26 @@ public class MainActivity extends BaseFragmentActivity {
 //        mBottomBarLayout.setMsg(3, "NEW");//设置第四个页签显示NEW提示文字
     }
 
-//    /**
-//     * 切换fragment
-//     *
-//     * @param currentPosition
-//     */
-//    private void changeFragment(int currentPosition) {
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.fl_content, mFragmentList.get(currentPosition));
-//        transaction.commit();
-//    }
+    private void addToCart(String param){
+        Observable<ListResponse> observable = api.addToCart(param);
+        observable.subscribeOn(Schedulers.newThread())//它为指定任务启动一个新的线程。
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ListResponse>() {
+            @Override
+            public void onSubscribe(Disposable d) { }
+            @Override
+            public void onNext(ListResponse listResponse) {
+                showToast(listResponse.getMsg());
+            }
+            @Override
+            public void onError(Throwable e) {
 
+            }
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
     /**
      * 对返回键进行拦截，实现双击退出应用
      *
