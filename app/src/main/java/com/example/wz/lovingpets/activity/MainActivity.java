@@ -90,8 +90,8 @@ public class MainActivity extends BaseFragmentActivity {
             String param = new Gson().toJson(event.getData());
             com.orhanobut.logger.Logger.i("接受数据"+param);
             addToCart(param);
+            showToast("成功加入购物车！");
         }
-        showToast("成功加入购物车！");
     }
     /**
      * 初始化各种监听

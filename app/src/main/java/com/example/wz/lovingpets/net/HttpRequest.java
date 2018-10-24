@@ -1,5 +1,6 @@
 package com.example.wz.lovingpets.net;
 
+import com.example.wz.lovingpets.entity.Address;
 import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
@@ -61,6 +62,25 @@ public class HttpRequest {
         Observable<ListResponse> addToCart(
                 @Field("param") String param);
 
+        // 获取收货地址
+        @FormUrlEncoded
+        @POST("/petserviceplatform/AddressAction/getAllAddress")
+        Observable<ListResponse<Address>> getAllAddress(
+                @Field("userId") int userId);
+
+        // 修改、添加、收货地址
+        @FormUrlEncoded
+        @POST("/petserviceplatform/AddressAction/addAddress")
+        Observable<ListResponse> manageAddress(
+                @Field("id") int id,
+                @Field("userId") int userId,
+                @Field("receiver") String receiver,
+                @Field("contact") String contact,
+                @Field("province") String province,
+                @Field("city") String city,
+                @Field("fullAddress") String fullAddress,
+                @Field("isCommonAddress") int isCommonAddress);
+
     }
 
     public Observable<ListResponse<User>> login(String username, String password) {
@@ -73,5 +93,15 @@ public class HttpRequest {
 
     public Observable<ListResponse> addToCart(String param){
         return apiService.addToCart(param);
+    }
+
+    public Observable<ListResponse<Address>> getAllAddress(int userId){
+        return apiService.getAllAddress(userId);
+    }
+
+    public Observable<ListResponse> manageAddress( int id,int userId,String receiver, String contact,
+                      String province,String city,String fullAddress,int isCommonAddress){
+        return apiService.manageAddress(id,userId,receiver,contact,
+                province,city,fullAddress,isCommonAddress);
     }
 }

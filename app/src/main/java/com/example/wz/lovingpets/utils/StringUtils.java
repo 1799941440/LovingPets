@@ -29,6 +29,16 @@ public class StringUtils {
             return mobileNums.matches(telRegex) && StringUtils.isEmpty(mobileNums);
     }
 
+    //有空串则返回true
+    public static boolean checkStrings(String... s){
+        for(String string :s){
+            if(isEmpty(string)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static String getMoney(float cost) {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         return "￥" + decimalFormat.format(cost);

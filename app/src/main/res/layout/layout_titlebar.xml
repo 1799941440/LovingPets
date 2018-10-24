@@ -18,14 +18,15 @@
         android:src="@mipmap/ic_back" />
 
     <TextView
-        android:id="@+id/titlebar_tv_left"
+        android:id="@+id/titlebar_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="45dp"
         android:gravity="center_vertical"
+        android:textSize="16sp"
         android:paddingLeft="8dp"
         android:paddingRight="16dp"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black" />
 
     <ImageView
         android:id="@+id/iv_titlebar_add"
@@ -34,5 +35,7 @@
         android:layout_alignParentRight="true"
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
-        android:src="@mipmap/ic_add" />
+        android:src="@mipmap/ic_add"
+        android:visibility="gone"/>
+
 </RelativeLayout>

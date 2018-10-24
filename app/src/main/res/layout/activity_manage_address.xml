@@ -5,7 +5,19 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.ManageAddressActivity">
 
     <include layout="@layout/layout_titlebar"/>
+    <View
+        android:layout_alignParentBottom="true"
+        android:background="#cccccc"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/manage_address_rv"
+        android:background="#f3f4f5"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

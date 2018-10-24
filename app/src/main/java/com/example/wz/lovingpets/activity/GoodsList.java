@@ -102,7 +102,7 @@ public class GoodsList extends BaseActivity {
 
     private void successLoadGoods(List<GoodsDetailInfo> goodsDetailInfos) {
 //        Logger.i("获取的商品列表",new Gson().toJson(goodsDetailInfos));
-        System.out.println(new Gson().toJson(goodsDetailInfos));
+//        System.out.println(new Gson().toJson(goodsDetailInfos));
         list_goods.clear();
         list_goods.addAll(goodsDetailInfos);
         runOnUiThread(new Runnable() {
