@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.base.BaseActivity;
 import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.common.EventCodes;
 import com.example.wz.lovingpets.entity.Address;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
@@ -132,7 +133,7 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onNext(ListResponse listResponse) {
                 showToast(listResponse.getMsg());
-                EventBusUtils.sendEvent(new Event(0x3,null));
+                EventBusUtils.sendEvent(new Event(EventCodes.SAVE_ADDRESS,null));
             }
             @Override
             public void onError(Throwable e) {

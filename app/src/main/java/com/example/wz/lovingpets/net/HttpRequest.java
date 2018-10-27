@@ -3,8 +3,11 @@ package com.example.wz.lovingpets.net;
 import com.example.wz.lovingpets.entity.Address;
 import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
+import com.example.wz.lovingpets.entity.OrderInfo;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.utils.LoggingInterceptor;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
@@ -20,7 +23,9 @@ import retrofit2.http.POST;
  * LoggingInterceptor：带格式化json的自定义日志记录器，继承于okhttp3的日志记录器
  */
 public class HttpRequest {
+//    public static final String BASE_URL = "http://192.168.1.106:8080";//网络访问基地址
     public static final String BASE_URL = "http://192.168.43.234:8080";//网络访问基地址
+//    public static final String BASE_URL = "http://193.112.48.16:8080";//网络访问基地址
     private static OkHttpClient.Builder builder = new OkHttpClient()
             .newBuilder()
             .addNetworkInterceptor(new LoggingInterceptor());
@@ -34,7 +39,7 @@ public class HttpRequest {
         if(apiService == null){
             Retrofit retrofit = new Retrofit.Builder()
                     .client(builder.build())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create()))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .baseUrl(BASE_URL)
                     .build();
@@ -68,6 +73,25 @@ public class HttpRequest {
         Observable<ListResponse<Address>> getAllAddress(
                 @Field("userId") int userId);
 
+        // 获取订单
+        @FormUrlEncoded
+        @POST("/petserviceplatform/OrderAction/getOrdersByUserId")
+        Observable<ListResponse<OrderInfo>> getOrder(
+                @Field("userId") int userId);
+
+        // 删除订单
+        @FormUrlEncoded
+        @POST("/petserviceplatform/OrderAction/deleteOrder")
+        Observable<ListResponse> delOrder(
+                @Field("orderId") int orderId);
+
+        // 收货、付款
+        @FormUrlEncoded
+        @POST("/petserviceplatform/OrderAction/changeOrderState")
+        Observable<ListResponse> changeOrderState(
+                @Field("id") int orderId,
+                @Field("orderState") int orderState);
+
         // 修改、添加、收货地址
         @FormUrlEncoded
         @POST("/petserviceplatform/AddressAction/addAddress")
@@ -97,6 +121,18 @@ public class HttpRequest {
 
     public Observable<ListResponse<Address>> getAllAddress(int userId){
         return apiService.getAllAddress(userId);
+    }
+
+    public Observable<ListResponse<OrderInfo>> getOrder(int userId){
+        return apiService.getOrder(userId);
+    }
+
+    public Observable<ListResponse> delOrder(int orderId){
+        return apiService.delOrder(orderId);
+    }
+
+    public Observable<ListResponse> changeOrderState(int orderId,int orderState){
+        return apiService.changeOrderState(orderId,orderState);
     }
 
     public Observable<ListResponse> manageAddress( int id,int userId,String receiver, String contact,

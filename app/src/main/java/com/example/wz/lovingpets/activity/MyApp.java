@@ -9,7 +9,9 @@ import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Constant;
 import com.example.wz.lovingpets.common.LogCatStrategy;
+import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.utils.GreenDaoManager;
+import com.example.wz.lovingpets.utils.UserUtil;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
@@ -24,6 +26,7 @@ public class MyApp extends Application {
 
     public static int currentTheme; //当前主题
     public static int currentColor; //当前颜色
+    private User user;
     public static MyApp instance; //应用实例
     public static Context context; //
     public SharedPreferences sp; //
@@ -69,6 +72,7 @@ public class MyApp extends Application {
         sp = context.getSharedPreferences("theme", MODE_PRIVATE);//初始化sp
         currentTheme = sp.getInt("currentTheme",0);//获取sp存储的主题
         currentColor = sp.getInt("currentColor",0);//获取sp存储的颜色
+        user = new UserUtil(context).getUser();
         initLogger();//初始化Logger日志记录器
 //        initLeakCanary();//初始化内存泄漏检测
         GreenDaoManager.getInstance();
@@ -107,5 +111,12 @@ public class MyApp extends Application {
 
     public static Context getContext() {
         return context;
+    }
+
+    public User getUser(){
+        if(user == null){
+            user = new User();
+        }
+        return user;
     }
 }

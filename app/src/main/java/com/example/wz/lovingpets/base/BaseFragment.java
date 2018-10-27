@@ -1,5 +1,7 @@
 package com.example.wz.lovingpets.base;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,5 +30,22 @@ public class BaseFragment extends Fragment {
         }
 //        RefWatcher refWatcher = MyApp.getRefWatcher(getActivity());
 //        refWatcher.watch(this);//对所有fragment进行检测是否有泄漏
+    }
+    public void intent2Activity(Class<? extends Activity> tarActivity){
+        Intent intent = new Intent(getActivity(), tarActivity);
+        startActivity(intent);
+    }
+
+    /**
+     * 带参数的跳转
+     * @param tarActivity 目标activity
+     * @param b 数据载体，Bundle类型
+     */
+    public void intentWithData(Class<? extends Activity> tarActivity, Bundle b) {
+        Intent intent = new Intent(getActivity(), tarActivity);
+        if (b != null && b.size() != 0) {
+            intent.putExtra("bundle", b);
+        }
+        startActivity(intent);
     }
 }

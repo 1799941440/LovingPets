@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.common.EventCodes;
 import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ShoppingCartDetail;
 import com.example.wz.lovingpets.utils.EventBusUtils;
@@ -65,7 +66,7 @@ public class GoodsListAdapter extends RecyclerView.Adapter {
                 Integer count = ((GoodsViewHolder) holder).number.getNumText();
                 ShoppingCartDetail s= new ShoppingCartDetail(0,shoppingcartId,data.getId(),count,
                 data.getPrice(),data.getPrice()*count,data.getShopId());
-                EventBusUtils.sendEvent(new Event<ShoppingCartDetail>(0x123,s));
+                EventBusUtils.sendEvent(new Event<ShoppingCartDetail>(EventCodes.ADD_TO_CART,s));
             }
         });
     }

@@ -28,8 +28,7 @@
         <!-- </intent-filter> -->
         <!-- </activity> -->
         <activity android:name=".activity.LaunchActivity" />
-        <activity
-            android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,7 +48,8 @@
         <activity android:name=".ui.goods_list.GoodsListActivity" />
         <activity android:name=".activity.GoodsList" />
         <activity android:name=".activity.ManageAddressActivity" />
-        <activity android:name=".activity.EditAddressActivity"/>
+        <activity android:name=".activity.EditAddressActivity" />
+        <activity android:name=".ui.order.OrderActivity"></activity>
     </application>
 
 </manifest>

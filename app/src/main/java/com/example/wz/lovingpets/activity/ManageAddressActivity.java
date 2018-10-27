@@ -12,6 +12,7 @@ import com.example.wz.lovingpets.adapter.AddressAdapter;
 import com.example.wz.lovingpets.base.BaseActivity;
 import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.common.EventCodes;
 import com.example.wz.lovingpets.entity.Address;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
@@ -69,7 +70,7 @@ public class ManageAddressActivity extends BaseActivity implements View.OnClickL
         iv_back.setOnClickListener(this);
     }
     private void getAddress(){
-        Observable observable = api.getAllAddress(user.getId());
+        Observable<ListResponse<Address>> observable = api.getAllAddress(user.getId());
         observable.subscribeOn(Schedulers.newThread())//它为指定任务启动一个新的线程。
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ListResponse<Address>>(){
             @Override
@@ -114,7 +115,7 @@ public class ManageAddressActivity extends BaseActivity implements View.OnClickL
 
     @Subscribe(threadMode =  ThreadMode.MAIN)
     public void addressChanged(Event event){
-        if(event.getCode() == 0x3){
+        if(event.getCode() == EventCodes.SAVE_ADDRESS){
             getAddress();
         }
     }

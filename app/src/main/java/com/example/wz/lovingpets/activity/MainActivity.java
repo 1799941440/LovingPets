@@ -14,6 +14,7 @@ import com.example.wz.lovingpets.common.ActivityManager;
 import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Constant;
 import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.common.EventCodes;
 import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
@@ -86,7 +87,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void receive(Event<GoodsDetailInfo> event){
-        if(event.getCode() == 0x123){
+        if(event.getCode() == EventCodes.ADD_TO_CART){
             String param = new Gson().toJson(event.getData());
             com.orhanobut.logger.Logger.i("接受数据"+param);
             addToCart(param);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.common.EventCodes;
 import com.example.wz.lovingpets.db.UserDao;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
@@ -43,7 +44,6 @@ public class LoginPresenter implements LoginContract.Presenter {
             public void onSubscribe(Disposable d) {
 
             }
-
             @Override
             public void onNext(ListResponse<User> listResponse) {
                 if(!view.isActive()){
@@ -51,19 +51,17 @@ public class LoginPresenter implements LoginContract.Presenter {
                 }
                 if(listResponse.getRows().size()!=0){
                     Log.d("Tag", "登录onNext : 登录成功");
-                    EventBusUtils.sendEvent(new Event<User>(0x1,listResponse.getRows().get(0)));
+                    EventBusUtils.sendEvent(new Event<User>(EventCodes.LOGIN_SUCCESS,listResponse.getRows().get(0)));
                     view.loginSuccess(listResponse.getRows().get(0),listResponse.isSuccess());
                 }else {
                     Log.d("Tag", "登录onNext : 登录失败，没有该用户");
                     view.loginSuccess(null,listResponse.isSuccess());
                 }
             }
-
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
             }
-
             @Override
             public void onComplete() {
 

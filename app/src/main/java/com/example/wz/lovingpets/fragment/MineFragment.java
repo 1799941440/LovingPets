@@ -26,6 +26,7 @@ import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.ui.login.LoginActivity;
+import com.example.wz.lovingpets.ui.order.OrderActivity;
 import com.example.wz.lovingpets.ui.register.RegisterActivity;
 import com.example.wz.lovingpets.widget.MyScrollView;
 
@@ -33,16 +34,16 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 @BindEventBus
-public class MineFragment extends BaseFragment implements View.OnClickListener,MyScrollView.ScrollListener{
+public class MineFragment extends BaseFragment implements View.OnClickListener, MyScrollView.ScrollListener {
     public static final String TEXT_TITLE = "content";
     private String mParam1;
     private String mParam2;
     private static int height;
     private MyScrollView scrollView;
-    private ImageView iv_setting,iv_banner,iv_devide;
     private RelativeLayout rl_title;
-    private TextView tv_title,tv_login,tv_register;
-    private LinearLayout ll_pets_info,ll_my_address;
+    private TextView tv_title, tv_login, tv_register;
+    private ImageView iv_setting, iv_banner, iv_devide;
+    private LinearLayout ll_pets_info, ll_my_address,ll_unpay,ll_unreceive,ll_evaluate,ll_all;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         initListeners();
         return view;
     }
+
     public static MineFragment newInstance(String param1) {
         MineFragment fragment = new MineFragment();
         Bundle args = new Bundle();
@@ -69,7 +71,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         fragment.setArguments(args);
         return fragment;
     }
-    public void findViews(View view){
+
+    public void findViews(View view) {
         tv_title = view.findViewById(R.id.mine_tv_title);
         tv_login = view.findViewById(R.id.mine_tv_login);
         iv_devide = view.findViewById(R.id.mine_iv_devide);
@@ -80,32 +83,43 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         iv_banner = view.findViewById(R.id.mine_background);
         ll_pets_info = view.findViewById(R.id.ll_pets_info);
         ll_my_address = view.findViewById(R.id.ll_my_address);
+        ll_unpay = view.findViewById(R.id.mine_ll_unpay);
+        ll_unreceive = view.findViewById(R.id.mine_ll_unreceive);
+        ll_evaluate = view.findViewById(R.id.mine_ll_evaluate);
+        ll_all = view.findViewById(R.id.mine_ll_all);
     }
-    public void initDatas(){
+
+    public void initDatas() {
         iv_setting.setOnClickListener(this);
         iv_banner.setOnClickListener(this);
         tv_register.setOnClickListener(this);
         tv_login.setOnClickListener(this);
         ll_pets_info.setOnClickListener(this);
         ll_my_address.setOnClickListener(this);
+        ll_unpay.setOnClickListener(this);
+        ll_unreceive.setOnClickListener(this);
+        ll_evaluate.setOnClickListener(this);
+        ll_all.setOnClickListener(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void loginSuccess(Event<User> event){
-        if(event.getCode() == 1){
+    public void loginSuccess(Event<User> event) {
+        if (event.getCode() == 1) {
             tv_register.setVisibility(View.GONE);
             iv_devide.setVisibility(View.GONE);
             tv_login.setText(event.getData().getUserName());
         }
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        Bundle b = new Bundle();
+        switch (v.getId()) {
             case R.id.mine_iv_setting:
-                Toast.makeText(getContext(),"setting clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "setting clicked", Toast.LENGTH_LONG).show();
                 break;
             case R.id.mine_background:
-                Toast.makeText(getContext(),"banner clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "banner clicked", Toast.LENGTH_LONG).show();
                 break;
             case R.id.mine_tv_login:
                 startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -119,24 +133,40 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
             case R.id.ll_my_address:
                 startActivity(new Intent(getActivity(), ManageAddressActivity.class));
                 break;
+            case R.id.mine_ll_unpay:
+                b.putInt("orderState",2);
+                intentWithData(OrderActivity.class,b);
+                break;
+            case R.id.mine_ll_unreceive:
+                b.putInt("orderState",3);
+                intentWithData(OrderActivity.class,b);
+                break;
+            case R.id.mine_ll_evaluate:
+                b.putInt("orderState",4);
+                intentWithData(OrderActivity.class,b);
+                break;
+            case R.id.mine_ll_all:
+                b.putInt("orderState",0);
+                intentWithData(OrderActivity.class,b);
+                break;
             default:
                 break;
         }
     }
 
     @Override
-    public void onScrollChanged(int x, int y, int oldx, int oldy,int computeVerticalScrollRange) {
+    public void onScrollChanged(int x, int y, int oldx, int oldy, int computeVerticalScrollRange) {
         if (y <= 50) {   //设置标题的背景颜色
-            tv_title.setTextColor(Color.argb((int) 0,0,0,0));
-            rl_title.setBackgroundColor(Color.argb((int) 0, 255,255,255));
+            tv_title.setTextColor(Color.argb((int) 0, 0, 0, 0));
+            rl_title.setBackgroundColor(Color.argb((int) 0, 255, 255, 255));
         } else if (y > 50 && y <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
             //Log.i("Tag", "onScrollChanged: Y:"+y);
             float scale = (float) y / height;
             float alpha = (255 * scale);
-            tv_title.setTextColor(Color.argb((int) alpha,0,0,0));
-            rl_title.setBackgroundColor(Color.argb((int) alpha, 255,255,255));
+            tv_title.setTextColor(Color.argb((int) alpha, 0, 0, 0));
+            rl_title.setBackgroundColor(Color.argb((int) alpha, 255, 255, 255));
         } else {    //滑动到banner下面设置普通颜色
-            rl_title.setBackgroundColor(Color.argb((int) 255, 255,255,255));
+            rl_title.setBackgroundColor(Color.argb((int) 255, 255, 255, 255));
         }
     }
 
