@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".activity.MyPetsActivity">
 
-    <TextView
-        android:id="@+id/mypets_tv"
-        android:layout_width="wrap_content"
-        android:text="qweqwewe"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/layout_titlebar"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/myPet_rv"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </LinearLayout>

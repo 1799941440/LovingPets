@@ -1,14 +1,14 @@
 package com.example.wz.lovingpets.ui.main_home;
 
-import com.example.wz.lovingpets.base.BasePresenter;
-import com.example.wz.lovingpets.base.BaseView;
+
+import com.example.wz.lovingpets.base.BaseContract;
 
 public interface HomeContract {
-    interface View extends BaseView{
+    interface View extends BaseContract.BaseView {
 
     }
 
-    interface Presenter extends BasePresenter{
+    interface Presenter extends BaseContract.BasePresenter {
 
     }
 }

@@ -4,6 +4,7 @@ import com.example.wz.lovingpets.entity.Address;
 import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.OrderInfo;
+import com.example.wz.lovingpets.entity.PetInfo;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.utils.LoggingInterceptor;
 import com.google.gson.Gson;
@@ -105,6 +106,9 @@ public class HttpRequest {
                 @Field("fullAddress") String fullAddress,
                 @Field("isCommonAddress") int isCommonAddress);
 
+        @FormUrlEncoded
+        @POST("/petserviceplatform/PetAction/getMyPet")
+        Observable<ListResponse<PetInfo>> getPets(@Field("id")int id);
     }
 
     public Observable<ListResponse<User>> login(String username, String password) {
@@ -139,5 +143,9 @@ public class HttpRequest {
                       String province,String city,String fullAddress,int isCommonAddress){
         return apiService.manageAddress(id,userId,receiver,contact,
                 province,city,fullAddress,isCommonAddress);
+    }
+    
+    public Observable<ListResponse<PetInfo>> getPets(int id){
+        return apiService.getPets(id);
     }
 }

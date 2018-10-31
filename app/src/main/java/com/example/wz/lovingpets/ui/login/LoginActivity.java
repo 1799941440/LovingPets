@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.activity.MainActivity;
+import com.example.wz.lovingpets.base.BaseContract;
 import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.db.UserDao;
 import com.example.wz.lovingpets.entity.User;
@@ -37,7 +38,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 @BindEventBus
 public class LoginActivity extends Activity implements View.OnFocusChangeListener
-        , LoginContract.View, View.OnClickListener {
+        , LoginContract.LoginView, View.OnClickListener {
 
     private TextView mBtnLogin;//登录按钮
     private View logining, mInputLayout;//
@@ -48,7 +49,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
     private EditText et_un, et_pw;
     private TextView tv_forgot, tv_goto_register;
     private Handler handler;
-    private LoginContract.Presenter presenter;
+    private LoginPresenter presenter;
     private ObjectAnimator animator3;
     public boolean isActive = false, isLogining;
 
@@ -83,7 +84,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
 
     //为变量赋值、设置监听器等
     protected void initData() {
-        presenter = new LoginPresenter(this, HttpRequest.getApiservice());
+        presenter =  new LoginPresenter(this, HttpRequest.getApiservice());
         rl_root.setAlpha(0);
         //登录键点击后的动画
         mBtnLogin.setOnClickListener(this);
@@ -348,7 +349,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
     }
 
     @Override
-    public void setPresenter(LoginContract.Presenter presenter) {
+    public void setPresenter(LoginPresenter presenter) {
         this.presenter = presenter;
     }
 
@@ -410,4 +411,5 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
     public User getUser(Long id) {
         return getUserDao().loadByRowId(id);
     }
+
 }

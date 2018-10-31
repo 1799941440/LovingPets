@@ -3,7 +3,6 @@ package com.example.wz.lovingpets.widget;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -17,15 +16,16 @@ import com.example.wz.lovingpets.utils.StringUtils;
 
 public class ViewDialogFragment extends DialogFragment {
 
-    private DialogBuilder b;
+    private ConfirmDialogBuilder b;
     private TextView tv_title,tv_content;
     private Button bt_left, bt_right;
+    private LayoutInflater inflater;
 
     public ViewDialogFragment() {
     }
 
     @SuppressLint("ValidFragment")
-    public ViewDialogFragment(DialogBuilder builder) {
+    public ViewDialogFragment(ConfirmDialogBuilder builder) {
         this.b = builder;
     }
 
@@ -51,8 +51,8 @@ public class ViewDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View view = inflater.inflate(R.layout.dialog_manage_order, null);
+        inflater = getActivity().getLayoutInflater();
+        final View view = inflater.inflate(R.layout.dialog_comfirm, null);
         initView(view);
         initBuilder();
         builder.setView(view);

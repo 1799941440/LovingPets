@@ -1,7 +1,6 @@
 package com.example.wz.lovingpets.ui.login;
 
-import com.example.wz.lovingpets.base.BasePresenter;
-import com.example.wz.lovingpets.base.BaseView;
+import com.example.wz.lovingpets.base.BaseContract;
 import com.example.wz.lovingpets.db.UserDao;
 import com.example.wz.lovingpets.entity.User;
 
@@ -10,7 +9,7 @@ import com.example.wz.lovingpets.entity.User;
  */
 public interface LoginContract {
 
-    interface View extends BaseView<Presenter> {
+    interface LoginView extends BaseContract.BaseView<LoginPresenter> {
 
         void loginSuccess(User user, boolean success);
         void showLoginAnim();
@@ -18,7 +17,7 @@ public interface LoginContract {
         UserDao getUserDao();
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BaseContract.BasePresenter<LoginView> {
 
         void login(String username, String password);
 

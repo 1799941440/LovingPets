@@ -3,6 +3,7 @@ package com.example.wz.lovingpets.ui.login;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.wz.lovingpets.base.IBasePresent;
 import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.common.EventCodes;
 import com.example.wz.lovingpets.db.UserDao;
@@ -22,19 +23,16 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class LoginPresenter implements LoginContract.Presenter {
+public class LoginPresenter extends IBasePresent<LoginContract.LoginView> {
 
-    private final LoginContract.View view;
     private final HttpRequest.ApiService api;
     public ListResponse<User> list;
 
-    public LoginPresenter(LoginContract.View view, HttpRequest.ApiService api) {
-        this.view = view;
+    public LoginPresenter(LoginContract.LoginView view, HttpRequest.ApiService api) {
         this.api = api;
-        this.view.setPresenter(this);
+        attachMVPView(view);
     }
 
-    @Override
     public void login(String username, String password) {
         Logger.i("登录信息",username,password);
         Observable<ListResponse<User>> observable = api.login(username, password);
@@ -46,16 +44,16 @@ public class LoginPresenter implements LoginContract.Presenter {
             }
             @Override
             public void onNext(ListResponse<User> listResponse) {
-                if(!view.isActive()){
+                if(!mvpView.isActive()){
                     return;
                 }
                 if(listResponse.getRows().size()!=0){
                     Log.d("Tag", "登录onNext : 登录成功");
                     EventBusUtils.sendEvent(new Event<User>(EventCodes.LOGIN_SUCCESS,listResponse.getRows().get(0)));
-                    view.loginSuccess(listResponse.getRows().get(0),listResponse.isSuccess());
+                    mvpView.loginSuccess(listResponse.getRows().get(0),listResponse.isSuccess());
                 }else {
                     Log.d("Tag", "登录onNext : 登录失败，没有该用户");
-                    view.loginSuccess(null,listResponse.isSuccess());
+                    mvpView.loginSuccess(null,listResponse.isSuccess());
                 }
             }
             @Override

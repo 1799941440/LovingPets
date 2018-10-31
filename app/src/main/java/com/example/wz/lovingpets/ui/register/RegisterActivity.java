@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.activity.MainActivity;
 import com.example.wz.lovingpets.base.BaseActivity;
+import com.example.wz.lovingpets.base.BaseContract;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.ui.login.LoginActivity;
@@ -33,7 +34,7 @@ import com.example.wz.lovingpets.utils.UserUtil;
 public class RegisterActivity extends BaseActivity implements RegisterContract.View
         , View.OnClickListener,View.OnFocusChangeListener{
 
-    private RegisterContract.Presenter presenter;
+    private RegisterPresenter presenter;
     private RelativeLayout rl_un,rl_pw,rl_code;
     private RelativeLayout rl_failed, rl_success;
     private View rl_onregister,mInputLayout;
@@ -283,8 +284,8 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     }
 
     @Override
-    public void setPresenter(RegisterContract.Presenter presenter) {
-        this.presenter = presenter;
+    public void setPresenter(RegisterPresenter presenter) {
+        this.presenter = (RegisterPresenter) presenter;
     }
 
     @Override
@@ -300,4 +301,5 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         }
         super.onDestroy();
     }
+
 }

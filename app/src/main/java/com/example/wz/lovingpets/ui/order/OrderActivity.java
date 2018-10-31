@@ -22,9 +22,8 @@ import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.fragment.OrderFragment;
 import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.utils.EventBusUtils;
-import com.example.wz.lovingpets.widget.DialogBuilder;
+import com.example.wz.lovingpets.widget.ConfirmDialogBuilder;
 import com.example.wz.lovingpets.widget.ViewDialogFragment;
-import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -35,11 +34,9 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.internal.schedulers.RxThreadFactory;
 import io.reactivex.schedulers.Schedulers;
 
 @BindEventBus
@@ -139,7 +136,7 @@ public class OrderActivity extends BaseFragmentActivity{
     }
 
     private void showDelDialog(final Event<List> event) {
-        dialog= new DialogBuilder()
+        dialog= new ConfirmDialogBuilder()
                 .setTv_title("删除订单")
                 .setTv_content("确认删除订单编号为"+event.getData().get(0)+"的订单吗？")
                 .build();
@@ -158,7 +155,7 @@ public class OrderActivity extends BaseFragmentActivity{
     }
 
     private void showPayDialog(final Event<List> event) {
-        dialog= new DialogBuilder()
+        dialog= new ConfirmDialogBuilder()
                 .setTv_title("确认支付？")
                 .setTv_content("确认支付订单编号为"+event.getData().get(0)+"的订单吗？")
                 .build();
@@ -177,7 +174,7 @@ public class OrderActivity extends BaseFragmentActivity{
     }
 
     private void showRecDialog(final Event<List> event) {
-        dialog= new DialogBuilder()
+        dialog= new ConfirmDialogBuilder()
                 .setTv_title("确认收货？")
                 .setTv_content("确认编号为"+event.getData().get(0)+"的订单到货了吗？")
                 .build();

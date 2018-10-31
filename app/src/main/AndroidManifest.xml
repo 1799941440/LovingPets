@@ -49,7 +49,8 @@
         <activity android:name=".activity.GoodsList" />
         <activity android:name=".activity.ManageAddressActivity" />
         <activity android:name=".activity.EditAddressActivity" />
-        <activity android:name=".ui.order.OrderActivity"></activity>
+        <activity android:name=".ui.order.OrderActivity" />
+        <activity android:name=".activity.AddPetActivity"></activity>
     </application>
 
 </manifest>
