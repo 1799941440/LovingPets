@@ -21,7 +21,22 @@ public class PetInfo implements Serializable{
 	private Integer familyId;//宠物大类表ID
 	private Integer classId;//宠物小类ID
 	private String userName;//主任的用户名
-	
+
+	public PetInfo() {
+	}
+
+	public PetInfo(Integer id, Integer userId, String nickName, String state, String sex, Date birthday, String icon, Integer familyId, Integer classId) {
+		this.id = id;
+		this.userId = userId;
+		this.nickName = nickName;
+		this.state = state;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.icon = icon;
+		this.familyId = familyId;
+		this.classId = classId;
+	}
+
 	public String getUserName() {
 		return userName;
 	}

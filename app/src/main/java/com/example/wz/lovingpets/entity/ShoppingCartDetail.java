@@ -10,10 +10,14 @@ public class ShoppingCartDetail implements Serializable{
 	private Integer id;
 	private Integer shoppingCartId;//购物车ID
 	private Integer goodsDetailId;//商品详情表id
+	private String goodsName;
 	private Integer count;//数量
 	private float price;//价格
 	private float total;//购物车单种商品的总价格
 	private Integer shopId;//商品的店铺ID
+	private String shopName;
+	private boolean isSelected;
+	private String image;
 	public ShoppingCartDetail() {}
 	public ShoppingCartDetail(Integer id, Integer shoppingCartId, Integer goodsDetailId, Integer count, float price, float total, Integer shopId) {
 		this.id = id;
@@ -23,6 +27,30 @@ public class ShoppingCartDetail implements Serializable{
 		this.price = price;
 		this.total = total;
 		this.shopId = shopId;
+	}
+	public boolean isSelected() {
+		return isSelected;
+	}
+	public void setSelected(boolean selected) {
+		isSelected = selected;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getGoodsName() {
+		return goodsName;
+	}
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
 	public Integer getId() {
 		return id;

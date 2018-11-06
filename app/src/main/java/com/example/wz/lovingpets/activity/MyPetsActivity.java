@@ -14,27 +14,41 @@ import android.widget.TextView;
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.adapter.PetAdapter;
 import com.example.wz.lovingpets.base.BaseActivity;
+import com.example.wz.lovingpets.base.BaseFragmentActivity;
+import com.example.wz.lovingpets.common.BindEventBus;
+import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.common.EventCodes;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.PetInfo;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.net.HttpRequest;
+import com.example.wz.lovingpets.utils.EventBusUtils;
+import com.example.wz.lovingpets.widget.ConfirmDialogBuilder;
+import com.example.wz.lovingpets.widget.ViewDialogFragment;
 import com.ywp.addresspickerlib.AddressPickerView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class MyPetsActivity extends BaseActivity implements View.OnClickListener {
+@BindEventBus
+public class MyPetsActivity extends BaseFragmentActivity implements View.OnClickListener {
 
     private TextView title;
     private ImageView iv_add;
     private RecyclerView rv;
     private PetAdapter adapter;
     private User user;
+    private ViewDialogFragment  dialog;
     private List<PetInfo> list_pets = new ArrayList<>();
     private HttpRequest.ApiService api = HttpRequest.getApiservice();
     @Override
@@ -93,5 +107,58 @@ public class MyPetsActivity extends BaseActivity implements View.OnClickListener
                 finish();break;
             default:
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void receive(Event<Integer> event){
+        if(event.getCode() == EventCodes.DEL_PET){
+            showDelDialog(event.getData());
+        }else if(event.getCode() == EventCodes.MANAGE_PET){
+            getPets();
+        }
+    }
+
+    private void showDelDialog(final Integer data) {
+        dialog= new ConfirmDialogBuilder()
+                .setTv_title("删除宠物")
+                .setTv_content("确认删除这个宠物吗？")
+                .build();
+        dialog.setCallback(new ViewDialogFragment.Callback() {
+            @Override
+            public void onLeftClick() {
+
+            }
+
+            @Override
+            public void onRightClick() {
+                delPet(data);
+            }
+        });
+        dialog.show(getSupportFragmentManager());
+    }
+
+    private void delPet(Integer data) {
+        Observable<ListResponse> observable = api.delete(data);
+        observable.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ListResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+                    @Override
+                    public void onNext(ListResponse listResponse) {
+                        if(listResponse.isSuccess()){
+                            showToast("删除成功");
+                        }
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

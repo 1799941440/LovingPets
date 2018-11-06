@@ -5,10 +5,13 @@ import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.OrderInfo;
 import com.example.wz.lovingpets.entity.PetInfo;
+import com.example.wz.lovingpets.entity.ShoppingCartDetail;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.utils.LoggingInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.Date;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
@@ -17,6 +20,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -109,6 +113,30 @@ public class HttpRequest {
         @FormUrlEncoded
         @POST("/petserviceplatform/PetAction/getMyPet")
         Observable<ListResponse<PetInfo>> getPets(@Field("id")int id);
+
+        @FormUrlEncoded
+        @POST("/petserviceplatform/PetAction/delete")
+        Observable<ListResponse> delete(@Field("petId")int id);
+
+        @FormUrlEncoded
+        @POST("/petserviceplatform/PetAction/managePet")
+        Observable<ListResponse> managePet(@Field("id") int id,
+                                             @Field("nickName")String nickName,
+                                             @Field("familyId")int familyId,
+                                             @Field("userId")int userId,
+                                             @Field("classId")int classId,
+                                             @Field("state")String state,
+                                             @Field("sex")String sex,
+                                             @Field("icon")String icon,
+                                             @Field("bs")String bs);
+
+        @FormUrlEncoded
+        @POST("/petserviceplatform/UploadAction/getToken")
+        Observable<String> getToken(@Field("path") String path);
+
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ShoppingCartAction/getMyCart")
+        Observable<ListResponse<ShoppingCartDetail>> getSC(@Field("shoppingCartId") Integer shoppingCartId);
     }
 
     public Observable<ListResponse<User>> login(String username, String password) {
@@ -147,5 +175,23 @@ public class HttpRequest {
     
     public Observable<ListResponse<PetInfo>> getPets(int id){
         return apiService.getPets(id);
+    }
+
+    public Observable<ListResponse> deletePet(int id){
+        return apiService.delete(id);
+    }
+
+    public Observable<ListResponse> update(int id,String nickName,int familyId,int userId,
+                                           int classId,String state,String sex,String icon,String bs){
+        return apiService.managePet(id,nickName,familyId,userId,
+        classId,state,sex,icon,bs);
+    }
+
+    public Observable<String> getToken(String path){
+        return apiService.getToken(path);
+    }
+
+    public Observable<ListResponse<ShoppingCartDetail>> getSC(Integer SCId){
+        return apiService.getSC(SCId);
     }
 }

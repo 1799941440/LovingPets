@@ -2,16 +2,14 @@ package com.example.wz.lovingpets.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
-import com.example.wz.lovingpets.utils.UIUtils;
+import com.example.wz.lovingpets.utils.DecimalUtil;
 
 public class PriceView extends LinearLayout {
 

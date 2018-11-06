@@ -14,7 +14,10 @@ import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.activity.AddPetActivity;
+import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.common.EventCodes;
 import com.example.wz.lovingpets.entity.PetInfo;
+import com.example.wz.lovingpets.utils.EventBusUtils;
 import com.example.wz.lovingpets.utils.ImageUtil;
 import com.google.gson.Gson;
 
@@ -50,6 +53,13 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
                 b.putString("petInfo",gson.toJson(data));
                 intent.putExtra("bundle",b);
                 context.startActivity(intent);
+            }
+        });
+        holder.ll.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                EventBusUtils.sendEvent(new Event<Integer>(EventCodes.DEL_PET,data.getId()));
+                return true;
             }
         });
         holder.tv_name.setText(data.getNickName());
