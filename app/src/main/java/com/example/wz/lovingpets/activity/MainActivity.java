@@ -15,6 +15,7 @@ import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Constant;
 import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.common.EventCodes;
+import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
@@ -89,9 +90,7 @@ public class MainActivity extends BaseFragmentActivity {
     public void receive(Event<GoodsDetailInfo> event){
         if(event.getCode() == EventCodes.ADD_TO_CART){
             String param = new Gson().toJson(event.getData());
-            com.orhanobut.logger.Logger.i("接受数据"+param);
             addToCart(param);
-            showToast("成功加入购物车！");
         }
     }
     /**
@@ -118,21 +117,12 @@ public class MainActivity extends BaseFragmentActivity {
 
     private void addToCart(String param){
         Observable<ListResponse> observable = api.addToCart(param);
-        observable.subscribeOn(Schedulers.newThread())//它为指定任务启动一个新的线程。
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ListResponse>() {
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
             @Override
-            public void onSubscribe(Disposable d) { }
-            @Override
-            public void onNext(ListResponse listResponse) {
-                showToast(listResponse.getMsg());
-            }
-            @Override
-            public void onError(Throwable e) {
-
-            }
-            @Override
-            public void onComplete() {
-
+            public void onSuccess(ListResponse listResponse) {
+                if(listResponse.isSuccess()){
+                    showToast("成功加入购物车!");
+                }
             }
         });
     }

@@ -18,6 +18,7 @@ import com.example.wz.lovingpets.base.BaseFragmentActivity;
 import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.common.EventCodes;
+import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.PetInfo;
 import com.example.wz.lovingpets.entity.User;
@@ -80,13 +81,12 @@ public class MyPetsActivity extends BaseFragmentActivity implements View.OnClick
     @SuppressLint("CheckResult")
     private void getPets(){
         Observable<ListResponse<PetInfo>> observable = api.getPets(user.getId());
-        observable.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ListResponse<PetInfo>>() {
-                    @Override
-                    public void accept(ListResponse<PetInfo> listResponse) throws Exception {
-                        successLoadPet(listResponse.getRows());
-                    }
-                });
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse<PetInfo>>() {
+            @Override
+            public void onSuccess(ListResponse<PetInfo> listResponse) {
+                successLoadPet(listResponse.getRows());
+            }
+        });
     }
 
     private void successLoadPet(List<PetInfo> rows) {
@@ -139,26 +139,13 @@ public class MyPetsActivity extends BaseFragmentActivity implements View.OnClick
 
     private void delPet(Integer data) {
         Observable<ListResponse> observable = api.delete(data);
-        observable.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ListResponse>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-                    @Override
-                    public void onNext(ListResponse listResponse) {
-                        if(listResponse.isSuccess()){
-                            showToast("删除成功");
-                        }
-                    }
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
+            @Override
+            public void onSuccess(ListResponse listResponse) {
+                if(listResponse.isSuccess()){
+                    showToast("删除成功");
+                }
+            }
+        });
     }
 }

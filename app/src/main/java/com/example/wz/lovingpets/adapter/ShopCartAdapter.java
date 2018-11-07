@@ -61,24 +61,28 @@ public class ShopCartAdapter extends RecyclerView.Adapter<ShopCartAdapter.SCHold
                 if(holder.cb.isChecked()){
                     amount = DecimalUtil.add(amount,String.valueOf(data.getTotal()));
                     cbl.onCkeckboxSwitch(amount);
+                    data.setSelected(true);
                 }else{
                     cb_all.setChecked(false);
                     amount = DecimalUtil.subtract(amount,String.valueOf(data.getTotal()));
                     cbl.onCkeckboxSwitch(amount);
+                    data.setSelected(false);
                 }
             }
         });
         ImageUtil.loadNetImage(holder.iv,data.getImage());
     }
 
-    public List<Integer> getSeletedItem(){
-        List<Integer> result = new ArrayList<>();
+    public String getSeletedItem(){
+        StringBuilder sb = new StringBuilder();
         for (ShoppingCartDetail s :list){
             if(s.isSelected()){
-                result.add(s.getId());
+                sb.append(s.getId());
+                sb.append("-");
             }
         }
-        return result;
+        String res = sb.toString();
+        return res.substring(0,res.length()-1);
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.widget.Toast;
 
 import com.example.wz.lovingpets.activity.MyApp;
 import com.example.wz.lovingpets.common.BindEventBus;
@@ -47,5 +48,13 @@ public class BaseFragment extends Fragment {
             intent.putExtra("bundle", b);
         }
         startActivity(intent);
+    }
+
+    public void showToast(String msg){
+        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+    }
+
+    public void showLongToast(String msg){
+        Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
     }
 }

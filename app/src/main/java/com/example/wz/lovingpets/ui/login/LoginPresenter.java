@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.wz.lovingpets.base.IBasePresent;
 import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.common.EventCodes;
+import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.db.UserDao;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
@@ -36,14 +37,9 @@ public class LoginPresenter extends IBasePresent<LoginContract.LoginView> {
     public void login(String username, String password) {
         Logger.i("登录信息",username,password);
         Observable<ListResponse<User>> observable = api.login(username, password);
-        observable.subscribeOn(Schedulers.newThread())//它为指定任务启动一个新的线程。
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ListResponse<User>>() {
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse<User>>() {
             @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-            @Override
-            public void onNext(ListResponse<User> listResponse) {
+            public void onSuccess(ListResponse<User> listResponse) {
                 if(!mvpView.isActive()){
                     return;
                 }
@@ -55,14 +51,6 @@ public class LoginPresenter extends IBasePresent<LoginContract.LoginView> {
                     Log.d("Tag", "登录onNext : 登录失败，没有该用户");
                     mvpView.loginSuccess(null,listResponse.isSuccess());
                 }
-            }
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-            }
-            @Override
-            public void onComplete() {
-
             }
         });
     }

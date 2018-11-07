@@ -15,6 +15,7 @@ import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.base.BaseActivity;
 import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.common.EventCodes;
+import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.entity.Address;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
@@ -122,26 +123,13 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void saveAddress(String receiver, String contact, String province, String city, String fullAddress,int commonAddress) {
-        Observable observable = api.manageAddress(data.getId() == null?0:data.getId(),user.getId(),receiver,contact,province,city,
+        Observable<ListResponse> observable = api.manageAddress(data.getId() == null?0:data.getId(),user.getId(),receiver,contact,province,city,
                 fullAddress,commonAddress);
-        observable.subscribeOn(Schedulers.newThread())//它为指定任务启动一个新的线程。
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ListResponse>(){
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
             @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-            @Override
-            public void onNext(ListResponse listResponse) {
+            public void onSuccess(ListResponse listResponse) {
                 showToast(listResponse.getMsg());
                 EventBusUtils.sendEvent(new Event(EventCodes.SAVE_ADDRESS,null));
-            }
-            @Override
-            public void onError(Throwable e) {
-
-            }
-            @Override
-            public void onComplete() {
-
             }
         });
     }

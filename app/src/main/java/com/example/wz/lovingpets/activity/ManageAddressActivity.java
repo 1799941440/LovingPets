@@ -13,6 +13,7 @@ import com.example.wz.lovingpets.base.BaseActivity;
 import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.common.EventCodes;
+import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.entity.Address;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
@@ -71,23 +72,10 @@ public class ManageAddressActivity extends BaseActivity implements View.OnClickL
     }
     private void getAddress(){
         Observable<ListResponse<Address>> observable = api.getAllAddress(user.getId());
-        observable.subscribeOn(Schedulers.newThread())//它为指定任务启动一个新的线程。
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ListResponse<Address>>(){
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse<Address>>() {
             @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-            @Override
-            public void onNext(ListResponse<Address> listResponse) {
+            public void onSuccess(ListResponse<Address> listResponse) {
                 successLoadData(listResponse.getRows());
-            }
-            @Override
-            public void onError(Throwable e) {
-
-            }
-            @Override
-            public void onComplete() {
-
             }
         });
     }

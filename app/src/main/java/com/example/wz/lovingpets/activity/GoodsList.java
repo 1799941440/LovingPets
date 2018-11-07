@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.adapter.GoodsListAdapter;
 import com.example.wz.lovingpets.base.BaseActivity;
+import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.User;
@@ -73,29 +74,14 @@ public class GoodsList extends BaseActivity {
 
     private void getGoods(){
         Observable<ListResponse<GoodsDetailInfo>> observable = api.getGoods(classify,condition);
-        observable.subscribeOn(Schedulers.newThread())//它为指定任务启动一个新的线程。
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ListResponse<GoodsDetailInfo>>(){
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse<GoodsDetailInfo>>() {
             @Override
-            public void onSubscribe(Disposable d) {
-            }
-
-            @Override
-            public void onNext(ListResponse<GoodsDetailInfo> listResponse) {
+            public void onSuccess(ListResponse<GoodsDetailInfo> listResponse) {
                 if(listResponse.isSuccess()){
                     successLoadGoods(listResponse.getRows());
                 }else{
                     showToast(listResponse.getMsg());
                 }
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onComplete() {
-
             }
         });
     }

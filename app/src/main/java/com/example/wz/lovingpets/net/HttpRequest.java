@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.Date;
+import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
@@ -110,14 +111,17 @@ public class HttpRequest {
                 @Field("fullAddress") String fullAddress,
                 @Field("isCommonAddress") int isCommonAddress);
 
+        //获取宠物
         @FormUrlEncoded
         @POST("/petserviceplatform/PetAction/getMyPet")
         Observable<ListResponse<PetInfo>> getPets(@Field("id")int id);
 
+        //删除宠物
         @FormUrlEncoded
         @POST("/petserviceplatform/PetAction/delete")
         Observable<ListResponse> delete(@Field("petId")int id);
 
+        //添加修改宠物一体接口，带id为修改，为0则添加
         @FormUrlEncoded
         @POST("/petserviceplatform/PetAction/managePet")
         Observable<ListResponse> managePet(@Field("id") int id,
@@ -130,13 +134,20 @@ public class HttpRequest {
                                              @Field("icon")String icon,
                                              @Field("bs")String bs);
 
+        //获取七牛云上传凭证
         @FormUrlEncoded
         @POST("/petserviceplatform/UploadAction/getToken")
         Observable<String> getToken(@Field("path") String path);
 
+//        获取购物车列表
         @FormUrlEncoded
         @POST("/petserviceplatform/ShoppingCartAction/getMyCart")
         Observable<ListResponse<ShoppingCartDetail>> getSC(@Field("shoppingCartId") Integer shoppingCartId);
+
+        @FormUrlEncoded
+        @POST("/petserviceplatform/OrderAction/cartToOrder")
+        Observable<ListResponse> cartToOrder(@Field("goodsList")String goodsList,@Field("userId") Integer userId
+                ,@Field("state") Integer state);
     }
 
     public Observable<ListResponse<User>> login(String username, String password) {
@@ -193,5 +204,9 @@ public class HttpRequest {
 
     public Observable<ListResponse<ShoppingCartDetail>> getSC(Integer SCId){
         return apiService.getSC(SCId);
+    }
+
+    public Observable<ListResponse> cartToOrder(String goodsList,Integer userId,Integer state){
+        return apiService.cartToOrder(goodsList,userId,state);
     }
 }

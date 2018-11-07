@@ -23,6 +23,8 @@ import com.example.wz.lovingpets.entity.ShoppingCartDetail;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.utils.DecimalUtil;
+import com.example.wz.lovingpets.widget.ConfirmDialogBuilder;
+import com.example.wz.lovingpets.widget.ViewDialogFragment;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -52,7 +54,6 @@ public class ShoppingTrolleyFragment extends BaseFragment {
             mParam1 = getArguments().getString(TEXT_TITLE);
         }
     }
-
 
     @Nullable
     @Override
@@ -104,7 +105,39 @@ public class ShoppingTrolleyFragment extends BaseFragment {
     }
 
     private void payForCart() {
+        final String items = adapter.getSeletedItem();
+        if(items.length()<1){
+            showToast("你还没有选择结算的商品哦");
+        }
+        ViewDialogFragment dialog = new ConfirmDialogBuilder().setTv_title("确认支付？")
+                .setTv_left("稍后支付")
+                .setTv_right("立即支付")
+                .setTv_content("确认支付该订单吗？").build();
+        dialog.setCallback(new ViewDialogFragment.Callback() {
+            @Override
+            public void onLeftClick() {
+                cartToOrder(items,0);
+            }
+            //支付
+            @Override
+            public void onRightClick() {
+                cartToOrder(items,2);
+            }
+        });
+        dialog.show(getFragmentManager());
+    }
 
+    //发出购物车转换订单的请求
+    private void cartToOrder(String items,Integer state) {
+        Observable<ListResponse> observable = api.cartToOrder(items, MyApp.getInstance().getUser().getId(),state);
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
+            @Override
+            public void onSuccess(ListResponse listResponse) {
+                showLongToast(listResponse.getMsg());
+                getSC();
+                tv_total.setText("0.0");
+            }
+        });
     }
 
     private void unSelectAll(List<ShoppingCartDetail> list,boolean b) {
@@ -145,16 +178,16 @@ public class ShoppingTrolleyFragment extends BaseFragment {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void loginSuccess(Event<User> event){
+
+    }
+
     public static ShoppingTrolleyFragment newInstance(String param1) {
         ShoppingTrolleyFragment fragment = new ShoppingTrolleyFragment();
         Bundle args = new Bundle();
         args.putString(TEXT_TITLE, param1);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void loginSuccess(Event<User> event){
-
     }
 }

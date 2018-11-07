@@ -24,6 +24,7 @@ import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Constant;
 import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.common.EventCodes;
+import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.PetInfo;
 import com.example.wz.lovingpets.net.HttpRequest;
@@ -147,26 +148,13 @@ public class AddPetActivity extends BaseFragmentActivity implements View.OnClick
 
     private void startUpload(File head) {
         Observable<String> observable = api.getToken(token_path+Calendar.getInstance().getTimeInMillis());
-        observable.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-                    @Override
-                    public void onNext(String s) {
-                        token = s;
-                        Log.d("获取token", "tokrn: "+s+" path"+token_path);
-                    }
-                    @Override
-                    public void onError(Throwable e) {
-                        showToast("获取上传凭证失败");
-                    }
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<String>() {
+            @Override
+            public void onSuccess(String s) {
+                token = s;
+                Log.d("获取token", "tokrn: "+s+" path"+token_path);
+            }
+        });
     }
 
     @Override
@@ -205,24 +193,12 @@ public class AddPetActivity extends BaseFragmentActivity implements View.OnClick
     private void addPet(PetInfo data) {
         Observable<ListResponse> observable = api.managePet(data.getId(),data.getNickName(),
         data.getFamilyId(),data.getUserId(),data.getClassId(),data.getState(),data.getSex(),data.getIcon(),tv_birthday.getText().toString());
-        observable.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ListResponse>() {
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
             @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-            @Override
-            public void onNext(ListResponse listResponse) {
+            public void onSuccess(ListResponse listResponse) {
                 if(listResponse.isSuccess()){
                     showToast(listResponse.getMsg());
                 }
-            }
-            @Override
-            public void onError(Throwable e) {
-
-            }
-            @Override
-            public void onComplete() {
-
             }
         });
     }

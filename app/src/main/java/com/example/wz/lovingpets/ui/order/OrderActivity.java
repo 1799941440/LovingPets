@@ -16,6 +16,7 @@ import com.example.wz.lovingpets.base.BaseFragmentActivity;
 import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.common.EventCodes;
+import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.OrderInfo;
 import com.example.wz.lovingpets.entity.User;
@@ -98,28 +99,14 @@ public class OrderActivity extends BaseFragmentActivity{
     }
     public void getOrder(){
         Observable<ListResponse<OrderInfo>> observable = api.getOrder(user.getId());
-        observable.subscribeOn(Schedulers.newThread())//它为指定任务启动一个新的线程。
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ListResponse<OrderInfo>>() {
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse<OrderInfo>>() {
             @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-            @Override
-            public void onNext(ListResponse<OrderInfo> listResponse) {
-                Log.d("ssss", "onNext: ");
+            public void onSuccess(ListResponse<OrderInfo> listResponse) {
                 if(listResponse.isSuccess()){
                     EventBusUtils.sendStickyEvent(new Event<List<OrderInfo>>(EventCodes.LOADED_ORDER,listResponse.getRows()));
                 }else {
                     showToast("获取失败");
                 }
-            }
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-            }
-            @Override
-            public void onComplete() {
-
             }
         });
     }
@@ -195,10 +182,9 @@ public class OrderActivity extends BaseFragmentActivity{
     @SuppressLint("CheckResult")
     private void payOrder(List<Integer> data) {
         Observable<ListResponse> observable = api.changeOrderState(data.get(0),data.get(1));
-        observable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<ListResponse>() {
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
             @Override
-            public void accept(ListResponse listResponse) throws Exception {
+            public void onSuccess(ListResponse listResponse) {
                 if(listResponse.isSuccess()){
                     showToast("支付成功！");
                     getOrder();
@@ -210,10 +196,9 @@ public class OrderActivity extends BaseFragmentActivity{
     @SuppressLint("CheckResult")
     private void recOrder(List<Integer> data) {
         Observable<ListResponse> observable = api.changeOrderState(data.get(0),data.get(1));
-        observable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<ListResponse>() {
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
             @Override
-            public void accept(ListResponse listResponse) throws Exception {
+            public void onSuccess(ListResponse listResponse) {
                 if(listResponse.isSuccess()){
                     showToast("收货成功！");
                     getOrder();
@@ -225,10 +210,9 @@ public class OrderActivity extends BaseFragmentActivity{
     @SuppressLint("CheckResult")
     private void delOrder(Integer data) {
         Observable<ListResponse> observable = api.delOrder(data);
-        observable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<ListResponse>() {
+        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
             @Override
-            public void accept(ListResponse listResponse) throws Exception {
+            public void onSuccess(ListResponse listResponse) {
                 showToast(listResponse.getMsg());
                 getOrder();
             }
