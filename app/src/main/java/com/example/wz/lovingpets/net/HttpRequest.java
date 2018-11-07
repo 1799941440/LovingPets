@@ -61,6 +61,13 @@ public class HttpRequest {
         Observable<ListResponse<User>> login(
                 @Field("userName") String username,
                 @Field("password") String password);
+        // 用户注册
+        @FormUrlEncoded
+        @POST("/petserviceplatform/UserAction/register")
+        Observable<ListResponse<User>> register(
+                @Field("userName") String username,
+                @Field("password") String password,
+                @Field("phone") String phone);
         // 获取商品
         @FormUrlEncoded
         @POST("/petserviceplatform/GoodsAction/getByClassify")
@@ -152,6 +159,10 @@ public class HttpRequest {
 
     public Observable<ListResponse<User>> login(String username, String password) {
         return apiService.login(username, password);
+    }
+
+    public Observable<ListResponse<User>> register(String username, String password,String phone) {
+        return apiService.register(username, password,phone);
     }
 
     public Observable<ListResponse<GoodsDetailInfo>> getGoods(String classify,String condition){

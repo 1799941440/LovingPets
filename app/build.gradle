@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'//配置greendao 2、app目录下依赖插件
+apply plugin: 'com.mob.sdk'//配置mobSDK
 
 android {
     compileSdkVersion 27
@@ -23,6 +24,15 @@ android {
             //如果要混淆要小心类库的混淆规则
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+}
+
+MobSDK {
+    appKey "27606a32d1aa8"
+    appSecret "d9f6090c5d052d60fae9684bbdcb96f8"
+
+    SMSSDK {
+        gui false
     }
 }
 

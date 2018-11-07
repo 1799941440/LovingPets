@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.activity.MainActivity;
@@ -31,20 +33,26 @@ import com.example.wz.lovingpets.utils.Md5Util;
 import com.example.wz.lovingpets.utils.StringUtils;
 import com.example.wz.lovingpets.utils.UserUtil;
 
+import java.util.HashMap;
+
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+
 public class RegisterActivity extends BaseActivity implements RegisterContract.View
         , View.OnClickListener,View.OnFocusChangeListener{
 
+    private String phoneNum;
+    private Button bt_getcode;
+    private float mWidth, mHeight;
+    private ObjectAnimator animator3;
+    public boolean isregisting = false;
     private RegisterPresenter presenter;
+    private EditText et_un,et_pw,et_code;
+    private TextView tv_register;//注册按钮
+    private View rl_onregister,mInputLayout;
+    private ImageView iv_failed, iv_success;
     private RelativeLayout rl_un,rl_pw,rl_code;
     private RelativeLayout rl_failed, rl_success;
-    private View rl_onregister,mInputLayout;
-    private float mWidth, mHeight;
-    private ImageView iv_failed, iv_success;
-    private EditText et_un,et_pw,et_code;
-    private Button bt_getcode;
-    private TextView tv_register;//注册按钮
-    public boolean isregisting = false;
-    private ObjectAnimator animator3;
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler(){
         @Override
@@ -63,6 +71,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        SMSSDK.registerEventHandler(eh);
         findViews();
         initData();
     }
@@ -101,7 +110,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.register_bt_getcode:
-                showToast("getCode clicked");
+                getSecurity();
                 break;
             case R.id.register_tv_register:
                 if (StringUtils.isEmpty(et_un.getText().toString().trim())) {
@@ -112,13 +121,11 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                     showToast("请输入密码");
                     return;
                 }
-                mWidth = tv_register.getMeasuredWidth();
-                mHeight = tv_register.getMeasuredHeight();
-                rl_un.setVisibility(View.INVISIBLE);
-                rl_pw.setVisibility(View.INVISIBLE);
-                rl_code.setVisibility(View.INVISIBLE);
-                handler.sendEmptyMessage(1);
-                isregisting = true;
+                if (StringUtils.isEmpty(et_code.getText().toString().trim())) {
+                    showToast("请输入验证码");
+                    return;
+                }
+                testSecurity();
                 break;
             default:break;
         }
@@ -166,7 +173,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
             public void onAnimationRepeat(Animator animation) {
                 super.onAnimationRepeat(animation);
                 animation.cancel();
-                presenter.register("1","1");
+                presenter.register(phoneNum,et_pw.getText().toString().trim());
             }
 
             @Override
@@ -180,7 +187,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         isregisting = false;
         rl_onregister.setVisibility(View.INVISIBLE);
         if (success) {
-            //new UserUtil(this).saveUser(user);
+            new UserUtil(this).saveUser(user);
             showSuccessAnim();
         } else {
             showFailedAnim();
@@ -285,7 +292,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @Override
     public void setPresenter(RegisterPresenter presenter) {
-        this.presenter = (RegisterPresenter) presenter;
+        this.presenter = presenter;
     }
 
     @Override
@@ -299,7 +306,82 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
             //If token is null, all callbacks and messages will be removed.
             handler.removeCallbacksAndMessages(null);
         }
+        SMSSDK.unregisterAllEventHandler();
         super.onDestroy();
     }
 
+    public void getSecurity() {
+        phoneNum = et_un.getText().toString().trim();
+        //发送短信，传入国家号和电话---使用SMSSDK核心类之前一定要在MyApplication中初始化，否侧不能使用
+        if (StringUtils.isMobileNO(phoneNum)) {
+            showToast("号码不符合格式！");
+        } else {
+            SMSSDK.getVerificationCode("+86", phoneNum);
+        }
+    }
+
+    public void testSecurity() {
+        String security = et_code.getText().toString();
+        if (!TextUtils.isEmpty(security)) {
+            //提交短信验证码
+            SMSSDK.submitVerificationCode("+86", phoneNum, security);//国家号，手机号码，验证码
+        } else {
+            showToast("验证码不能为空");
+        }
+    }
+
+    private EventHandler eh = new EventHandler() {
+        @Override
+        public void afterEvent(int event, int result, Object data) {//提交验证码成功,如果验证成功会在data里返回数据。data数据类型为HashMap<number,code>
+            if (result == SMSSDK.RESULT_COMPLETE) {
+                //回调完成
+                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                    //提交验证码成功
+                    HashMap<String, Object> mData = (HashMap<String, Object>) data;
+                    String country = (String) mData.get("country");//返回的国家编号
+                    String phone = (String) mData.get("phone");//返回用户注册的手机号
+
+                    if (phone.equals(phoneNum)) {
+                        runOnUiThread(new Runnable() {//更改ui的操作要放在主线程，实际可以发送hander
+                            @Override
+                            public void run() {
+                                showToast("通过验证");
+                                mWidth = tv_register.getMeasuredWidth();
+                                mHeight = tv_register.getMeasuredHeight();
+                                rl_un.setVisibility(View.INVISIBLE);
+                                rl_pw.setVisibility(View.INVISIBLE);
+                                rl_code.setVisibility(View.INVISIBLE);
+                                handler.sendEmptyMessage(1);
+                                isregisting = true;
+                            }
+                        });
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showToast("验证失败1");
+                            }
+                        });
+                    }
+                } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showToast("成功发出验证，请查看短信获取验证码");
+                        }
+                    });
+                } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {
+                    //返回支持发送验证码的国家列表
+                }
+            } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showToast("验证失败0");
+                    }
+                });
+                ((Throwable) data).printStackTrace();
+            }
+        }
+    };
 }

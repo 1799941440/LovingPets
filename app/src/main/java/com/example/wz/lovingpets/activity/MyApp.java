@@ -12,6 +12,7 @@ import com.example.wz.lovingpets.common.LogCatStrategy;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.utils.GreenDaoManager;
 import com.example.wz.lovingpets.utils.UserUtil;
+import com.mob.MobSDK;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
@@ -76,6 +77,7 @@ public class MyApp extends Application {
         initLogger();//初始化Logger日志记录器
 //        initLeakCanary();//初始化内存泄漏检测
         GreenDaoManager.getInstance();
+        MobSDK.init(this);
     }
 
     /**

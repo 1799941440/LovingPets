@@ -26,9 +26,9 @@
     <string name="to_be_revceive">待收货</string>
     <string name="to_be_evaluated">待评价</string>
     <string name="all_orders">全部订单</string>
-    <string name="register_et_un_hint">输入用户名注册，作为登录账号</string>
-    <string name="et_hint">密码</string>
-    <string name="et_code_hint">验证码</string>
+    <string name="register_et_un_hint">输入您的手机号，作为登录账号</string>
+    <string name="et_hint">设定一个密码</string>
+    <string name="et_code_hint">请输入收到的验证码</string>
     <string name="check_version">版本检测</string>
     <string name="feed_back">意见反馈</string>
     <string name="connect_to_service">联系客服</string>

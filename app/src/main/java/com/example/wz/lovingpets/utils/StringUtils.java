@@ -9,8 +9,30 @@ import android.view.View;
 import com.example.wz.lovingpets.R;
 
 import java.text.DecimalFormat;
+import java.util.Random;
 
 public class StringUtils {
+    static char[] str = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+            'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
+            'X', 'Y', 'Z','a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+            'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
+            'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
+    public static String genRandomNum(int number){
+        int  maxNum = 36;
+        int i;
+        int count = 0;
+        StringBuilder pwd = new StringBuilder("");
+        Random r = new Random();
+        while(count < number){
+            i = Math.abs(r.nextInt(maxNum));
+            if (i >= 0 && i < str.length) {
+                pwd.append(str[i]);
+                count ++;
+            }
+        }
+        return pwd.toString();
+    }
 
     public static boolean isEmpty(CharSequence str) {
         return str == null || str.length() == 0;
@@ -45,7 +67,7 @@ public class StringUtils {
          * @return 待检测的字符串
          */
         String telRegex = "^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(199)|(17[0,1,3,5,6,7,8]))\\d{8}$";// "[1]"代表下一位为数字可以是几，"[0-9]"代表可以为0-9中的一个，"[5,7,9]"表示可以是5,7,9中的任意一位,[^4]表示除4以外的任何一个,\\d{9}"代表后面是可以是0～9的数字，有9位。
-            return mobileNums.matches(telRegex) && StringUtils.isEmpty(mobileNums);
+            return mobileNums.matches(telRegex) && isEmpty(mobileNums);
     }
 
     public static String getMoney(float cost) {
