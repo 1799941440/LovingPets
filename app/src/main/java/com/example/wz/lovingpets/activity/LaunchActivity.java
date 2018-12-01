@@ -9,7 +9,9 @@ import android.os.Message;
 import android.view.KeyEvent;
 
 import com.example.wz.lovingpets.R;
+import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.ui.login.LoginActivity;
+import com.example.wz.lovingpets.utils.UserUtil;
 
 /**
  * 应用启动的第一个activity，由于方法较少，直接继承activity而非baseactivity
@@ -17,11 +19,23 @@ import com.example.wz.lovingpets.ui.login.LoginActivity;
  */
 public class LaunchActivity extends Activity {
 
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-        gotoLogin();
+        checkLoginState();
+    }
+
+    private void checkLoginState() {
+        user = new UserUtil(getApplicationContext()).getUser();
+        if(user.getId() == 0){
+            gotoLogin();
+        }else{
+            Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @SuppressLint("HandlerLeak")
@@ -31,6 +45,7 @@ public class LaunchActivity extends Activity {
             switch (msg.what) {
                 case 0:
                     Intent intent = new Intent(LaunchActivity.this, LoginActivity.class);
+                    intent.putExtra("from","LAUNCH_ACTIVITY");
                     startActivity(intent);
                     finish();
                     //取消界面跳转时的动画，使启动页的logo图片与注册、登录主页的logo图片完美衔接

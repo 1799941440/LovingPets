@@ -36,4 +36,8 @@
     <string name="my_collection">我的收藏</string>
     <string name="my_evaluate">我的评价</string>
     <string name="pets_info">宠物资料</string>
+    <string name="my_cart">我的购物车</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -9,6 +9,8 @@ import android.view.View;
 import com.example.wz.lovingpets.R;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class StringUtils {
@@ -18,8 +20,8 @@ public class StringUtils {
             'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
             'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
-    public static String genRandomNum(int number){
-        int  maxNum = 36;
+    public static String getRandomNum(int number){
+        int  maxNum = 62;
         int i;
         int count = 0;
         StringBuilder pwd = new StringBuilder("");
@@ -55,6 +57,14 @@ public class StringUtils {
             return checkInt(integer);
         }
         return false;
+    }
+    public static List<String> getImgs(String content){
+        List<String> list = new ArrayList<>();
+        String[] a = content.split("!\\[img\\]\\(");
+        for(int i = 1; i<a.length ;i++){
+            list.add(a[i].split("\\)")[0]);
+        }
+        return list;
     }
 
     public static boolean isMobileNO(String mobileNums) {

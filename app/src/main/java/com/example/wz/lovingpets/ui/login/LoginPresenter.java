@@ -44,7 +44,6 @@ public class LoginPresenter extends IBasePresent<LoginContract.LoginView> {
                     return;
                 }
                 if(listResponse.getRows().size()!=0){
-                    Log.d("Tag", "登录onNext : 登录成功");
                     EventBusUtils.sendEvent(new Event<User>(EventCodes.LOGIN_SUCCESS,listResponse.getRows().get(0)));
                     mvpView.loginSuccess(listResponse.getRows().get(0),listResponse.isSuccess());
                 }else {

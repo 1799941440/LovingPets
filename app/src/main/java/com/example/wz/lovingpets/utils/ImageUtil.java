@@ -40,4 +40,9 @@ public class ImageUtil {
         Glide.with(view.getContext())
                 .load(url).into(view);
     }
+
+    public static void loadLocalImage(ImageView view, String url) {
+        Glide.with(view.getContext())
+                .load(url).into(view);
+    }
 }

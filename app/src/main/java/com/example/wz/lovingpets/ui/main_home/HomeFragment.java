@@ -32,8 +32,6 @@ import java.util.List;
 public class HomeFragment extends BaseFragment {
     public static final String TEXT_TITLE = "content";
     private String mParam1;
-    private String mParam2;
-    private TextView mTextView;
     private TabLayout tab;
     private ViewPager vp;
     private int currentTheme;
@@ -119,7 +117,6 @@ public class HomeFragment extends BaseFragment {
         };
         vp.setAdapter(adapter);
         tab.setupWithViewPager(vp);
-        tab.setTabsFromPagerAdapter(adapter);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

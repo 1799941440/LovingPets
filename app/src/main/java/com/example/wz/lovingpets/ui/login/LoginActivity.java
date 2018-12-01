@@ -40,18 +40,19 @@ import org.greenrobot.eventbus.Subscribe;
 public class LoginActivity extends Activity implements View.OnFocusChangeListener
         , LoginContract.LoginView, View.OnClickListener {
 
-    private TextView mBtnLogin;//登录按钮
-    private View logining, mInputLayout;//
     private long exitTime;
-    private float mWidth, mHeight;//
-    private RelativeLayout rl_root, rl_un, rl_pw, rl_failed, rl_success;//input根布局、username、password、失败、成功的id
-    private ImageView icon, ic_after, iv_failed, iv_success;//一开始显示的图标以及变化后的位置，成功以及失败图片
-    private EditText et_un, et_pw;
-    private TextView tv_forgot, tv_goto_register;
     private Handler handler;
+    private String from;
+    private TextView mBtnLogin;//登录按钮
+    private float mWidth, mHeight;//
+    private EditText et_un, et_pw;
     private LoginPresenter presenter;
     private ObjectAnimator animator3;
+    private View logining, mInputLayout;//
+    private TextView tv_forgot, tv_goto_register;
     public boolean isActive = false, isLogining;
+    private ImageView icon, ic_after, iv_failed, iv_success;//一开始显示的图标以及变化后的位置，成功以及失败图片
+    private RelativeLayout rl_root, rl_un, rl_pw, rl_failed, rl_success;//input根布局、username、password、失败、成功的id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
         et_pw.setOnFocusChangeListener(this);
         tv_forgot.setOnClickListener(this);
         tv_goto_register.setOnClickListener(this);
+        from = getIntent().getStringExtra("from");
     }
 
     @SuppressLint("HandlerLeak")
@@ -317,8 +319,12 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                intent2Activity(MainActivity.class);
-                LoginActivity.this.finish();
+                if(from == null | "LAUNCH_ACTIVITY".equals(from)){
+                    finish();
+                }else{
+                    intent2Activity(MainActivity.class);
+                    finish();
+                }
             }
 
             @Override

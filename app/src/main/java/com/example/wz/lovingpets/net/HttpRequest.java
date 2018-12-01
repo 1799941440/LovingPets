@@ -1,6 +1,9 @@
 package com.example.wz.lovingpets.net;
 
 import com.example.wz.lovingpets.entity.Address;
+import com.example.wz.lovingpets.entity.Collect;
+import com.example.wz.lovingpets.entity.CollectGoodsInfo;
+import com.example.wz.lovingpets.entity.CollectThemeInfo;
 import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.OrderInfo;
@@ -155,6 +158,16 @@ public class HttpRequest {
         @POST("/petserviceplatform/OrderAction/cartToOrder")
         Observable<ListResponse> cartToOrder(@Field("goodsList")String goodsList,@Field("userId") Integer userId
                 ,@Field("state") Integer state);
+
+        @FormUrlEncoded
+        @POST("/petserviceplatform/CollectAction/getCollectByUserId")
+        Observable<ListResponse<CollectGoodsInfo>>  getCollectGoods(@Field("userId")Integer userId
+                , @Field("type") Integer type);
+
+        @FormUrlEncoded
+        @POST("/petserviceplatform/CollectAction/getCollectByUserId")
+        Observable<ListResponse<CollectThemeInfo>>  getCollectTheme(@Field("userId")Integer userId
+                , @Field("type") Integer type);
     }
 
     public Observable<ListResponse<User>> login(String username, String password) {
@@ -219,5 +232,13 @@ public class HttpRequest {
 
     public Observable<ListResponse> cartToOrder(String goodsList,Integer userId,Integer state){
         return apiService.cartToOrder(goodsList,userId,state);
+    }
+
+    public Observable<ListResponse<CollectGoodsInfo>>  getCollectGoods(Integer userId){
+        return apiService.getCollectGoods(userId,0);
+    }
+
+    public Observable<ListResponse<CollectThemeInfo>>  getCollectTheme(Integer userId){
+        return apiService.getCollectTheme(userId,1);
     }
 }

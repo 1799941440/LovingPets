@@ -13,6 +13,8 @@ import com.example.wz.lovingpets.utils.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import static com.example.wz.lovingpets.activity.MyApp.getContext;
+
 /**
  * 功能与BaseActivity基本相似
  */
@@ -71,5 +73,9 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
             EventBus.getDefault().unregister(this);
         }
         ActivityManager.getInstance().remove(this);
+    }
+
+    public void showLongToast(String msg){
+        Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
     }
 }

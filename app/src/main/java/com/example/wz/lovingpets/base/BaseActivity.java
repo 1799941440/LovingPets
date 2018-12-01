@@ -13,6 +13,8 @@ import com.example.wz.lovingpets.utils.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import static com.example.wz.lovingpets.activity.MyApp.getContext;
+
 /**
  * activity基类，封装了一些基本常用的方法
  */
@@ -50,6 +52,10 @@ public abstract class BaseActivity extends Activity {
     protected void onStart() {
         super.onStart();
         isActive = true;
+    }
+
+    public void showLongToast(String msg){
+        Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
     }
 
     @Override

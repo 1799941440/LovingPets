@@ -1,7 +1,5 @@
 package com.example.wz.lovingpets.ui.register;
 
-import android.content.Context;
-
 import com.example.wz.lovingpets.base.IBasePresent;
 import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.entity.ListResponse;
@@ -23,7 +21,7 @@ public class RegisterPresenter extends IBasePresent<RegisterActivity> {
 
     public void register(String phone, String password) {
         StringBuilder sb = new StringBuilder("爱宠-");
-        sb.append(StringUtils.genRandomNum(7));
+        sb.append(StringUtils.getRandomNum(7));
         Observable<ListResponse<User>> observable = api.register(sb.toString(), Md5Util.md5(password),phone);
         ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse<User>>() {
             @Override
@@ -33,6 +31,5 @@ public class RegisterPresenter extends IBasePresent<RegisterActivity> {
                 }
             }
         });
-
     }
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
@@ -33,14 +34,16 @@ import io.reactivex.schedulers.Schedulers;
 
 public class GoodsList extends BaseActivity {
 
-    public String classify,condition;
-    private final HttpRequest.ApiService api = HttpRequest.getApiservice();
-    private RecyclerView rv;
-    private EditText et_goodsName;
     private User user;
+    private RecyclerView rv;
+    private ImageView iv_back;
     private TextView tv_search;
+    private EditText et_goodsName;
+    public String classify,condition;
     private GoodsListAdapter adapter;
     private List<GoodsDetailInfo> list_goods = new ArrayList<>();
+    private final HttpRequest.ApiService api = HttpRequest.getApiservice();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +51,12 @@ public class GoodsList extends BaseActivity {
         classify = getIntent().getStringExtra("classify");
         findViews();
         initData();
+        getGoods();
     }
 
     @Override
     protected void findViews() {
+        iv_back = findViewById(R.id.goodsList_iv_back);
         rv = findViewById(R.id.goodsList_rv);
         et_goodsName = findViewById(R.id.et_goodsName);
         tv_search = findViewById(R.id.tv_goods_search);
@@ -65,6 +70,12 @@ public class GoodsList extends BaseActivity {
             public void onClick(View v) {
                 condition = et_goodsName.getText().toString().trim();
                 getGoods();
+            }
+        });
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
         adapter = new GoodsListAdapter(list_goods,getApplicationContext(),user.getShoppingcartId());
@@ -89,6 +100,10 @@ public class GoodsList extends BaseActivity {
     private void successLoadGoods(List<GoodsDetailInfo> goodsDetailInfos) {
 //        Logger.i("获取的商品列表",new Gson().toJson(goodsDetailInfos));
 //        System.out.println(new Gson().toJson(goodsDetailInfos));
+        if(adapter == null){
+            adapter = new GoodsListAdapter(list_goods,getApplicationContext(),user.getShoppingcartId());
+            rv.setAdapter(adapter);
+        }
         list_goods.clear();
         list_goods.addAll(goodsDetailInfos);
         adapter.notifyDataSetChanged();

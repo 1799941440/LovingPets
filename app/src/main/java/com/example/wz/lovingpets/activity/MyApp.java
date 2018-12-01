@@ -11,6 +11,7 @@ import com.example.wz.lovingpets.common.Constant;
 import com.example.wz.lovingpets.common.LogCatStrategy;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.utils.GreenDaoManager;
+import com.example.wz.lovingpets.utils.IPUtil;
 import com.example.wz.lovingpets.utils.UserUtil;
 import com.mob.MobSDK;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -78,6 +79,7 @@ public class MyApp extends Application {
 //        initLeakCanary();//初始化内存泄漏检测
         GreenDaoManager.getInstance();
         MobSDK.init(this);
+//        Logger.i(IPUtil.getIPAddress(context));
     }
 
     /**

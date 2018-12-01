@@ -8,7 +8,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.goods_list.GoodsListActivity">
 
-    <include layout="@layout/layout_goods_search"/>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/goodsList_iv_back"
+            android:layout_marginStart="8dp"
+            android:src="@mipmap/ic_back"
+            android:layout_width="@dimen/dp30"
+            android:layout_height="@dimen/dp20" />
+
+        <include layout="@layout/layout_goods_search"/>
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/goodsList_rv"

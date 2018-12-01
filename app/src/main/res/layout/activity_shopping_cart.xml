@@ -1,31 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    tools:context=".activity.ShoppingCartActivity">
 
-    <LinearLayout
-        android:id="@+id/shopcart_title"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-        <TextView
-            android:text="购物车"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <View
-            android:background="#999999"
-            android:layout_width="match_parent"
-            android:layout_height="1px"/>
-    </LinearLayout>
+    <include
+        android:id="@+id/mark"
+        layout="@layout/layout_titlebar"/>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/shopcart_title"
+        android:layout_below="@+id/mark"
         android:id="@+id/shopcart_rv"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         android:layout_width="match_parent"
@@ -41,7 +28,7 @@
             android:layout_weight="1"
             android:id="@+id/shopcart_cb_all"
             android:text="全选"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView

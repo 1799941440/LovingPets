@@ -7,8 +7,9 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".activity.MyApp"
@@ -19,17 +20,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme_dog">
 
-        <!--<activity-->
-            <!--android:name=".activity.LaunchActivity"-->
-            <!--android:theme="@style/LaunchTheme">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        <!-- <activity -->
+        <!-- android:name=".activity.LaunchActivity" -->
+        <!-- android:theme="@style/LaunchTheme"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-        <!--<activity android:name=".activity.MainActivity" />-->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <!-- <activity android:name=".activity.MainActivity" /> -->
         <activity android:name=".activity.LaunchActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
@@ -54,6 +55,8 @@
         <activity android:name=".activity.EditAddressActivity" />
         <activity android:name=".ui.order.OrderActivity" />
         <activity android:name=".activity.AddPetActivity" />
+        <activity android:name=".activity.ShoppingCartActivity" />
+        <activity android:name=".activity.MyCollectionActivity"></activity>
     </application>
 
 </manifest>

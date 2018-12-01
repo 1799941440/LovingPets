@@ -82,7 +82,11 @@ public class ShopCartAdapter extends RecyclerView.Adapter<ShopCartAdapter.SCHold
             }
         }
         String res = sb.toString();
-        return res.substring(0,res.length()-1);
+        if(res.length() == 0){
+            return "";
+        }else{
+            return res.substring(0,res.length()-1);
+        }
     }
 
     @Override

@@ -45,7 +45,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MyPetsActivity extends BaseFragmentActivity implements View.OnClickListener {
 
     private TextView title;
-    private ImageView iv_add;
+    private ImageView iv_add,iv_back;
     private RecyclerView rv;
     private PetAdapter adapter;
     private User user;
@@ -65,6 +65,7 @@ public class MyPetsActivity extends BaseFragmentActivity implements View.OnClick
     protected void findViews() {
         title = findViewById(R.id.titlebar_tv_title);
         iv_add = findViewById(R.id.iv_titlebar_add);
+        iv_back = findViewById(R.id.titlebar_iv_left);
         rv = findViewById(R.id.myPet_rv);
     }
 
@@ -76,6 +77,7 @@ public class MyPetsActivity extends BaseFragmentActivity implements View.OnClick
         adapter = new PetAdapter(list_pets,MyPetsActivity.this);
         rv.setAdapter(adapter);
         iv_add.setOnClickListener(this);
+        iv_back.setOnClickListener(this);
     }
 
     @SuppressLint("CheckResult")
