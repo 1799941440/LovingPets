@@ -7,8 +7,8 @@ public class ConfirmDialogBuilder {
             bg_color_title, bg_color_left, bg_color_right;
     private String tv_title,tv_content,tv_left,tv_right;
 
-    public ViewDialogFragment build(){
-        return new ViewDialogFragment(this);
+    public ConfirmDialog build(){
+        return new ConfirmDialog(this);
     }
 
     public int getText_color_title() {

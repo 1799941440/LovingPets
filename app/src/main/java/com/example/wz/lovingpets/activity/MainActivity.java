@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
 
@@ -19,19 +18,16 @@ import com.example.wz.lovingpets.common.EventCodes;
 import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
-import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.fragment.CircleFragment;
 import com.example.wz.lovingpets.fragment.ClassifyFragment;
 import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.ui.main_home.HomeFragment;
 import com.example.wz.lovingpets.fragment.MineFragment;
-import com.example.wz.lovingpets.fragment.ShoppingTrolleyFragment;
-import com.example.wz.lovingpets.utils.StatusBarUtil;
+import com.example.wz.lovingpets.fragment.OrderServiceFragment;
 import com.example.wz.lovingpets.widget.BottomBarItem;
 import com.example.wz.lovingpets.widget.BottomBarLayout;
 import com.google.gson.Gson;
 
-import org.greenrobot.eventbus.Logger;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -39,10 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * APP的主界面，包含五个fragment
@@ -82,7 +74,7 @@ public class MainActivity extends BaseFragmentActivity {
         mFragmentList.add(HomeFragment.newInstance("主页"));
         mFragmentList.add(ClassifyFragment.newInstance("分类"));
         mFragmentList.add(CircleFragment.newInstance("爱宠圈"));
-        mFragmentList.add(ShoppingTrolleyFragment.newInstance("购物车"));
+        mFragmentList.add(OrderServiceFragment.newInstance());
         mFragmentList.add(MineFragment.newInstance("我的"));
         switchFragment(0); //默认显示第一页
     }

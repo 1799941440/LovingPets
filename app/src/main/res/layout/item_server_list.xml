@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/item_server_list_image"
+        android:layout_width="90dp"
+        android:layout_height="90dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:textSize="16sp"
+            android:id="@+id/item_server_list_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="猫咪外观设计与美容"
+            android:textColor="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/item_server_list_shopName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="铃铛宠物用品店"
+                android:textColor="#757575" />
+
+            <TextView
+                android:id="@+id/item_server_list_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="评分：4.9"
+                android:textColor="#757575" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="价格："
+                android:textColor="#757575" />
+
+            <com.example.wz.lovingpets.widget.PriceView
+                android:id="@+id/item_server_list_pv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:price="20.25"
+                app:price_type="￥" />
+
+            <TextView
+                android:id="@+id/item_server_list_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="江西省九江市濂溪区"
+                android:textAlignment="viewEnd"
+                android:textColor="#757575" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/item_server_list_payWay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="付费方式"
+                android:textColor="#757575" />
+
+            <TextView
+                android:id="@+id/item_server_list_sales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textAlignment="viewEnd"
+                android:textColor="#757575" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

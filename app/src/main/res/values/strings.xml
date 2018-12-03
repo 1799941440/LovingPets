@@ -7,7 +7,7 @@
     <string name="nav_bottom_1">主站</string>
     <string name="nav_bottom_2">分类</string>
     <string name="nav_bottom_3">爱宠圈</string>
-    <string name="nav_bottom_4">购物车</string>
+    <string name="nav_bottom_4">预约服务</string>
     <string name="nav_bottom_5">我的</string>
     <string name="login_title1">爱宠APP</string>
     <string name="login_title2">爱宠物，爱生活</string>
@@ -38,6 +38,4 @@
     <string name="pets_info">宠物资料</string>
     <string name="my_cart">我的购物车</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

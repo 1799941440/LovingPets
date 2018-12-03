@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
@@ -23,8 +22,8 @@ import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.fragment.OrderFragment;
 import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.utils.EventBusUtils;
+import com.example.wz.lovingpets.widget.ConfirmDialog;
 import com.example.wz.lovingpets.widget.ConfirmDialogBuilder;
-import com.example.wz.lovingpets.widget.ViewDialogFragment;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -34,11 +33,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 @BindEventBus
 public class OrderActivity extends BaseFragmentActivity{
@@ -48,7 +42,7 @@ public class OrderActivity extends BaseFragmentActivity{
     private TabLayout tab;
     private TextView title;
     private int currentItem ;
-    private ViewDialogFragment  dialog;
+    private ConfirmDialog dialog;
     private List<OrderFragment> list_view = new ArrayList<>();
     private HttpRequest.ApiService api = HttpRequest.getApiservice();
     private List<String> list_title = Arrays.asList("全部","订单失效","待付款","待收货","交易成功");
@@ -127,7 +121,7 @@ public class OrderActivity extends BaseFragmentActivity{
                 .setTv_title("删除订单")
                 .setTv_content("确认删除订单编号为"+event.getData().get(0)+"的订单吗？")
                 .build();
-        dialog.setCallback(new ViewDialogFragment.Callback() {
+        dialog.setCallback(new ConfirmDialog.Callback() {
             @Override
             public void onLeftClick() {
 
@@ -146,7 +140,7 @@ public class OrderActivity extends BaseFragmentActivity{
                 .setTv_title("确认支付？")
                 .setTv_content("确认支付订单编号为"+event.getData().get(0)+"的订单吗？")
                 .build();
-        dialog.setCallback(new ViewDialogFragment.Callback() {
+        dialog.setCallback(new ConfirmDialog.Callback() {
             @Override
             public void onLeftClick() {
 
@@ -165,7 +159,7 @@ public class OrderActivity extends BaseFragmentActivity{
                 .setTv_title("确认收货？")
                 .setTv_content("确认编号为"+event.getData().get(0)+"的订单到货了吗？")
                 .build();
-        dialog.setCallback(new ViewDialogFragment.Callback() {
+        dialog.setCallback(new ConfirmDialog.Callback() {
             @Override
             public void onLeftClick() {
 

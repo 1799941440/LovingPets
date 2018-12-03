@@ -44,6 +44,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         holder.tv_id.setText(data.getId()+"");
         holder.tv_state.setText(getState(data.getOrderState()));
         holder.tv_total.setText(data.getAmount()+"");
+        holder.tv_receiver.setText(data.getReceiver());
+        holder.tv_contact.setText(data.getContact());
+        holder.tv_address.setText("收货地址"+data.getProvince()+data.getCity()+data.getFullAddress());
         if(data.getOrderState() == 2){
             //2-待收货
             holder.tv_state.setTextColor(Color.parseColor("#00ff00"));
@@ -90,7 +93,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
 
         public RecyclerView rv;
         public Button bt_left, bt_right;
-        public TextView tv_id,tv_state,tv_total;
+        public TextView tv_id,tv_state,tv_total,tv_receiver,tv_contact,tv_address;
         public OrderHolder(View view) {
             super(view);
             rv = view.findViewById(R.id.order_item_rv);
@@ -99,6 +102,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             tv_id = view.findViewById(R.id.order_item_id);
             tv_state = view.findViewById(R.id.order_item_state);
             tv_total = view.findViewById(R.id.order_item_total);
+            tv_receiver = view.findViewById(R.id.order_item_receiver);
+            tv_contact = view.findViewById(R.id.order_item_contact);
+            tv_address = view.findViewById(R.id.order_item_address);
         }
 
     }

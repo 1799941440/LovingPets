@@ -1,6 +1,6 @@
 package com.example.wz.lovingpets.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,17 +10,19 @@ import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.adapter.ShopCartAdapter;
-import com.example.wz.lovingpets.base.BaseActivity;
 import com.example.wz.lovingpets.base.BaseFragmentActivity;
 import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.ShoppingCartDetail;
 import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.utils.DecimalUtil;
+import com.example.wz.lovingpets.widget.AddToCartDialog;
+import com.example.wz.lovingpets.widget.ConfirmDialog;
 import com.example.wz.lovingpets.widget.ConfirmDialogBuilder;
-import com.example.wz.lovingpets.widget.ViewDialogFragment;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -46,6 +48,7 @@ public class ShoppingCartActivity extends BaseFragmentActivity {
         setContentView(R.layout.activity_shopping_cart);
         findViews();
         initData();
+        getSC();
     }
 
     @Override
@@ -58,7 +61,6 @@ public class ShoppingCartActivity extends BaseFragmentActivity {
 
     @Override
     protected void initData() {
-        getSC();
         cbl = new ShopCartAdapter.CkeckBoxListener() {
             @Override
             public void onCkeckboxSwitch(String amount) {
@@ -90,41 +92,17 @@ public class ShoppingCartActivity extends BaseFragmentActivity {
         });
     }
     private void payForCart() {
-        final String items = adapter.getSeletedItem();
-        if(items.length()<1){
+        final List<ShoppingCartDetail> items = adapter.getSeletedItem();
+        if(items.size() == 0){
             showToast("你还没有选择结算的商品哦");
         }else{
-            ViewDialogFragment dialog = new ConfirmDialogBuilder().setTv_title("确认支付？")
-                    .setTv_left("稍后支付")
-                    .setTv_right("立即支付")
-                    .setTv_content("确认支付该订单吗？").build();
-            dialog.setCallback(new ViewDialogFragment.Callback() {
-                @Override
-                public void onLeftClick() {
-                    cartToOrder(items,0);
-                }
-                //支付
-                @Override
-                public void onRightClick() {
-                    cartToOrder(items,2);
-                }
-            });
-            dialog.show(getSupportFragmentManager());
+            Intent intent = new Intent(getContext(), ConfirmOrderActivity.class);
+            intent.putExtra("data",new Gson().toJson(items));
+            intent.putExtra("type",0);
+            startActivity(intent);
         }
     }
 
-    //发出购物车转换订单的请求
-    private void cartToOrder(String items,Integer state) {
-        Observable<ListResponse> observable = api.cartToOrder(items, MyApp.getInstance().getUser().getId(),state);
-        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
-            @Override
-            public void onSuccess(ListResponse listResponse) {
-                showLongToast(listResponse.getMsg());
-                getSC();
-                tv_total.setText("0.0");
-            }
-        });
-    }
 
     private void unSelectAll(List<ShoppingCartDetail> list,boolean b) {
         for(ShoppingCartDetail s :list){

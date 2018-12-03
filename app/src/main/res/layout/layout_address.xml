@@ -9,13 +9,14 @@
     android:padding="@dimen/dp10">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
+            android:layout_weight="1"
             android:id="@+id/address_receiver"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="接收者"
             android:textColor="@android:color/black"

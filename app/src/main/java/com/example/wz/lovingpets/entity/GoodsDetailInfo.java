@@ -16,8 +16,16 @@ public class GoodsDetailInfo {
 	private Float price;//商品定价
 	private Integer sales;//商品销量
 	private String image;//商品图片URL
+	private Integer isCollect;
 	private String goodsState;//商品状态（下架、正常）
 	private String unit;//商品单位
+
+	public Integer getIsCollect() {
+		return isCollect;
+	}
+	public void setIsCollect(Integer isCollect) {
+		this.isCollect = isCollect;
+	}
 	public Integer getShopId() {
 		return shopId;
 	}

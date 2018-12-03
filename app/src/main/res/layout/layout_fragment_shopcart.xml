@@ -1,67 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/shopcart_title"
-        android:orientation="vertical"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="40dp">
-        <TextView
-            android:text="购物车"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:gravity="center"
-            android:textAlignment="center"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="预约服务"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/service_ll_0"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="@dimen/dp10">
+
+            <ImageView
+                android:src="@mipmap/iv_server0"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:text="宠物美容服务"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
         <View
-            android:background="#999999"
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginEnd="@dimen/dp10"
+            android:background="#757575"
             android:layout_width="match_parent"
             android:layout_height="1px"/>
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/shopcart_title"
-        android:id="@+id/shopcart_rv"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <LinearLayout
-        android:background="#ffffff"
-        android:gravity="center_vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-
-        <CheckBox
+        <LinearLayout
+            android:id="@+id/service_ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
             android:layout_weight="1"
-            android:id="@+id/shopcart_cb_all"
-            android:text="全选"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:padding="@dimen/dp10">
 
-        <TextView
-            android:text="合计："
-            android:textColor="#000000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/shopcart_tv_total"
-            android:textColor="#ff0000"
-            android:text="￥0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:background="@drawable/shape_shopcart_item"
-            style="?android:attr/borderlessButtonStyle"
-            android:id="@+id/shopcart_bt_pay"
-            android:layout_margin="5dp"
-            android:text="结算"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@mipmap/iv_server1"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:text="医疗保健服务"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginEnd="@dimen/dp10"
+            android:background="#757575"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+        <LinearLayout
+            android:id="@+id/service_ll_2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="@dimen/dp10">
+
+            <ImageView
+                android:src="@mipmap/iv_server2"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:text="绝育繁育服务"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginEnd="@dimen/dp10"
+            android:background="#757575"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+        <LinearLayout
+            android:id="@+id/service_ll_3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="@dimen/dp10">
+
+            <ImageView
+                android:src="@mipmap/iv_server3"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:text="宠物训练服务"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        
+        <View
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginEnd="@dimen/dp10"
+            android:background="#757575"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+        <LinearLayout
+            android:id="@+id/service_ll_4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="@dimen/dp10">
+
+            <ImageView
+                android:src="@mipmap/iv_server4"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:text="宠物摄影服务"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

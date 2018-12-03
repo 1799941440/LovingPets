@@ -25,11 +25,13 @@ public class User {
     private String card;//身份证号
     private String name;//用户真实姓名
     private String icon;//用户头像
-    @Generated(hash = 844711652)
+    private Integer commomAddressId;
+    @Generated(hash = 1076706844)
     public User(Integer id, String userName, String password, Integer identity,
             String phone, String province, String city, String fullAddress,
             float balance, String sex, Integer age, Integer shopId, String shopName,
-            Integer shoppingcartId, String card, String name, String icon) {
+            Integer shoppingcartId, String card, String name, String icon,
+            Integer commomAddressId) {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -47,6 +49,7 @@ public class User {
         this.card = card;
         this.name = name;
         this.icon = icon;
+        this.commomAddressId = commomAddressId;
     }
     @Generated(hash = 586692638)
     public User() {
@@ -152,5 +155,11 @@ public class User {
     }
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+    public Integer getCommomAddressId() {
+        return this.commomAddressId;
+    }
+    public void setCommomAddressId(Integer commomAddressId) {
+        this.commomAddressId = commomAddressId;
     }
 }

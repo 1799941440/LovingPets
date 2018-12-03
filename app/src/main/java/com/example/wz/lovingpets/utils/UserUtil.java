@@ -42,6 +42,7 @@ public class UserUtil {
         user.setCard(sp.getString("card",""));
         user.setName(sp.getString("name",""));
         user.setIcon(sp.getString("icon",""));
+        user.setCommomAddressId(sp.getInt("setCommomAddressId",0));
         return user;
     }
 
@@ -64,6 +65,7 @@ public class UserUtil {
         editor.putString("card", user.getCard());
         editor.putString("name", user.getName());
         editor.putString("icon", user.getIcon());
+        editor.putInt("setCommomAddressId", user.getCommomAddressId());
         editor.commit();
 
     }

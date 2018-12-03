@@ -41,6 +41,7 @@ public class UserDao extends AbstractDao<User, Void> {
         public final static Property Card = new Property(14, String.class, "card", false, "CARD");
         public final static Property Name = new Property(15, String.class, "name", false, "NAME");
         public final static Property Icon = new Property(16, String.class, "icon", false, "ICON");
+        public final static Property CommomAddressId = new Property(17, Integer.class, "commomAddressId", false, "COMMOM_ADDRESS_ID");
     }
 
 
@@ -72,7 +73,8 @@ public class UserDao extends AbstractDao<User, Void> {
                 "\"SHOPPINGCART_ID\" INTEGER," + // 13: shoppingcartId
                 "\"CARD\" TEXT," + // 14: card
                 "\"NAME\" TEXT," + // 15: name
-                "\"ICON\" TEXT);"); // 16: icon
+                "\"ICON\" TEXT," + // 16: icon
+                "\"COMMOM_ADDRESS_ID\" INTEGER);"); // 17: commomAddressId
     }
 
     /** Drops the underlying database table. */
@@ -165,6 +167,11 @@ public class UserDao extends AbstractDao<User, Void> {
         if (icon != null) {
             stmt.bindString(17, icon);
         }
+ 
+        Integer commomAddressId = entity.getCommomAddressId();
+        if (commomAddressId != null) {
+            stmt.bindLong(18, commomAddressId);
+        }
     }
 
     @Override
@@ -251,6 +258,11 @@ public class UserDao extends AbstractDao<User, Void> {
         if (icon != null) {
             stmt.bindString(17, icon);
         }
+ 
+        Integer commomAddressId = entity.getCommomAddressId();
+        if (commomAddressId != null) {
+            stmt.bindLong(18, commomAddressId);
+        }
     }
 
     @Override
@@ -277,7 +289,8 @@ public class UserDao extends AbstractDao<User, Void> {
             cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13), // shoppingcartId
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // card
             cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // name
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16) // icon
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // icon
+            cursor.isNull(offset + 17) ? null : cursor.getInt(offset + 17) // commomAddressId
         );
         return entity;
     }
@@ -301,6 +314,7 @@ public class UserDao extends AbstractDao<User, Void> {
         entity.setCard(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
         entity.setName(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
         entity.setIcon(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setCommomAddressId(cursor.isNull(offset + 17) ? null : cursor.getInt(offset + 17));
      }
     
     @Override

@@ -14,18 +14,18 @@ import android.widget.TextView;
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.utils.StringUtils;
 
-public class ViewDialogFragment extends DialogFragment {
+public class ConfirmDialog extends DialogFragment {
 
     private ConfirmDialogBuilder b;
     private TextView tv_title,tv_content;
     private Button bt_left, bt_right;
     private LayoutInflater inflater;
 
-    public ViewDialogFragment() {
+    public ConfirmDialog() {
     }
 
     @SuppressLint("ValidFragment")
-    public ViewDialogFragment(ConfirmDialogBuilder builder) {
+    public ConfirmDialog(ConfirmDialogBuilder builder) {
         this.b = builder;
     }
 
@@ -37,7 +37,7 @@ public class ViewDialogFragment extends DialogFragment {
     private Callback callback;
 
     public void show(FragmentManager fragmentManager) {
-        show(fragmentManager, "ViewDialogFragment");
+        show(fragmentManager, "ConfirmDialog");
     }
 
     public Callback getCallback() {

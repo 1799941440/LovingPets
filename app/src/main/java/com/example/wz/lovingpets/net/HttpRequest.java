@@ -8,6 +8,7 @@ import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.OrderInfo;
 import com.example.wz.lovingpets.entity.PetInfo;
+import com.example.wz.lovingpets.entity.ServiceInfo;
 import com.example.wz.lovingpets.entity.ShoppingCartDetail;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.utils.LoggingInterceptor;
@@ -76,7 +77,9 @@ public class HttpRequest {
         @POST("/petserviceplatform/GoodsAction/getByClassify")
         Observable<ListResponse<GoodsDetailInfo>> getGoods(
                 @Field("classify") String classify,
-                @Field("condition") String condition);
+                @Field("condition") String condition,
+                @Field("collecterId") Integer collecterId
+        );
         // 加入购物车
         @FormUrlEncoded
         @POST("/petserviceplatform/ShoppingCartAction/addGoodsToCart")
@@ -87,6 +90,12 @@ public class HttpRequest {
         @FormUrlEncoded
         @POST("/petserviceplatform/AddressAction/getAllAddress")
         Observable<ListResponse<Address>> getAllAddress(
+                @Field("userId") int userId);
+
+        // 获取默认收货地址
+        @FormUrlEncoded
+        @POST("/petserviceplatform/AddressAction/getCommonAddress")
+        Observable<ListResponse<Address>> getCommonAddress(
                 @Field("userId") int userId);
 
         // 获取订单
@@ -154,20 +163,59 @@ public class HttpRequest {
         @POST("/petserviceplatform/ShoppingCartAction/getMyCart")
         Observable<ListResponse<ShoppingCartDetail>> getSC(@Field("shoppingCartId") Integer shoppingCartId);
 
+        //购物车转换为订单
         @FormUrlEncoded
         @POST("/petserviceplatform/OrderAction/cartToOrder")
-        Observable<ListResponse> cartToOrder(@Field("goodsList")String goodsList,@Field("userId") Integer userId
-                ,@Field("state") Integer state);
+        Observable<ListResponse> cartToOrder(
+                @Field("goodsList")String goodsList,
+                @Field("userId") Integer userId,
+                @Field("addressId") Integer addressId,
+                @Field("state") Integer state);
 
+        //商品直接购买转换为订单
+        @FormUrlEncoded
+        @POST("/petserviceplatform/OrderAction/goodsToOrder")
+        Observable<ListResponse> goodsToOrder(
+                @Field("goodsDetailId")Integer goodsDetailId,
+                @Field("addressId") Integer addressId,
+                @Field("userId") Integer userId,
+                @Field("count") Integer count);
+
+        //获取用户的商品收藏
         @FormUrlEncoded
         @POST("/petserviceplatform/CollectAction/getCollectByUserId")
         Observable<ListResponse<CollectGoodsInfo>>  getCollectGoods(@Field("userId")Integer userId
                 , @Field("type") Integer type);
 
+        //获取用户的主题收藏
         @FormUrlEncoded
         @POST("/petserviceplatform/CollectAction/getCollectByUserId")
         Observable<ListResponse<CollectThemeInfo>>  getCollectTheme(@Field("userId")Integer userId
                 , @Field("type") Integer type);
+
+        //收藏操作
+        @FormUrlEncoded
+        @POST("/petserviceplatform/CollectAction/collect")
+        Observable<ListResponse>  collect(
+                @Field("targetId")Integer targetId,
+                @Field("userId")Integer userId,
+                @Field("type") Integer type);
+
+        //取消收藏
+        @FormUrlEncoded
+        @POST("/petserviceplatform/CollectAction/unCollect")
+        Observable<ListResponse>  unCollect(
+                @Field("targetId")Integer targetId,
+                @Field("userId")Integer userId,
+                @Field("type") Integer type);
+
+        //获取服务
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ServiceAction/getServiceByType")
+        Observable<ListResponse<ServiceInfo>> getServer(
+                @Field("type") Integer type,
+                @Field("condition")String condition
+        );
     }
 
     public Observable<ListResponse<User>> login(String username, String password) {
@@ -178,8 +226,8 @@ public class HttpRequest {
         return apiService.register(username, password,phone);
     }
 
-    public Observable<ListResponse<GoodsDetailInfo>> getGoods(String classify,String condition){
-        return apiService.getGoods(classify,condition);
+    public Observable<ListResponse<GoodsDetailInfo>> getGoods(String classify,String condition,Integer collecterId){
+        return apiService.getGoods(classify,condition,collecterId);
     }
 
     public Observable<ListResponse> addToCart(String param){
@@ -188,6 +236,10 @@ public class HttpRequest {
 
     public Observable<ListResponse<Address>> getAllAddress(int userId){
         return apiService.getAllAddress(userId);
+    }
+
+    public Observable<ListResponse<Address>> getCommonAddress(int userId){
+        return apiService.getCommonAddress(userId);
     }
 
     public Observable<ListResponse<OrderInfo>> getOrder(int userId){
@@ -230,8 +282,12 @@ public class HttpRequest {
         return apiService.getSC(SCId);
     }
 
-    public Observable<ListResponse> cartToOrder(String goodsList,Integer userId,Integer state){
-        return apiService.cartToOrder(goodsList,userId,state);
+    public Observable<ListResponse> cartToOrder(String goodsList,Integer userId,Integer state,Integer addressId){
+        return apiService.cartToOrder(goodsList,userId,state,addressId);
+    }
+
+    public Observable<ListResponse> goodsToOrder(Integer goodsDetailId,Integer userId,Integer count,Integer addressId){
+        return apiService.goodsToOrder(goodsDetailId,userId,count,addressId);
     }
 
     public Observable<ListResponse<CollectGoodsInfo>>  getCollectGoods(Integer userId){
@@ -240,5 +296,17 @@ public class HttpRequest {
 
     public Observable<ListResponse<CollectThemeInfo>>  getCollectTheme(Integer userId){
         return apiService.getCollectTheme(userId,1);
+    }
+
+    public Observable<ListResponse>  collect(Integer targetId,Integer userId,Integer type){
+        return apiService.collect(targetId,userId,type);
+    }
+
+    public Observable<ListResponse>  unCollect(Integer targetId,Integer userId,Integer type){
+        return apiService.unCollect(targetId,userId,type);
+    }
+
+    public Observable<ListResponse<ServiceInfo>>  getServer(Integer type,String condition){
+        return apiService.getServer(type,condition);
     }
 }

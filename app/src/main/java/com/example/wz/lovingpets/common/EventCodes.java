@@ -9,5 +9,8 @@ public class EventCodes {
     public static final int RECEIVE_ORDER = 0x7;//确认收货
     public static final int DEL_PET = 0x8;//删除宠物
     public static final int MANAGE_PET = 0x9;//修改或删除宠物通知前一个更新数据
+    public static final int OPEN_GOODSDETAIL_DIALOG = 0x10;//商品列表打开详情
+    public static final int SWITCH_COLLECT = 0x11;//点击收藏或者取消收藏
+    public static final int BUY_GOODS = 0x12;//点击直接购买按钮
     public static final int ADD_TO_CART = 0x123;//加入购物车
 }

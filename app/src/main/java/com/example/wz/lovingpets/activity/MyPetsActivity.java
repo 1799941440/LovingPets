@@ -1,19 +1,14 @@
 package com.example.wz.lovingpets.activity;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.adapter.PetAdapter;
-import com.example.wz.lovingpets.base.BaseActivity;
 import com.example.wz.lovingpets.base.BaseFragmentActivity;
 import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Event;
@@ -23,10 +18,8 @@ import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.PetInfo;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.net.HttpRequest;
-import com.example.wz.lovingpets.utils.EventBusUtils;
 import com.example.wz.lovingpets.widget.ConfirmDialogBuilder;
-import com.example.wz.lovingpets.widget.ViewDialogFragment;
-import com.ywp.addresspickerlib.AddressPickerView;
+import com.example.wz.lovingpets.widget.ConfirmDialog;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -35,11 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 @BindEventBus
 public class MyPetsActivity extends BaseFragmentActivity implements View.OnClickListener {
@@ -49,7 +37,7 @@ public class MyPetsActivity extends BaseFragmentActivity implements View.OnClick
     private RecyclerView rv;
     private PetAdapter adapter;
     private User user;
-    private ViewDialogFragment  dialog;
+    private ConfirmDialog dialog;
     private List<PetInfo> list_pets = new ArrayList<>();
     private HttpRequest.ApiService api = HttpRequest.getApiservice();
     @Override
@@ -125,7 +113,7 @@ public class MyPetsActivity extends BaseFragmentActivity implements View.OnClick
                 .setTv_title("删除宠物")
                 .setTv_content("确认删除这个宠物吗？")
                 .build();
-        dialog.setCallback(new ViewDialogFragment.Callback() {
+        dialog.setCallback(new ConfirmDialog.Callback() {
             @Override
             public void onLeftClick() {
 

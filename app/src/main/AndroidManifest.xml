@@ -56,7 +56,9 @@
         <activity android:name=".ui.order.OrderActivity" />
         <activity android:name=".activity.AddPetActivity" />
         <activity android:name=".activity.ShoppingCartActivity" />
-        <activity android:name=".activity.MyCollectionActivity"></activity>
+        <activity android:name=".activity.MyCollectionActivity" />
+        <activity android:name=".activity.ConfirmOrderActivity" />
+        <activity android:name=".activity.ServiceListActivity"></activity>
     </application>
 
 </manifest>
