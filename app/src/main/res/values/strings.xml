@@ -5,7 +5,7 @@
     <string name="favorite_bird">鸟儿主站</string>
     <string name="favorite_fish">鱼儿主站</string>
     <string name="nav_bottom_1">主站</string>
-    <string name="nav_bottom_2">分类</string>
+    <string name="nav_bottom_2">商城</string>
     <string name="nav_bottom_3">爱宠圈</string>
     <string name="nav_bottom_4">预约服务</string>
     <string name="nav_bottom_5">我的</string>
@@ -34,6 +34,7 @@
     <string name="connect_to_service">联系客服</string>
     <string name="manage_address">管理收货地址</string>
     <string name="my_collection">我的收藏</string>
+    <string name="my_server">我的服务</string>
     <string name="my_evaluate">我的评价</string>
     <string name="pets_info">宠物资料</string>
     <string name="my_cart">我的购物车</string>

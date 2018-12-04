@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="@drawable/shape_order_item"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp10"
+    android:paddingRight="@dimen/dp10"
+    android:paddingTop="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_server_order_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="订单编号："
+            android:textColor="#757575" />
+
+        <TextView
+            android:id="@+id/item_server_order_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已完成" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_order_item"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/item_server_order_image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_server_order_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="服务名称"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/item_server_order_shopName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="店铺名称"
+                android:textColor="#757575" />
+
+            <TextView
+                android:id="@+id/item_server_order_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="店铺地址"
+                android:textColor="#757575" />
+
+            <TextView
+                android:id="@+id/item_server_order_payWay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="支付方式：预定"
+                android:textColor="#757575" />
+
+
+            <TextView
+                android:id="@+id/item_server_order_payed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已付金额"
+                android:textColor="#757575" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@drawable/shape_order_item"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/item_server_order_orderTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="预定时间：2018-12-4"
+                android:textColor="#757575" />
+
+            <TextView
+                android:id="@+id/item_server_order_serverTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp20"
+                android:text="服务时间：2018-12-9"
+                android:textColor="#757575" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_server_order_orderMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="预定留言:刚刚出发，请做好准备"
+            android:textColor="#757575" />
+
+        <TextView
+            android:id="@+id/item_server_order_shopMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="店家留言:等候您的大驾光临"
+            android:textColor="#757575" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="end|center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <Button
+            android:id="@+id/item_server_order_left"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/dp20"
+            android:layout_gravity="end|center_vertical"
+            android:background="@drawable/shape_order_item"
+            android:text="删除订单" />
+
+        <Button
+            android:id="@+id/item_server_order_right"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/dp20"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/shape_order_item"
+            android:text="立即支付" />
+    </LinearLayout>
+</LinearLayout>

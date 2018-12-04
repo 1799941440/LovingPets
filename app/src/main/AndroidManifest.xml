@@ -58,7 +58,10 @@
         <activity android:name=".activity.ShoppingCartActivity" />
         <activity android:name=".activity.MyCollectionActivity" />
         <activity android:name=".activity.ConfirmOrderActivity" />
-        <activity android:name=".activity.ServiceListActivity"></activity>
+        <activity android:name=".activity.ServiceListActivity" />
+        <activity android:name=".activity.ServerOrderActivity" />
+        <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.OrderServerActivity"></activity>
     </application>
 
 </manifest>

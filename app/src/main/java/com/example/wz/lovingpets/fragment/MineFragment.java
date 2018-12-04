@@ -20,7 +20,9 @@ import com.example.wz.lovingpets.activity.ManageAddressActivity;
 import com.example.wz.lovingpets.activity.MyApp;
 import com.example.wz.lovingpets.activity.MyCollectionActivity;
 import com.example.wz.lovingpets.activity.MyPetsActivity;
+import com.example.wz.lovingpets.activity.ServerOrderActivity;
 import com.example.wz.lovingpets.activity.ShoppingCartActivity;
+import com.example.wz.lovingpets.activity.UserInfoActivity;
 import com.example.wz.lovingpets.base.BaseFragment;
 import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Event;
@@ -29,6 +31,7 @@ import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.ui.login.LoginActivity;
 import com.example.wz.lovingpets.ui.order.OrderActivity;
 import com.example.wz.lovingpets.ui.register.RegisterActivity;
+import com.example.wz.lovingpets.utils.ImageUtil;
 import com.example.wz.lovingpets.utils.UserUtil;
 import com.example.wz.lovingpets.widget.MyScrollView;
 
@@ -37,17 +40,18 @@ import org.greenrobot.eventbus.ThreadMode;
 
 @BindEventBus
 public class MineFragment extends BaseFragment implements View.OnClickListener, MyScrollView.ScrollListener {
-    public static final String TEXT_TITLE = "content";
+    private User user;
     private String mParam1;
     private String mParam2;
-    private User user;
     private static int height;
     private MyScrollView scrollView;
     private RelativeLayout rl_title;
     private TextView tv_title, tv_login, tv_register;
-    private ImageView iv_setting, iv_banner, iv_devide;
+    public static final String TEXT_TITLE = "content";
+    private ImageView iv_setting, iv_banner, iv_devide,iv_head;
     private LinearLayout ll_pets_info, ll_my_address,ll_unpay,
-            ll_unreceive,ll_evaluate,ll_all,ll_my_cart,ll_my_collection;
+            ll_unreceive,ll_evaluate,ll_all,ll_my_cart,ll_my_collection,
+            ll_my_server,mine_ll_userInfo;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,24 +89,32 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         iv_devide = view.findViewById(R.id.mine_iv_devide);
         iv_setting = view.findViewById(R.id.mine_iv_setting);
         iv_banner = view.findViewById(R.id.mine_background);
+        iv_head = view.findViewById(R.id.mine_iv_head);
         ll_pets_info = view.findViewById(R.id.ll_pets_info);
         ll_my_address = view.findViewById(R.id.ll_my_address);
         ll_unpay = view.findViewById(R.id.mine_ll_unpay);
         ll_unreceive = view.findViewById(R.id.mine_ll_unreceive);
         ll_evaluate = view.findViewById(R.id.mine_ll_evaluate);
+        ll_my_server = view.findViewById(R.id.ll_my_server);
+        mine_ll_userInfo = view.findViewById(R.id.mine_ll_userInfo);
         ll_all = view.findViewById(R.id.mine_ll_all);
         ll_my_cart = view.findViewById(R.id.ll_my_cart);
         ll_my_collection = view.findViewById(R.id.ll_my_collection);
     }
 
     public void initDatas() {
-        user = MyApp.getInstance().getUser();
+        user = new UserUtil(getContext()).getUser();
+        if(user.getId() != 0){
+            resetUserData();
+            mine_ll_userInfo.setOnClickListener(this);
+        }
         iv_setting.setOnClickListener(this);
         iv_banner.setOnClickListener(this);
         tv_register.setOnClickListener(this);
         tv_login.setOnClickListener(this);
         ll_pets_info.setOnClickListener(this);
         ll_my_address.setOnClickListener(this);
+        ll_my_server.setOnClickListener(this);
         ll_unpay.setOnClickListener(this);
         ll_unreceive.setOnClickListener(this);
         ll_evaluate.setOnClickListener(this);
@@ -123,6 +135,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         tv_register.setVisibility(View.GONE);
         iv_devide.setVisibility(View.GONE);
         tv_login.setText(user.getUserName());
+        ImageUtil.loadRoundImage(iv_head,user.getIcon());
     }
 
     @Override
@@ -168,6 +181,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 break;
             case R.id.ll_my_collection:
                 startActivity(new Intent(getActivity(), MyCollectionActivity.class));
+                break;
+            case R.id.ll_my_server:
+                startActivity(new Intent(getActivity(), ServerOrderActivity.class));
+                break;
+            case R.id.mine_ll_userInfo:
+                startActivity(new Intent(getActivity(), UserInfoActivity.class));
                 break;
             default:
                 break;

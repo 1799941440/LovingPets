@@ -8,7 +8,7 @@ public class ServiceInfo extends Server {
 	private String shopName;
 	private String address;
 	private String serviceStar;
-	private List<ServiceComment> commentList; 
+	private List<ServiceCommentInfo> commentList;
 	public String getShopName() {
 		return shopName;
 	}
@@ -35,10 +35,10 @@ public class ServiceInfo extends Server {
 		DecimalFormat df = new DecimalFormat("#0.00");
 		this.serviceStar = df.format(getCommentStars()/(float)getCommentTimes());
 	}
-	public List<ServiceComment> getCommentList() {
+	public List<ServiceCommentInfo> getCommentList() {
 		return commentList;
 	}
-	public void setCommentList(List<ServiceComment> commentList) {
+	public void setCommentList(List<ServiceCommentInfo> commentList) {
 		this.commentList = commentList;
 	}
 }

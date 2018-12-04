@@ -1,18 +1,23 @@
 package com.example.wz.lovingpets.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
+import com.example.wz.lovingpets.activity.MainActivity;
+import com.example.wz.lovingpets.activity.OrderServerActivity;
 import com.example.wz.lovingpets.entity.ServiceInfo;
 import com.example.wz.lovingpets.utils.ImageUtil;
 import com.example.wz.lovingpets.widget.PriceView;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -36,7 +41,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServerVH
 
     @Override
     public void onBindViewHolder(@NonNull ServerVH holder, int position) {
-        ServiceInfo data = list.get(position);
+        final ServiceInfo data = list.get(position);
         ImageUtil.loadNetImage(holder.image,data.getImages());
         holder.pv.setPrice(data.getPrice() == 0f ? data.getOrderPrice() : data.getPrice());
         holder.tv_address.setText(data.getAddress());
@@ -45,6 +50,15 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServerVH
         holder.tv_star.setText("评分"+data.getCommentStars());
         holder.tv_shopName.setText(data.getShopName());
         holder.tv_sales.setText("已预约次数："+data.getSales());
+        holder.ll_root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, OrderServerActivity.class);
+                intent.putExtra("data",new Gson().toJson(data));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -54,6 +68,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServerVH
 
     public class ServerVH extends RecyclerView.ViewHolder{
 
+        LinearLayout ll_root;
         ImageView image;
         TextView tv_name,tv_shopName,tv_star,tv_address,tv_payWay,tv_sales;
         PriceView pv;
@@ -67,6 +82,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServerVH
             tv_address = view.findViewById(R.id.item_server_list_address);
             tv_payWay = view.findViewById(R.id.item_server_list_payWay);
             tv_sales = view.findViewById(R.id.item_server_list_sales);
+            ll_root = view.findViewById(R.id.item_server_list_root);
         }
     }
 }

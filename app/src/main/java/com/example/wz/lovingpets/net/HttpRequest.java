@@ -9,6 +9,7 @@ import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.OrderInfo;
 import com.example.wz.lovingpets.entity.PetInfo;
 import com.example.wz.lovingpets.entity.ServiceInfo;
+import com.example.wz.lovingpets.entity.ServiceOrderInfo;
 import com.example.wz.lovingpets.entity.ShoppingCartDetail;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.utils.LoggingInterceptor;
@@ -216,6 +217,44 @@ public class HttpRequest {
                 @Field("type") Integer type,
                 @Field("condition")String condition
         );
+
+        //获取服务订单
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ServiceOrderAction/getForUser")
+        Observable<ListResponse<ServiceOrderInfo>> getServerOrder(
+                @Field("userId")Integer userId
+        );
+
+        //取消服务订单
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ServiceOrderAction/updateOrder")
+        Observable<ListResponse> cancelServerOrder(
+                @Field("id")Integer id,
+                @Field("state")byte state
+        );
+
+        //延后服务订单
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ServiceOrderAction/updateOrder")
+        Observable<ListResponse> delayServerOrder(
+                @Field("id")Integer id,
+                @Field("serverDate")String serverDate
+        );
+
+        //支付服务订单
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ServiceOrderAction/payServiceOrder")
+        Observable<ListResponse> payServerOrder(
+                @Field("serviceOrderId")Integer serviceOrderId
+        );
+
+        //删除服务订单
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ServiceOrderAction/delServiceOrder")
+        Observable<ListResponse> delServiceOrder(
+                @Field("serviceOrderId")Integer serviceOrderId
+        );
+
     }
 
     public Observable<ListResponse<User>> login(String username, String password) {
@@ -309,4 +348,25 @@ public class HttpRequest {
     public Observable<ListResponse<ServiceInfo>>  getServer(Integer type,String condition){
         return apiService.getServer(type,condition);
     }
+
+    public Observable<ListResponse<ServiceOrderInfo>>  getServerOrder(Integer userId){
+        return apiService.getServerOrder(userId);
+    }
+
+    public Observable<ListResponse>  cancelServerOrder(Integer id,byte state){
+        return apiService.cancelServerOrder(id,state);
+    }
+
+    public Observable<ListResponse>  delayServerOrder(Integer id,String date){
+        return apiService.delayServerOrder(id,date);
+    }
+
+    public Observable<ListResponse>  payServerOrder(Integer serviceOrderId){
+        return apiService.payServerOrder(serviceOrderId);
+    }
+
+    public Observable<ListResponse>  delServerOrder(Integer serviceOrderId){
+        return apiService.delServiceOrder(serviceOrderId);
+    }
+
 }

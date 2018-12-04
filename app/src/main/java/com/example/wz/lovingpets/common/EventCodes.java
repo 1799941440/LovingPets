@@ -12,5 +12,11 @@ public class EventCodes {
     public static final int OPEN_GOODSDETAIL_DIALOG = 0x10;//商品列表打开详情
     public static final int SWITCH_COLLECT = 0x11;//点击收藏或者取消收藏
     public static final int BUY_GOODS = 0x12;//点击直接购买按钮
+    public static final int LOADED_SERVER_ORDER = 0x13;//获取服务订单成功
+    public static final int CANCEL_SERVER_ORDER = 0x14;//取消服务订单
+    public static final int DELAY_SERVER_ORDER = 0x15;//延后服务订单
+    public static final int PAY_SERVER_ORDER = 0x16;//支付待定金额服务订单
+    public static final int DEL_SERVER_ORDER = 0x17;//删除服务订单
+    public static final int COMMENT_SERVER_ORDER = 0x18;//评论服务订单
     public static final int ADD_TO_CART = 0x123;//加入购物车
 }

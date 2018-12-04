@@ -22,6 +22,7 @@ import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.fragment.OrderFragment;
 import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.utils.EventBusUtils;
+import com.example.wz.lovingpets.utils.UserUtil;
 import com.example.wz.lovingpets.widget.ConfirmDialog;
 import com.example.wz.lovingpets.widget.ConfirmDialogBuilder;
 
@@ -33,6 +34,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observable;
+
+import static com.example.wz.lovingpets.activity.MyApp.getContext;
 
 @BindEventBus
 public class OrderActivity extends BaseFragmentActivity{
@@ -62,7 +65,7 @@ public class OrderActivity extends BaseFragmentActivity{
     }
 
     protected void initData() {
-        user = MyApp.getInstance().getUser();
+        user = new UserUtil(getContext()).getUser();
         title.setText("订单管理");
         currentItem = getIntent().getBundleExtra("bundle").getInt("orderState",0);
         list_view.add(OrderFragment.newInstance(4));
@@ -70,9 +73,6 @@ public class OrderActivity extends BaseFragmentActivity{
         list_view.add(OrderFragment.newInstance(0));
         list_view.add(OrderFragment.newInstance(2));
         list_view.add(OrderFragment.newInstance(3));
-        for (int i = 0; i < list_title.size(); i++) {
-            tab.addTab(tab.newTab().setText(list_title.get(i)));//添加tab选项
-        }
         vp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {

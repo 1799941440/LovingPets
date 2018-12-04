@@ -23,7 +23,7 @@ import com.example.wz.lovingpets.fragment.ClassifyFragment;
 import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.ui.main_home.HomeFragment;
 import com.example.wz.lovingpets.fragment.MineFragment;
-import com.example.wz.lovingpets.fragment.OrderServiceFragment;
+import com.example.wz.lovingpets.fragment.ChooseServerFragment;
 import com.example.wz.lovingpets.widget.BottomBarItem;
 import com.example.wz.lovingpets.widget.BottomBarLayout;
 import com.google.gson.Gson;
@@ -74,7 +74,7 @@ public class MainActivity extends BaseFragmentActivity {
         mFragmentList.add(HomeFragment.newInstance("主页"));
         mFragmentList.add(ClassifyFragment.newInstance("分类"));
         mFragmentList.add(CircleFragment.newInstance("爱宠圈"));
-        mFragmentList.add(OrderServiceFragment.newInstance());
+        mFragmentList.add(ChooseServerFragment.newInstance());
         mFragmentList.add(MineFragment.newInstance("我的"));
         switchFragment(0); //默认显示第一页
     }

@@ -4,7 +4,21 @@ package com.example.wz.lovingpets.entity;
 public class ServiceOrderInfo extends ServiceOrder{
 	private String serviceName;
 	private String shopName;
+	private Integer shopId;
+	private String images;
 	private String shopAddress;
+	public Integer getShopId() {
+		return shopId;
+	}
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	public String getImages() {
+		return images;
+	}
+	public void setImages(String images) {
+		this.images = images;
+	}
 	public String getServiceName() {
 		return serviceName;
 	}

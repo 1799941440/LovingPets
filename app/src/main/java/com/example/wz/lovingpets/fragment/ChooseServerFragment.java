@@ -4,38 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
-import com.example.wz.lovingpets.activity.MyApp;
 import com.example.wz.lovingpets.activity.ServiceListActivity;
-import com.example.wz.lovingpets.adapter.ShopCartAdapter;
 import com.example.wz.lovingpets.base.BaseFragment;
-import com.example.wz.lovingpets.common.BindEventBus;
-import com.example.wz.lovingpets.common.Event;
-import com.example.wz.lovingpets.common.ObservableDecorator;
-import com.example.wz.lovingpets.entity.ListResponse;
-import com.example.wz.lovingpets.entity.ShoppingCartDetail;
-import com.example.wz.lovingpets.entity.User;
-import com.example.wz.lovingpets.net.HttpRequest;
-import com.example.wz.lovingpets.utils.DecimalUtil;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.Observable;
-
-public class OrderServiceFragment extends BaseFragment implements View.OnClickListener {
+public class ChooseServerFragment extends BaseFragment implements View.OnClickListener {
 
     private LinearLayout ll_0,ll_1,ll_2,ll_3,ll_4;
     @Override
@@ -69,8 +47,8 @@ public class OrderServiceFragment extends BaseFragment implements View.OnClickLi
     }
 
 
-    public static OrderServiceFragment newInstance() {
-        OrderServiceFragment fragment = new OrderServiceFragment();
+    public static ChooseServerFragment newInstance() {
+        ChooseServerFragment fragment = new ChooseServerFragment();
         return fragment;
     }
 

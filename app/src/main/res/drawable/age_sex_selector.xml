@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--评论年龄性别选择-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_activated="false" android:drawable="@drawable/shape_age_sex_male"/>
+    <item android:state_activated="true" android:drawable="@drawable/shape_age_sex_female"/>
+</selector>
