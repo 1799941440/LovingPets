@@ -61,7 +61,8 @@
         <activity android:name=".activity.ServiceListActivity" />
         <activity android:name=".activity.ServerOrderActivity" />
         <activity android:name=".activity.UserInfoActivity" />
-        <activity android:name=".activity.OrderServerActivity"></activity>
+        <activity android:name=".activity.OrderServerActivity" />
+        <activity android:name=".activity.CommentServerActivity"></activity>
     </application>
 
 </manifest>

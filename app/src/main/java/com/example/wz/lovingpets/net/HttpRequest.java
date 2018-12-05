@@ -8,6 +8,7 @@ import com.example.wz.lovingpets.entity.GoodsDetailInfo;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.OrderInfo;
 import com.example.wz.lovingpets.entity.PetInfo;
+import com.example.wz.lovingpets.entity.ServiceComment;
 import com.example.wz.lovingpets.entity.ServiceInfo;
 import com.example.wz.lovingpets.entity.ServiceOrderInfo;
 import com.example.wz.lovingpets.entity.ShoppingCartDetail;
@@ -255,6 +256,20 @@ public class HttpRequest {
                 @Field("serviceOrderId")Integer serviceOrderId
         );
 
+        //预定服务，生成订单
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ServiceOrderAction/addOrder")
+        Observable<ListResponse> addServiceOrder(
+                @Field("param")String param
+        );
+
+        //评论服务，生成服务评论
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ServiceOrderAction/comentServiceOrder")
+        Observable<ListResponse> comentServiceOrder(
+                @Field("param")String param
+        );
+
     }
 
     public Observable<ListResponse<User>> login(String username, String password) {
@@ -367,6 +382,10 @@ public class HttpRequest {
 
     public Observable<ListResponse>  delServerOrder(Integer serviceOrderId){
         return apiService.delServiceOrder(serviceOrderId);
+    }
+
+    public Observable<ListResponse>  comentServiceOrder(String param){
+        return apiService.comentServiceOrder(param);
     }
 
 }

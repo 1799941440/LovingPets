@@ -101,17 +101,18 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_weight="1"
                     android:text="选择服务时间:"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
                 <TextView
+                    android:gravity="end"
+                    android:layout_weight="1"
                     android:id="@+id/order_server_time"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:text="2018年12月6日"
@@ -169,19 +170,44 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="140dp" />
         </LinearLayout>
     </com.example.wz.lovingpets.widget.MyScrollView>
 
-    <TextView
-        android:id="@+id/order_server_order"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:background="#ffa000"
-        android:gravity="center"
-        android:text="立即预约"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"/>
+        android:layout_height="wrap_content">
+
+        <View
+            android:background="#757575"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+        <LinearLayout
+            android:background="#F0F2F8"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/order_server_orderMsg"
+                android:gravity="top"
+                android:padding="5dp"
+                android:background="@drawable/bg_edittext_selector"
+                android:hint="请输入预定留言。以便店家了解你的情况"
+                android:layout_width="match_parent"
+                android:layout_height="90dp" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/order_server_order"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#ffa000"
+            android:gravity="center"
+            android:text="立即预约"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+    </LinearLayout>
 
 </RelativeLayout>

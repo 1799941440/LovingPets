@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.CommentServerActivity">
+
+    <include layout="@layout/layout_titlebar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/comment_server_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp10"
+            android:text="服务评分"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:id="@+id/comment_server_star1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_collected" />
+
+        <ImageView
+            android:id="@+id/comment_server_star2"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_collected" />
+
+        <ImageView
+            android:id="@+id/comment_server_star3"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_collected" />
+
+        <ImageView
+            android:id="@+id/comment_server_star4"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_collected" />
+
+        <ImageView
+            android:id="@+id/comment_server_star5"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_collected" />
+
+        <TextView
+            android:id="@+id/comment_server_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="非常好" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#757575" />
+
+    <EditText
+        android:id="@+id/comment_server_comment"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginBottom="@dimen/dp10"
+        android:background="@android:color/white"
+        android:gravity="top"
+        android:padding="@dimen/dp10" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#757575" />
+
+    <Button
+        android:id="@+id/comment_server_commit"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="#ffa000"
+        android:text="发布"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+</LinearLayout>

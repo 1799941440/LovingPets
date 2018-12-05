@@ -9,8 +9,7 @@
         android:scaleType="centerCrop"
         android:id="@+id/item_collect_goods_iv"
         android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:background="@android:color/black" />
+        android:layout_height="120dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
