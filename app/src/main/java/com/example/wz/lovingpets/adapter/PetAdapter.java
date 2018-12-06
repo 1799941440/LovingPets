@@ -24,15 +24,32 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
-    private List<PetInfo> list;
-    private LayoutInflater layoutInflater;
-    private Context context;
     private Gson gson;
+    private Context context;
+    private List<PetInfo> list;
+    private boolean shouldIntent = true;
+    private LayoutInflater layoutInflater;
+    private OnPetSelected onPetSelected;
 
+    public void setOnPetSelected(OnPetSelected onPetSelected) {
+        this.onPetSelected = onPetSelected;
+    }
+
+    public interface OnPetSelected{
+        void onSelected(int petId,String icon,String name);
+    }
     public PetAdapter(List<PetInfo> list, Context context) {
         this.list = list;
         this.context = context;
         gson = new Gson();
+        this.layoutInflater = LayoutInflater.from(context);
+    }
+
+    public PetAdapter(List<PetInfo> list, Context context,boolean shouldIntent) {
+        this.list = list;
+        gson = new Gson();
+        this.context = context;
+        this.shouldIntent = shouldIntent;
         this.layoutInflater = LayoutInflater.from(context);
     }
 
@@ -45,23 +62,32 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
     @Override
     public void onBindViewHolder(@NonNull final PetHolder holder, int position) {
         final PetInfo data = list.get(position);
-        holder.ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, AddPetActivity.class);
-                Bundle b = new Bundle();
-                b.putString("petInfo",gson.toJson(data));
-                intent.putExtra("bundle",b);
-                context.startActivity(intent);
-            }
-        });
-        holder.ll.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                EventBusUtils.sendEvent(new Event<Integer>(EventCodes.DEL_PET,data.getId()));
-                return true;
-            }
-        });
+        if(shouldIntent){
+            holder.ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, AddPetActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("petInfo",gson.toJson(data));
+                    intent.putExtra("bundle",b);
+                    context.startActivity(intent);
+                }
+            });
+            holder.ll.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    EventBusUtils.sendEvent(new Event<Integer>(EventCodes.DEL_PET,data.getId()));
+                    return true;
+                }
+            });
+        }else{
+            holder.ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onPetSelected.onSelected(data.getId(),data.getIcon(),data.getNickName());
+                }
+            });
+        }
         holder.tv_name.setText(data.getNickName());
         holder.tv_class.setText("("+data.getClassName()+")");
         ImageUtil.loadRoundImage(holder.iv_head,data.getIcon());

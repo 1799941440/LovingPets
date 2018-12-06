@@ -1,6 +1,7 @@
 package com.example.wz.lovingpets.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -32,14 +33,15 @@ import io.reactivex.Observable;
 @BindEventBus
 public class MyPetsActivity extends BaseFragmentActivity implements View.OnClickListener {
 
+    private User user;
     private TextView title;
-    private ImageView iv_add,iv_back;
     private RecyclerView rv;
     private PetAdapter adapter;
-    private User user;
     private ConfirmDialog dialog;
+    private ImageView iv_add,iv_back;
     private List<PetInfo> list_pets = new ArrayList<>();
     private HttpRequest.ApiService api = HttpRequest.getApiservice();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,16 +61,32 @@ public class MyPetsActivity extends BaseFragmentActivity implements View.OnClick
 
     @Override
     protected void initData() {
-        title.setText("我的宠物");
-        iv_add.setVisibility(View.VISIBLE);
+        if(getIntent().getIntExtra("from",0) == 1){
+            adapter = new PetAdapter(list_pets,MyPetsActivity.this,false);
+            title.setText("选择宠物");
+            iv_add.setVisibility(View.GONE);
+            adapter.setOnPetSelected(new PetAdapter.OnPetSelected() {
+                @Override
+                public void onSelected(int petId,String icon,String name) {
+                    Intent intent = new Intent();
+                    intent.putExtra("petId", petId); //将计算的值回传回去
+                    intent.putExtra("icon",icon);
+                    intent.putExtra("name",name);
+                    setResult(0x123, intent);
+                    finish(); //结束当前的activity的生命周期
+                }
+            });
+        }else{
+            adapter = new PetAdapter(list_pets,MyPetsActivity.this);
+            title.setText("我的宠物");
+            iv_add.setVisibility(View.VISIBLE);
+            iv_add.setOnClickListener(this);
+        }
         user = MyApp.getInstance().getUser();
-        adapter = new PetAdapter(list_pets,MyPetsActivity.this);
         rv.setAdapter(adapter);
-        iv_add.setOnClickListener(this);
         iv_back.setOnClickListener(this);
     }
 
-    @SuppressLint("CheckResult")
     private void getPets(){
         Observable<ListResponse<PetInfo>> observable = api.getPets(user.getId());
         ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse<PetInfo>>() {
@@ -80,9 +98,6 @@ public class MyPetsActivity extends BaseFragmentActivity implements View.OnClick
     }
 
     private void successLoadPet(List<PetInfo> rows) {
-        if(adapter == null){
-            adapter = new PetAdapter(list_pets,MyPetsActivity.this);
-        }
         list_pets.clear();
         list_pets.addAll(rows);
         adapter.notifyDataSetChanged();

@@ -35,4 +35,6 @@
     <color name="color_100">#222222</color>
     <color name="color_109">#ffffffff</color>
     <color name="divider">#999999</color>
+    <color name="rip_color">#BFBFBF</color>
+    <color name="rip_color1">#FFFCF6</color>
 </resources>

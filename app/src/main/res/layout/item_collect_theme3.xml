@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/item_collect_theme1_root"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/item_collect_theme1_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:text="【M.L.X】呆呆免流3.5版本 专治病危区 江西江苏的试试"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/item_collect_theme1_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="昨天有个葫芦丝发了个按键停止应用的破解教程，后来有锁机测试发现没用，值" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <LinearLayout
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/item_collect_theme1_iv1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:layout_marginStart="8dp"
+                android:id="@+id/item_collect_theme1_iv2"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:id="@+id/item_collect_theme1_iv3"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_collect_theme1_imgCount"
+            android:text="4图"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"
+            android:background="#99000000"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="30dp"
+            android:layout_height="18dp">
+
+        </TextView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/item_collect_theme1_author"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="作者"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/item_collect_theme1_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018年12月24号"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_marginStart="3dp"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@drawable/ic_comment" />
+
+        <TextView
+            android:layout_marginStart="3dp"
+            android:id="@+id/item_collect_theme1_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5683"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_marginStart="3dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_my_collection" />
+
+        <TextView
+            android:layout_marginStart="3dp"
+            android:id="@+id/item_collect_theme1_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="114"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

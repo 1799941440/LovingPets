@@ -12,6 +12,8 @@ import com.example.wz.lovingpets.entity.ServiceComment;
 import com.example.wz.lovingpets.entity.ServiceInfo;
 import com.example.wz.lovingpets.entity.ServiceOrderInfo;
 import com.example.wz.lovingpets.entity.ShoppingCartDetail;
+import com.example.wz.lovingpets.entity.ThemeCommentInfo;
+import com.example.wz.lovingpets.entity.ThemeInfo;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.utils.LoggingInterceptor;
 import com.google.gson.Gson;
@@ -270,6 +272,36 @@ public class HttpRequest {
                 @Field("param")String param
         );
 
+        //获取主题列表
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ThemeAction/getThemeByPage")
+        Observable<ListResponse<ThemeInfo>> getTheme(
+                @Field("page")Integer page
+        );
+
+        //获取主题列表
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ThemeAction/pushTheme")
+        Observable<ListResponse> pushTheme(
+                @Field("param")String param
+        );
+
+        //以id获取主题
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ThemeAction/getThemeById")
+        Observable<ListResponse<ThemeInfo>> getThemeById(
+                @Field("themeId")Integer themeId,
+                @Field("collecterId")Integer collecterId
+        );
+
+        //以主题id获取评论
+        @FormUrlEncoded
+        @POST("/petserviceplatform/CommentAction/getCommentByThemeId")
+        Observable<ListResponse<ThemeCommentInfo>> getCommentByThemeId(
+                @Field("themeId")Integer themeId,
+                @Field("page")Integer page
+        );
+
     }
 
     public Observable<ListResponse<User>> login(String username, String password) {
@@ -386,6 +418,22 @@ public class HttpRequest {
 
     public Observable<ListResponse>  comentServiceOrder(String param){
         return apiService.comentServiceOrder(param);
+    }
+
+    public Observable<ListResponse<ThemeInfo>>  getTheme(Integer page){
+        return apiService.getTheme(page);
+    }
+
+    public Observable<ListResponse>  pushTheme(String param){
+        return apiService.pushTheme(param);
+    }
+
+    public Observable<ListResponse<ThemeInfo>>  getThemeById(Integer themeId,Integer collecterId){
+        return apiService.getThemeById(themeId,collecterId);
+    }
+
+    public Observable<ListResponse<ThemeCommentInfo>>  getCommentByThemeId(Integer themeId,Integer page){
+        return apiService.getCommentByThemeId(themeId,page);
     }
 
 }

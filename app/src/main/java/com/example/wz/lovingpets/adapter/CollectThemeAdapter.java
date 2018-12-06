@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
@@ -19,12 +20,10 @@ import java.util.List;
 
 public class CollectThemeAdapter extends RecyclerView.Adapter<CollectThemeAdapter.VH> {
 
-    private Context context;
     private LayoutInflater inflater;
     private List<CollectThemeInfo> list;
 
     public CollectThemeAdapter(Context context, List<CollectThemeInfo> list) {
-        this.context = context;
         inflater = LayoutInflater.from(context);
         this.list = list;
     }
@@ -32,19 +31,21 @@ public class CollectThemeAdapter extends RecyclerView.Adapter<CollectThemeAdapte
     @Override
     public int getItemViewType(int position) {
         if(StringUtils.getImgs(list.get(position).getContent()).size()>3){
-            return 1;
-        }else{
+            return 2;
+        }else if(StringUtils.getImgs(list.get(position).getContent()).size() == 0){
             return 0;
+        }else{
+            return 1;
         }
     }
 
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if(viewType == 0){
-            return new VH1(inflater.inflate(R.layout.item_collect_theme0,parent,false));
+        if(viewType == 2){
+            return new VH3(inflater.inflate(R.layout.item_collect_theme3,parent,false));
         }else{
-            return new VH3(inflater.inflate(R.layout.item_collect_theme1,parent,false));
+            return new VH1(inflater.inflate(R.layout.item_collect_theme1,parent,false));
         }
     }
 
@@ -53,13 +54,17 @@ public class CollectThemeAdapter extends RecyclerView.Adapter<CollectThemeAdapte
         CollectThemeInfo data = list.get(position);
         List<String> images = StringUtils.getImgs(data.getContent());
         if(holder instanceof VH1){
+            if(images.size() == 0){
+                ((VH1) holder).iv.setVisibility(View.GONE);
+            }else{
+                ImageUtil.loadLocalImage(((VH1) holder).iv,images.get(0));
+            }
             ((VH1) holder).tv_title.setText(data.getTitle());
             ((VH1) holder).tv_content.setText(data.getContent());
             ((VH1) holder).tv_author.setText(data.getUserName());
             ((VH1) holder).tv_date.setText(DateUtil.DateToString(data.getPushTime()));
             ((VH1) holder).tv_comment.setText(data.getCommentTimes()+"");
             ((VH1) holder).tv_collect.setText(data.getCollectTimes()+"");
-            ImageUtil.loadLocalImage(((VH1) holder).iv,images.get(0));
         }else if(holder instanceof VH3){
             ((VH3) holder).tv_title.setText(data.getTitle());
             ((VH3) holder).tv_content.setText(data.getContent());
@@ -80,13 +85,14 @@ public class CollectThemeAdapter extends RecyclerView.Adapter<CollectThemeAdapte
     }
 
     public class VH extends RecyclerView.ViewHolder{
-        public VH(View itemView) {
-            super(itemView);
+        public VH(View view) {
+            super(view);
         }
     }
 
     public class VH1 extends VH{
 
+        LinearLayout ll_root;
         ImageView iv;
         TextView tv_title,tv_content,tv_author,tv_date,tv_comment,tv_collect;
         public VH1(View view) {
@@ -98,12 +104,14 @@ public class CollectThemeAdapter extends RecyclerView.Adapter<CollectThemeAdapte
             tv_date = view.findViewById(R.id.item_collect_theme0_date);
             tv_comment = view.findViewById(R.id.item_collect_theme0_comment);
             tv_collect = view.findViewById(R.id.item_collect_theme0_collect);
+            ll_root = view.findViewById(R.id.item_collect_theme0_root);
         }
     }
 
     public class VH3 extends VH{
 
         ImageView iv1,iv2,iv3;
+        LinearLayout ll_root;
         TextView tv_title,tv_content,tv_author,tv_date,tv_comment,tv_collect,tv_count;
         public VH3(View view) {
             super(view);
@@ -117,6 +125,7 @@ public class CollectThemeAdapter extends RecyclerView.Adapter<CollectThemeAdapte
             tv_comment = view.findViewById(R.id.item_collect_theme1_comment);
             tv_collect = view.findViewById(R.id.item_collect_theme1_collect);
             tv_count = view.findViewById(R.id.item_collect_theme1_imgCount);
+            ll_root = view.findViewById(R.id.item_collect_theme1_root);
         }
     }
 }

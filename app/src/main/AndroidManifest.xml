@@ -62,7 +62,10 @@
         <activity android:name=".activity.ServerOrderActivity" />
         <activity android:name=".activity.UserInfoActivity" />
         <activity android:name=".activity.OrderServerActivity" />
-        <activity android:name=".activity.CommentServerActivity"></activity>
+        <activity android:name=".activity.CommentServerActivity" />
+        <activity android:name=".activity.AddThemeActivity" />
+        <activity android:name=".activity.ThemeDetailActivity" />
+        <activity android:name=".activity.CommentThemeActivity"></activity>
     </application>
 
 </manifest>

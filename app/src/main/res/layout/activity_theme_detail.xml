@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/theme_detail_back"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="@dimen/dp10"
+            android:src="@mipmap/ic_back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_weight="1"
+            android:text="帖子详情"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/theme_detail_isCollect"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_my_collection" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f4f5f6"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <!--帖子标题-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:padding="@dimen/dp10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/theme_detail_head"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp" />
+
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp10"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/theme_detail_author"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="作者" />
+
+                            <TextView
+                                android:textSize="@dimen/sp12"
+                                android:id="@+id/theme_detail_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2018年12月24号" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/theme_detail_petInfo"
+                            android:text="故事主角：花花（艾斯摩基犬）"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/theme_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="主人把狗狗最喜欢的玩具拿去洗，却拍到超可爱的一幕"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+            <!--内容-->
+            <LinearLayout
+                android:id="@+id/theme_detail_ll_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp10"
+                android:gravity="center_vertical|end">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="3dp"
+                    android:src="@drawable/ic_comment" />
+
+                <TextView
+                    android:id="@+id/theme_detail_tv_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="5683" />
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="3dp"
+                    android:src="@drawable/ic_my_collection" />
+
+                <TextView
+                    android:id="@+id/theme_detail__tv_collect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="114" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#757575" />
+
+            <LinearLayout
+                android:id="@+id/theme_detail_no_comment"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="#f4f5f7"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/no_comment" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="还没有评论哦~" />
+            </LinearLayout>
+            <!--评论-->
+            <TextView
+                android:background="@android:color/white"
+                android:id="@+id/theme_detail_showComment"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp30"
+                android:paddingLeft="@dimen/dp10"
+                android:gravity="center_vertical"
+                android:text="评论:"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#757575" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/theme_detail_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp50">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#757575" />
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/theme_detail_narrow_left"
+                android:src="@mipmap/ic_left_arrow"
+                android:layout_width="25dp"
+                android:layout_height="45dp" />
+
+            <TextView
+                android:id="@+id/theme_detail_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/theme_detail_totalPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/10页"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/theme_detail_narrow_right"
+                android:src="@mipmap/ic_right_arrow"
+                android:layout_width="25dp"
+                android:layout_height="45dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/theme_detail_comment"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp10"
+            android:background="#ffa000"
+            android:text="评论"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</LinearLayout>

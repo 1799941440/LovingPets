@@ -2,6 +2,7 @@ package com.example.wz.lovingpets.fragment;
 
 
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,6 +80,7 @@ public class ThemeCollectFragment extends BaseFragment {
         userId = new UserUtil(getContext()).getUser().getId();
         adapter = new CollectThemeAdapter(getContext(),list);
         rv.setAdapter(adapter);
+        rv.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
     }
 
     private void findViews(View view) {
