@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
@@ -32,8 +33,9 @@ import static com.example.wz.lovingpets.activity.MyApp.getContext;
 public class ShoppingCartActivity extends BaseFragmentActivity {
 
     private RecyclerView rv;
-    private TextView tv_total;
+    private TextView tv_total,tv_title;
     private CheckBox cb_all;
+    private ImageView iv_back;
     private Button bt_pay;
     private String mParam1,mParam2;
     private ShopCartAdapter adapter;
@@ -57,10 +59,19 @@ public class ShoppingCartActivity extends BaseFragmentActivity {
         tv_total = findViewById(R.id.shopcart_tv_total);
         cb_all = findViewById(R.id.shopcart_cb_all);
         bt_pay = findViewById(R.id.shopcart_bt_pay);
+        tv_title = findViewById(R.id.titlebar_tv_title);
+        iv_back = findViewById(R.id.titlebar_iv_left);
     }
 
     @Override
     protected void initData() {
+        tv_title.setText("我的购物车");
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         cbl = new ShopCartAdapter.CkeckBoxListener() {
             @Override
             public void onCkeckboxSwitch(String amount) {

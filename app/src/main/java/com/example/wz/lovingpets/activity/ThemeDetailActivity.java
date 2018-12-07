@@ -229,7 +229,10 @@ public class ThemeDetailActivity extends BaseActivity implements View.OnClickLis
                 getNextPage();
                 break;
             case R.id.theme_detail_comment :
-                intent2Activity(CommentThemeActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("userId",userId);
+                b.putInt("themeId",themeId);
+                intentWithData(CommentThemeActivity.class,b);
                 break;
         }
     }

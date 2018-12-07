@@ -50,6 +50,7 @@ public class ServiceListActivity extends BaseActivity {
         iv_back = findViewById(R.id.service_list_iv_back);
         tv_search = findViewById(R.id.tv_goods_search);
         et_condition = findViewById(R.id.et_goodsName);
+        et_condition.clearFocus();
     }
 
     @Override

@@ -2,53 +2,63 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".activity.ShoppingCartActivity">
 
     <include
         android:id="@+id/mark"
-        layout="@layout/layout_titlebar"/>
+        layout="@layout/layout_titlebar" />
+
+    <View
+        android:id="@+id/devide"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/mark"
+        android:background="#757575" />
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/mark"
         android:id="@+id/shopcart_rv"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/devide"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
     <LinearLayout
-        android:background="#ffffff"
-        android:gravity="center_vertical"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:gravity="center_vertical">
 
         <CheckBox
-            android:layout_weight="1"
             android:id="@+id/shopcart_cb_all"
-            android:text="全选"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="全选" />
 
         <TextView
-            android:text="合计："
-            android:textColor="#000000"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="合计："
+            android:textColor="#000000" />
+
         <TextView
             android:id="@+id/shopcart_tv_total"
-            android:textColor="#ff0000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="￥0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textColor="#ff0000" />
+
         <Button
-            android:background="@drawable/shape_shopcart_item"
-            style="?android:attr/borderlessButtonStyle"
             android:id="@+id/shopcart_bt_pay"
-            android:layout_margin="5dp"
-            android:text="结算"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_shopcart_item"
+            android:text="结算" />
     </LinearLayout>
 </RelativeLayout>

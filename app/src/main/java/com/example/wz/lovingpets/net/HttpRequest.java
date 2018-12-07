@@ -63,12 +63,30 @@ public class HttpRequest {
     }
 
     public interface ApiService {
+
         // 用户登录
         @FormUrlEncoded
         @POST("/petserviceplatform/UserAction/login")
         Observable<ListResponse<User>> login(
                 @Field("userName") String username,
                 @Field("password") String password);
+
+        // 用户信息界面获取信息
+        @FormUrlEncoded
+        @POST("/petserviceplatform/UserAction/selectById")
+        Observable<ListResponse<User>> selectById(
+                @Field("id") Integer id);
+
+        // 用户信息界面保存信息
+        @FormUrlEncoded
+        @POST("/petserviceplatform/UserAction/updateUserByJson")
+        Observable<ListResponse> updateUser(
+                @Field("id") Integer id,
+                @Field("icon") String icon,
+                @Field("userName") String userName,
+                @Field("age") Integer age,
+                @Field("sex") String sex);
+
         // 用户注册
         @FormUrlEncoded
         @POST("/petserviceplatform/UserAction/register")
@@ -76,6 +94,7 @@ public class HttpRequest {
                 @Field("userName") String username,
                 @Field("password") String password,
                 @Field("phone") String phone);
+
         // 获取商品
         @FormUrlEncoded
         @POST("/petserviceplatform/GoodsAction/getByClassify")
@@ -84,6 +103,7 @@ public class HttpRequest {
                 @Field("condition") String condition,
                 @Field("collecterId") Integer collecterId
         );
+
         // 加入购物车
         @FormUrlEncoded
         @POST("/petserviceplatform/ShoppingCartAction/addGoodsToCart")
@@ -302,6 +322,15 @@ public class HttpRequest {
                 @Field("page")Integer page
         );
 
+        //以主题id获取评论
+        @FormUrlEncoded
+        @POST("/petserviceplatform/CommentAction/commentTheme")
+        Observable<ListResponse> commentTheme(
+                @Field("themeId")Integer themeId,
+                @Field("reply")String reply,
+                @Field("replyId")Integer replyId
+        );
+
     }
 
     public Observable<ListResponse<User>> login(String username, String password) {
@@ -310,6 +339,14 @@ public class HttpRequest {
 
     public Observable<ListResponse<User>> register(String username, String password,String phone) {
         return apiService.register(username, password,phone);
+    }
+
+    public Observable<ListResponse<User>> selectById(Integer id) {
+        return apiService.selectById(id);
+    }
+
+    public Observable<ListResponse> updateUser(Integer id,String icon,String userName,Integer age, String sex) {
+        return apiService.updateUser(id,icon,userName,age,sex);
     }
 
     public Observable<ListResponse<GoodsDetailInfo>> getGoods(String classify,String condition,Integer collecterId){
@@ -434,6 +471,10 @@ public class HttpRequest {
 
     public Observable<ListResponse<ThemeCommentInfo>>  getCommentByThemeId(Integer themeId,Integer page){
         return apiService.getCommentByThemeId(themeId,page);
+    }
+
+    public Observable<ListResponse>  commentTheme(Integer themeId,String reply,Integer replyId){
+        return apiService.commentTheme(themeId,reply,replyId);
     }
 
 }

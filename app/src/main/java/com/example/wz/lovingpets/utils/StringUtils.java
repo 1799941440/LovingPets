@@ -1,6 +1,7 @@
 package com.example.wz.lovingpets.utils;
 
 import android.content.Context;
+import android.net.Uri;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.view.View;
@@ -90,6 +91,12 @@ public class StringUtils {
         String[] temp = null;
         temp = s.split(" ");
         return temp;
+    }
+
+    public static String formatUrl(Uri uri){
+        String res = uri.toString().substring(36);
+        res = res.replace("%2F","/");
+        return res;
     }
 
     public static class PrimaryClickableSpan extends ClickableSpan {

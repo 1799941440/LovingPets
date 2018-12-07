@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,14 +12,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
-import com.example.wz.lovingpets.base.BaseActivity;
 import com.example.wz.lovingpets.base.BaseFragmentActivity;
-import com.example.wz.lovingpets.common.BindEventBus;
 import com.example.wz.lovingpets.common.Constant;
 import com.example.wz.lovingpets.common.Event;
 import com.example.wz.lovingpets.common.EventCodes;
@@ -31,34 +27,29 @@ import com.example.wz.lovingpets.net.HttpRequest;
 import com.example.wz.lovingpets.utils.DateUtil;
 import com.example.wz.lovingpets.utils.EventBusUtils;
 import com.example.wz.lovingpets.utils.ImageUtil;
+import com.example.wz.lovingpets.utils.QiNiuUtil;
 import com.example.wz.lovingpets.utils.StringUtils;
+import com.example.wz.lovingpets.utils.UserUtil;
 import com.example.wz.lovingpets.widget.SingleDialog;
 import com.example.wz.lovingpets.widget.SingleDialogBuilder;
 import com.google.gson.Gson;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class AddPetActivity extends BaseFragmentActivity implements View.OnClickListener {
 
+    private int userId;
     private Button bt_save;
-    private String token;
     private EditText et_name;
     private ImageView iv_head;
     private DatePickerDialog dp;
     private int seletedClass = 145,selectedFamily=0;
     private PetInfo data = new PetInfo();
-    private String token_path = MyApp.getInstance().getUser().getId()+"-";
     private TextView title,tv_class,tv_state,tv_family,tv_sex,tv_birthday;
-    private String headUrl = "http://ozfwev5ji.bkt.clouddn.com/mine_head_logined.png";
+    private String headUrl = "http://a.hiphotos.baidu.com/image/%70%69%63/item/3bf33a87e950352aa665e2ba5e43fbf2b2118b78.jpg";
     private HttpRequest.ApiService api = HttpRequest.getApiservice();
 
     @Override
@@ -84,6 +75,7 @@ public class AddPetActivity extends BaseFragmentActivity implements View.OnClick
 
     @Override
     protected void initData() {
+        userId = new UserUtil(this).getUser().getId();
         Intent intent = getIntent();
         Bundle b = intent.getBundleExtra("bundle");
         if(b != null){
@@ -94,7 +86,7 @@ public class AddPetActivity extends BaseFragmentActivity implements View.OnClick
             setData(data);
         }else{
             title.setText("添加宠物");
-            data = new PetInfo(0,MyApp.getInstance().getUser().getId(),"","正常","公",
+            data = new PetInfo(0,userId,"","正常","公",
                     DateUtil.stringToDate("2016-1-1"),headUrl,6,145);
             ImageUtil.loadRoundImage(iv_head,headUrl);
         }
@@ -126,17 +118,17 @@ public class AddPetActivity extends BaseFragmentActivity implements View.OnClick
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("tag",requestCode+"-"+resultCode+"-"+data.getData());
-        if(resultCode == -1){
+        if(resultCode == -1 && data != null){
             try {
                 /**
                  * 该uri是上一个Activity返回的
                  */
                 Uri uri = data.getData();
                 Bitmap bit = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-                File head = new File(uri.toString());
+                File head = new File(StringUtils.formatUrl(uri));
+//                com.orhanobut.logger.Logger.i(uri.toString().substring(36));
+//                /storage/emulated/0/PDFfiles/test.pdf
                 startUpload(head);
-//                iv_head.setImageBitmap(bit);
                 ImageUtil.loadRoundImage(iv_head,uri);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -147,12 +139,14 @@ public class AddPetActivity extends BaseFragmentActivity implements View.OnClick
     }
 
     private void startUpload(File head) {
-        Observable<String> observable = api.getToken(token_path+Calendar.getInstance().getTimeInMillis());
-        ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<String>() {
+        bt_save.setClickable(false);
+        QiNiuUtil qiNiuUtil = new QiNiuUtil();
+        qiNiuUtil.startUpload(head,AddPetActivity.this,2,userId);
+        qiNiuUtil.setQiNiuCloudEvent(new QiNiuUtil.QiNiuCloudEvent() {
             @Override
-            public void onSuccess(String s) {
-                token = s;
-                Log.d("获取token", "tokrn: "+s+" path"+token_path);
+            public void getUrlKey(String url) {
+                data.setIcon(url);
+                bt_save.setClickable(true);
             }
         });
     }
@@ -187,7 +181,6 @@ public class AddPetActivity extends BaseFragmentActivity implements View.OnClick
         data.setNickName(et_name.getText().toString().trim());
         addPet(data);
         EventBusUtils.sendEvent(new Event(EventCodes.MANAGE_PET,null));
-        finish();
     }
 
     private void addPet(PetInfo data) {
@@ -198,6 +191,7 @@ public class AddPetActivity extends BaseFragmentActivity implements View.OnClick
             public void onSuccess(ListResponse listResponse) {
                 if(listResponse.isSuccess()){
                     showToast(listResponse.getMsg());
+                    finish();
                 }
             }
         });
@@ -245,7 +239,7 @@ public class AddPetActivity extends BaseFragmentActivity implements View.OnClick
     }
 
     private void showSexDialog() {
-        SingleDialog dialog= new SingleDialogBuilder().setTitle("设置性别").setList(Constant.list_sex).build();
+        SingleDialog dialog= new SingleDialogBuilder().setTitle("设置性别").setList(Constant.list_pet_sex).build();
         dialog.setCallBack(new SingleDialog.CallBack() {
             @Override
             public void onItemClick(String target,int position) {

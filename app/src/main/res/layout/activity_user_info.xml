@@ -1,9 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.UserInfoActivity">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp">
+
+        <include layout="@layout/layout_titlebar" />
+
+        <TextView
+            android:id="@+id/user_info_update"
+            android:textSize="15sp"
+            android:textColor="#0165ff"
+            android:layout_marginEnd="@dimen/dp10"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="修改信息"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_weight="1"
+                android:text="头        像"
+                android:textColor="#4f4f4f"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/user_info_head"
+                android:layout_width="@dimen/dp65"
+                android:layout_height="@dimen/dp65"
+                android:layout_marginEnd="15dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#999999" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="昵        称"
+                android:textColor="#4f4f4f"
+                android:textSize="15sp" />
+
+            <EditText
+                android:inputType="none"
+                android:id="@+id/user_info_name"
+                android:textColor="#999999"
+                android:textSize="13sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dp10"
+                android:layout_marginStart="@dimen/dp10"
+                android:background="@android:color/transparent"
+                android:gravity="end|center_vertical"
+                android:text="爱宠-5dwedgd" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#999999" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="年        龄"
+                android:textColor="#4f4f4f"
+                android:textSize="15sp" />
+
+            <EditText
+                android:inputType="none"
+                android:id="@+id/user_info_age"
+                android:textSize="13sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dp10"
+                android:layout_marginStart="@dimen/dp10"
+                android:background="@android:color/transparent"
+                android:gravity="end|center_vertical"
+                android:text="30" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#999999" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="性        别"
+                android:textColor="#4f4f4f"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/user_info_sex"
+                android:textSize="13sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dp10"
+                android:layout_marginStart="@dimen/dp10"
+                android:background="@android:color/transparent"
+                android:gravity="end|center_vertical"
+                android:text="男" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#999999" />
+
+        <View
+            android:background="#f3f4f5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp20"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#999999" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="账户余额"
+                android:textColor="#4f4f4f"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/user_info_balance"
+                android:textSize="13sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dp10"
+                android:layout_marginStart="@dimen/dp10"
+                android:background="@android:color/transparent"
+                android:gravity="end|center_vertical"
+                android:text="900.36" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#999999" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="绑定手机"
+                android:textColor="#4f4f4f"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/user_info_phone"
+                android:textSize="13sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dp10"
+                android:layout_marginStart="@dimen/dp10"
+                android:background="@android:color/transparent"
+                android:gravity="end|center_vertical"
+                android:text="14770832794" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#999999" />
+
+        <Button
+            android:id="@+id/user_info_exit"
+            android:background="@drawable/shape_unread"
+            android:text="退出登录"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_margin="@dimen/dp10"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+    </LinearLayout>
 </LinearLayout>

@@ -319,10 +319,10 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                if(from == null | "LAUNCH_ACTIVITY".equals(from)){
+                if("LAUNCH_ACTIVITY".equals(from)){
+                    intent2Activity(MainActivity.class);
                     finish();
                 }else{
-                    intent2Activity(MainActivity.class);
                     finish();
                 }
             }

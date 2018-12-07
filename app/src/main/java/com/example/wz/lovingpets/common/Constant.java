@@ -102,7 +102,8 @@ public class Constant {
     );
 
     //添加宠物界面dialog的选择列表
-    public static final List<String> list_sex = Arrays.asList("公","母");
+    public static final List<String> list_pet_sex = Arrays.asList("公","母");
+    public static final List<String> list_user_sex = Arrays.asList("男","女");
     public static final List<String> list_class = Arrays.asList("猫","狗","鸟","水族","其他");
     public static final List<String> list_state = Arrays.asList("正常","征婚","需要被领养","已丢失","已去世");
     public static final List<List<String>> list_family = Arrays.asList(

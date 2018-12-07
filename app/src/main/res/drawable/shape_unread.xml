@@ -2,6 +2,6 @@
 <!--底部导航条目的右上角未读消息背景-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <corners android:radius="20dp" />
-    <solid android:color="@color/red" />
+    <solid android:color="@color/loginout" />
     <padding android:left="4dp" android:right="4dp" android:top="1dp" android:bottom="1dp"/>
 </shape>

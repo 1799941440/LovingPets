@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -74,6 +75,12 @@ public class ServerOrderActivity extends BaseFragmentActivity {
     protected void initData() {
         userId = new UserUtil(getContext()).getUser().getId();
         title.setText("服务管理");
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         list_view.add(ServerOrderFragment.newInstance(6));
         list_view.add(ServerOrderFragment.newInstance(0));
         list_view.add(ServerOrderFragment.newInstance(1));

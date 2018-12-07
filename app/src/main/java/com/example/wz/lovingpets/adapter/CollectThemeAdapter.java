@@ -1,6 +1,7 @@
 package com.example.wz.lovingpets.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
+import com.example.wz.lovingpets.activity.ThemeDetailActivity;
 import com.example.wz.lovingpets.entity.CollectThemeInfo;
 import com.example.wz.lovingpets.utils.DateUtil;
 import com.example.wz.lovingpets.utils.ImageUtil;
@@ -20,10 +22,12 @@ import java.util.List;
 
 public class CollectThemeAdapter extends RecyclerView.Adapter<CollectThemeAdapter.VH> {
 
+    private Context context;
     private LayoutInflater inflater;
     private List<CollectThemeInfo> list;
 
     public CollectThemeAdapter(Context context, List<CollectThemeInfo> list) {
+        this.context = context;
         inflater = LayoutInflater.from(context);
         this.list = list;
     }
@@ -51,7 +55,7 @@ public class CollectThemeAdapter extends RecyclerView.Adapter<CollectThemeAdapte
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        CollectThemeInfo data = list.get(position);
+        final CollectThemeInfo data = list.get(position);
         List<String> images = StringUtils.getImgs(data.getContent());
         if(holder instanceof VH1){
             if(images.size() == 0){
@@ -65,6 +69,14 @@ public class CollectThemeAdapter extends RecyclerView.Adapter<CollectThemeAdapte
             ((VH1) holder).tv_date.setText(DateUtil.DateToString(data.getPushTime()));
             ((VH1) holder).tv_comment.setText(data.getCommentTimes()+"");
             ((VH1) holder).tv_collect.setText(data.getCollectTimes()+"");
+            ((VH1) holder).ll_root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ThemeDetailActivity.class);
+                    intent.putExtra("id",data.getTargetId());
+                    context.startActivity(intent);
+                }
+            });
         }else if(holder instanceof VH3){
             ((VH3) holder).tv_title.setText(data.getTitle());
             ((VH3) holder).tv_content.setText(data.getContent());
@@ -73,6 +85,14 @@ public class CollectThemeAdapter extends RecyclerView.Adapter<CollectThemeAdapte
             ((VH3) holder).tv_comment.setText(data.getCommentTimes()+"");
             ((VH3) holder).tv_collect.setText(data.getCollectTimes()+"");
             ((VH3) holder).tv_count.setText(images.size()+"图");
+            ((VH3) holder).ll_root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ThemeDetailActivity.class);
+                    intent.putExtra("id",data.getTargetId());
+                    context.startActivity(intent);
+                }
+            });
             ImageUtil.loadLocalImage(((VH3) holder).iv1,images.get(0));
             ImageUtil.loadLocalImage(((VH3) holder).iv2,images.get(1));
             ImageUtil.loadLocalImage(((VH3) holder).iv3,images.get(2));

@@ -80,6 +80,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         return fragment;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        resetUserData();
+    }
+
     public void findViews(View view) {
         tv_title = view.findViewById(R.id.mine_tv_title);
         tv_login = view.findViewById(R.id.mine_tv_login);
@@ -107,11 +113,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         if(user.getId() != 0){
             resetUserData();
             mine_ll_userInfo.setOnClickListener(this);
+        }else{
+            tv_register.setOnClickListener(this);
+            tv_login.setOnClickListener(this);
         }
         iv_setting.setOnClickListener(this);
-        iv_banner.setOnClickListener(this);
-        tv_register.setOnClickListener(this);
-        tv_login.setOnClickListener(this);
         ll_pets_info.setOnClickListener(this);
         ll_my_address.setOnClickListener(this);
         ll_my_server.setOnClickListener(this);

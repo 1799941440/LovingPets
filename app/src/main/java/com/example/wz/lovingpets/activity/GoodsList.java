@@ -67,6 +67,7 @@ public class GoodsList extends BaseFragmentActivity {
         iv_back = findViewById(R.id.goodsList_iv_back);
         rv = findViewById(R.id.goodsList_rv);
         et_goodsName = findViewById(R.id.et_goodsName);
+        et_goodsName.clearFocus();
         tv_search = findViewById(R.id.tv_goods_search);
     }
 
