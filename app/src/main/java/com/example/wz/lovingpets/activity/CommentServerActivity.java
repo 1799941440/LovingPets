@@ -10,10 +10,13 @@ import android.widget.TextView;
 
 import com.example.wz.lovingpets.R;
 import com.example.wz.lovingpets.base.BaseActivity;
+import com.example.wz.lovingpets.common.Event;
+import com.example.wz.lovingpets.common.EventCodes;
 import com.example.wz.lovingpets.common.ObservableDecorator;
 import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.ServiceComment;
 import com.example.wz.lovingpets.net.HttpRequest;
+import com.example.wz.lovingpets.utils.EventBusUtils;
 import com.example.wz.lovingpets.utils.ImageUtil;
 import com.example.wz.lovingpets.utils.UserUtil;
 import com.google.gson.Gson;
@@ -33,7 +36,7 @@ public class CommentServerActivity extends BaseActivity implements View.OnClickL
     private String imageUrl;
     private TextView tv_des,tv_title;
     private byte stars = 5;
-    private int userId,serviceId;
+    private int userId,serviceId,orderId;
     private ImageView iv_back,iv_image,iv_star1,iv_star2,iv_star3,iv_star4,iv_star5;
     private List<ImageView> list = new ArrayList<>();
 
@@ -65,6 +68,7 @@ public class CommentServerActivity extends BaseActivity implements View.OnClickL
         userId = new UserUtil(this).getUser().getId();
         list.addAll(Arrays.asList(iv_star1,iv_star2,iv_star3,iv_star4,iv_star5));
         serviceId = getIntent().getIntExtra("serviceId",0);
+        orderId = getIntent().getIntExtra("orderId",0);
         imageUrl = getIntent().getStringExtra("imageUrl");
         ImageUtil.loadNetImage(iv_image,imageUrl);
         iv_back.setOnClickListener(this);
@@ -105,7 +109,8 @@ public class CommentServerActivity extends BaseActivity implements View.OnClickL
 
     private void commitComment() {
         ServiceComment sc = new ServiceComment();
-        sc.setOrderId(serviceId);
+        sc.setOrderId(orderId);
+        sc.setServiceId(serviceId);
         sc.setUserId(userId);
         sc.setCommentTime(new Date());
         sc.setStar(stars);
@@ -121,6 +126,7 @@ public class CommentServerActivity extends BaseActivity implements View.OnClickL
             public void onSuccess(ListResponse listResponse) {
                 if(listResponse.isSuccess()){
                     showLongToast("评论成功");
+                    EventBusUtils.sendEvent(new Event(EventCodes.COMMENT_SERVER_ORDER,null));
                     finish();
                 }
             }

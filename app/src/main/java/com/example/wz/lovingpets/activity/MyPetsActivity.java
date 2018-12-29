@@ -19,6 +19,7 @@ import com.example.wz.lovingpets.entity.ListResponse;
 import com.example.wz.lovingpets.entity.PetInfo;
 import com.example.wz.lovingpets.entity.User;
 import com.example.wz.lovingpets.net.HttpRequest;
+import com.example.wz.lovingpets.utils.UserUtil;
 import com.example.wz.lovingpets.widget.ConfirmDialogBuilder;
 import com.example.wz.lovingpets.widget.ConfirmDialog;
 
@@ -82,7 +83,7 @@ public class MyPetsActivity extends BaseFragmentActivity implements View.OnClick
             iv_add.setVisibility(View.VISIBLE);
             iv_add.setOnClickListener(this);
         }
-        user = MyApp.getInstance().getUser();
+        user = new UserUtil(this).getUser();
         rv.setAdapter(adapter);
         iv_back.setOnClickListener(this);
     }

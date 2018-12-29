@@ -128,8 +128,11 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
         ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
             @Override
             public void onSuccess(ListResponse listResponse) {
-                showToast(listResponse.getMsg());
-                EventBusUtils.sendEvent(new Event(EventCodes.SAVE_ADDRESS,null));
+                if(listResponse.isSuccess()){
+                    showToast(listResponse.getMsg());
+                    EventBusUtils.sendEvent(new Event(EventCodes.SAVE_ADDRESS,null));
+                    finish();
+                }
             }
         });
     }
@@ -143,7 +146,7 @@ public class EditAddressActivity extends BaseActivity implements View.OnClickLis
         if(temp.length!=0){
             s+=(temp[0]);
         }
-        return s.toString();
+        return s;
     }
 
     private String getFullAddress(Address data) {

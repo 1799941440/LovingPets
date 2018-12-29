@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wz.lovingpets.R;
+import com.example.wz.lovingpets.activity.ApplyActivity;
 import com.example.wz.lovingpets.activity.ManageAddressActivity;
 import com.example.wz.lovingpets.activity.MyApp;
 import com.example.wz.lovingpets.activity.MyCollectionActivity;
@@ -51,7 +52,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private ImageView iv_setting, iv_banner, iv_devide,iv_head;
     private LinearLayout ll_pets_info, ll_my_address,ll_unpay,
             ll_unreceive,ll_evaluate,ll_all,ll_my_cart,ll_my_collection,
-            ll_my_server,mine_ll_userInfo;
+            ll_my_server,mine_ll_userInfo,ll_my_apply;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,6 +106,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         mine_ll_userInfo = view.findViewById(R.id.mine_ll_userInfo);
         ll_all = view.findViewById(R.id.mine_ll_all);
         ll_my_cart = view.findViewById(R.id.ll_my_cart);
+        ll_my_apply = view.findViewById(R.id.ll_my_apply);
         ll_my_collection = view.findViewById(R.id.ll_my_collection);
     }
 
@@ -126,6 +128,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         ll_evaluate.setOnClickListener(this);
         ll_all.setOnClickListener(this);
         ll_my_cart.setOnClickListener(this);
+        ll_my_apply.setOnClickListener(this);
         ll_my_collection.setOnClickListener(this);
     }
 
@@ -162,6 +165,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 break;
             case R.id.ll_pets_info:
                 startActivity(new Intent(getActivity(), MyPetsActivity.class));
+                break;
+            case R.id.ll_my_apply:
+                if(user.getIdentity() == 2){
+                    startActivity(new Intent(getActivity(), ApplyActivity.class));
+                }else{
+                    showLongToast("您已经是店家了！不能再次申请");
+                }
                 break;
             case R.id.ll_my_address:
                 startActivity(new Intent(getActivity(), ManageAddressActivity.class));

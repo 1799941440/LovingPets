@@ -5,10 +5,17 @@ import java.util.Date;
 public class ServiceComment {
 	private Integer id;
 	private Integer orderId;
+	private Integer serviceId;
 	private Integer userId;
 	private byte star;
 	private String comment;
 	private Date commentTime;
+	public Integer getServiceId() {
+		return serviceId;
+	}
+	public void setServiceId(Integer serviceId) {
+		this.serviceId = serviceId;
+	}
 	public Integer getId() {
 		return id;
 	}

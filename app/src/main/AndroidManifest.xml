@@ -19,27 +19,25 @@
         android:roundIcon="@drawable/ic_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme_dog">
-
         <activity
             android:name=".activity.LaunchActivity"
             android:theme="@style/LaunchTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
-        <!--<activity android:name=".activity.LaunchActivity" />-->
-        <!--<activity android:name=".activity.MainActivity">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.MAIN" />-->
+        <!-- <activity android:name=".activity.LaunchActivity" /> -->
+        <!-- <activity android:name=".activity.MainActivity"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-        <!--<category android:name="android.intent.category.LAUNCHER" />-->
-        <!--</intent-filter>-->
-        <!--</activity>-->
 
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
 
         <activity
             android:name=".ui.login.LoginActivity"
@@ -67,7 +65,8 @@
         <activity android:name=".activity.CommentServerActivity" />
         <activity android:name=".activity.AddThemeActivity" />
         <activity android:name=".activity.ThemeDetailActivity" />
-        <activity android:name=".activity.CommentThemeActivity"></activity>
+        <activity android:name=".activity.CommentThemeActivity" />
+        <activity android:name=".activity.ApplyActivity"></activity>
     </application>
 
 </manifest>

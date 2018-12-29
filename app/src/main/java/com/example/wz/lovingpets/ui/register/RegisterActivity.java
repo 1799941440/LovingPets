@@ -377,7 +377,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        showToast("验证失败0");
+                        showToast("请输入正确的手机号码");
                     }
                 });
                 ((Throwable) data).printStackTrace();

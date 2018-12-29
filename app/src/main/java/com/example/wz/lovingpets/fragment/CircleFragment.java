@@ -112,7 +112,7 @@ public class CircleFragment extends BaseFragment {
     }
 
     public void getTheme(final int targetPage, final RefreshLayout refreshlayout){
-        Observable<ListResponse<ThemeInfo>> observable = api.getTheme(targetPage);
+        Observable<ListResponse<ThemeInfo>> observable = api.getTheme(targetPage,10);
         ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse<ThemeInfo>>() {
             @Override
             public void onSuccess(ListResponse<ThemeInfo> listResponse) {

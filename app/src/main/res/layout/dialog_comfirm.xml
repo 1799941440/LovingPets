@@ -7,10 +7,10 @@
     <TextView
         android:textSize="18sp"
         android:text="确定"
-        android:background="#00ff00"
+        android:background="#f3f4f5"
         android:paddingLeft="5dp"
         android:textColor="#000000"
-        android:gravity="center|left"
+        android:gravity="center"
         android:id="@+id/dialog_tv_title"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
@@ -32,6 +32,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:textColor="#999999"
+            android:background="@android:color/white"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="取消"
@@ -45,10 +46,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_weight="1"
-            android:background="#00ff00"
+            android:background="@android:color/white"
             android:text="确定"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
+            android:textColor="#00ff00"
             android:textSize="18sp" />
     </LinearLayout>
 

@@ -295,7 +295,7 @@ public class LoginActivity extends Activity implements View.OnFocusChangeListene
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                showTip("失败");
+                showTip("登录失败，请填写正确的用户名和密码");
                 rl_failed.setVisibility(View.INVISIBLE);
                 reshowInputAnim();
             }

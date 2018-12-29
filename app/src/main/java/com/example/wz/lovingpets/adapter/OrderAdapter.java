@@ -46,7 +46,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         holder.tv_total.setText(data.getAmount()+"");
         holder.tv_receiver.setText(data.getReceiver());
         holder.tv_contact.setText(data.getContact());
-        holder.tv_address.setText("收货地址"+data.getProvince()+data.getCity()+data.getFullAddress());
+        holder.tv_address.setText("收货地址:"+data.getProvince()+data.getCity()+data.getFullAddress());
         if(data.getOrderState() == 2){
             //2-待收货
             holder.tv_state.setTextColor(Color.parseColor("#00ff00"));

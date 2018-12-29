@@ -121,6 +121,7 @@ public class ServerOrderAdapter extends RecyclerView.Adapter<ServerOrderAdapter.
                 public void onClick(View v) {
                     Intent intent = new Intent(context, CommentServerActivity.class);
                     intent.putExtra("serviceId",s.getServiceId());
+                    intent.putExtra("orderId",s.getId());
                     intent.putExtra("imageUrl",s.getImages());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);

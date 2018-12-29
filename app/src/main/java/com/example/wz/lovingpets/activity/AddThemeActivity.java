@@ -117,6 +117,7 @@ public class AddThemeActivity extends BaseActivity implements View.OnClickListen
             public void onSuccess(ListResponse listResponse) {
                 if(listResponse.isSuccess()){
                     showLongToast("发布主题成功");
+                    finish();
                 }
             }
         });

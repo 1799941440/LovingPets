@@ -22,6 +22,7 @@ import java.util.List;
 
 public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.VH> {
 
+    private int size;
     private Context context;
     private List<ThemeInfo> list;
     private LayoutInflater inflater;
@@ -30,6 +31,12 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.VH> {
         this.context = context;
         this.list = list;
         this.inflater = LayoutInflater.from(context);
+    }
+    public ThemeAdapter(List<ThemeInfo> list, Context context,int size) {
+        this.context = context;
+        this.list = list;
+        this.inflater = LayoutInflater.from(context);
+        this.size = size;
     }
 
     @Override
@@ -101,7 +108,11 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.VH> {
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if(size == 0){
+            return list.size();
+        }else{
+            return size;
+        }
     }
 
     public class VH extends RecyclerView.ViewHolder{

@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <com.example.wz.lovingpets.widget.MyScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:contentInsetStart="0dp">
+            android:layout_height="match_parent">
 
             <include
                 android:id="@+id/nav_top"
@@ -22,23 +20,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_behavior="" />
-        </android.support.v7.widget.Toolbar>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/home_tab"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@android:color/white"
-            app:tabIndicatorColor="?attr/colorPrimary"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="?attr/colorPrimary"
-            app:tabTextColor="@android:color/black" />
-    </android.support.design.widget.AppBarLayout>
+            <com.youth.banner.Banner
+                android:id="@+id/home_banner"
+                android:layout_width="match_parent"
+                android:layout_height="180dp" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/home_vp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            <TextView
+                android:layout_marginTop="@dimen/dp20"
+                android:background="#eeeeee"
+                android:textSize="17sp"
+                android:text="热门服务"
+                android:padding="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-</android.support.design.widget.CoordinatorLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/home_service_rv"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:background="#eeeeee"
+                android:textSize="17sp"
+                android:text="热卖商品"
+                android:padding="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/home_goods_rv"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:background="#eeeeee"
+                android:textSize="17sp"
+                android:text="热议话题"
+                android:padding="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/home_theme_rv"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </com.example.wz.lovingpets.widget.MyScrollView>
+</LinearLayout>

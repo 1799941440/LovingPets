@@ -104,6 +104,14 @@ public class HttpRequest {
                 @Field("collecterId") Integer collecterId
         );
 
+        // 获取商品
+        @FormUrlEncoded
+        @POST("/petserviceplatform/GoodsAction/getByClassify")
+        Observable<ListResponse<GoodsDetailInfo>> getTop4Goods(
+                @Field("rows") Integer rows,
+                @Field("collecterId") Integer collecterId
+        );
+
         // 加入购物车
         @FormUrlEncoded
         @POST("/petserviceplatform/ShoppingCartAction/addGoodsToCart")
@@ -241,6 +249,13 @@ public class HttpRequest {
                 @Field("condition")String condition
         );
 
+        //获取前4服务
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ServiceAction/getServiceByType")
+        Observable<ListResponse<ServiceInfo>> getTop4Service(
+                @Field("rows")Integer rows
+        );
+
         //获取服务订单
         @FormUrlEncoded
         @POST("/petserviceplatform/ServiceOrderAction/getForUser")
@@ -296,7 +311,8 @@ public class HttpRequest {
         @FormUrlEncoded
         @POST("/petserviceplatform/ThemeAction/getThemeByPage")
         Observable<ListResponse<ThemeInfo>> getTheme(
-                @Field("page")Integer page
+                @Field("page")Integer page,
+                @Field("rows")Integer rows
         );
 
         //获取主题列表
@@ -331,6 +347,15 @@ public class HttpRequest {
                 @Field("replyId")Integer replyId
         );
 
+        //申请入驻
+        @FormUrlEncoded
+        @POST("/petserviceplatform/ShopAction/toBeShopKeeper")
+        Observable<ListResponse> toBeShopKeeper(
+                @Field("userId")Integer userId,
+                @Field("shopName")String shopName,
+                @Field("shopAddress")String shopAddress
+        );
+
     }
 
     public Observable<ListResponse<User>> login(String username, String password) {
@@ -351,6 +376,10 @@ public class HttpRequest {
 
     public Observable<ListResponse<GoodsDetailInfo>> getGoods(String classify,String condition,Integer collecterId){
         return apiService.getGoods(classify,condition,collecterId);
+    }
+
+    public Observable<ListResponse<GoodsDetailInfo>> getTop4Goods(Integer rows,Integer collecterId){
+        return apiService.getTop4Goods(rows,collecterId);
     }
 
     public Observable<ListResponse> addToCart(String param){
@@ -433,6 +462,10 @@ public class HttpRequest {
         return apiService.getServer(type,condition);
     }
 
+    public Observable<ListResponse<ServiceInfo>>  getTop4Server(Integer rows){
+        return apiService.getTop4Service(rows);
+    }
+
     public Observable<ListResponse<ServiceOrderInfo>>  getServerOrder(Integer userId){
         return apiService.getServerOrder(userId);
     }
@@ -457,8 +490,8 @@ public class HttpRequest {
         return apiService.comentServiceOrder(param);
     }
 
-    public Observable<ListResponse<ThemeInfo>>  getTheme(Integer page){
-        return apiService.getTheme(page);
+    public Observable<ListResponse<ThemeInfo>>  getTheme(Integer page,Integer rows){
+        return apiService.getTheme(page,rows);
     }
 
     public Observable<ListResponse>  pushTheme(String param){
@@ -475,6 +508,10 @@ public class HttpRequest {
 
     public Observable<ListResponse>  commentTheme(Integer themeId,String reply,Integer replyId){
         return apiService.commentTheme(themeId,reply,replyId);
+    }
+
+    public Observable<ListResponse>  toBeShopKeeper(Integer userId,String shopName,String shopAddress){
+        return apiService.toBeShopKeeper(userId,shopName,shopAddress);
     }
 
 }

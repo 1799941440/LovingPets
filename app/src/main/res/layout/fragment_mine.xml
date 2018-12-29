@@ -384,6 +384,41 @@
                     android:background="@color/divide_line_color" />
 
                 <LinearLayout
+                    android:id="@+id/ll_my_apply"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_margin="@dimen/dp10"
+                        android:src="@drawable/ic_shop" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/apply_shop" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_margin="5dp"
+                        android:src="@mipmap/ic_right_arrow" />
+                </LinearLayout><!--我的地址-->
+                <!--分割线-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/divide_line_color" />
+
+                <LinearLayout
                     android:id="@+id/ll_my_address"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"

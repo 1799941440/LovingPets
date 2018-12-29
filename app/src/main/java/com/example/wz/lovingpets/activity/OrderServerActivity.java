@@ -136,6 +136,7 @@ public class OrderServerActivity extends BaseActivity {
             public void onSuccess(ListResponse listResponse) {
                 if(listResponse.isSuccess()){
                     showLongToast("预约服务成功");
+                    finish();
                 }
             }
         });

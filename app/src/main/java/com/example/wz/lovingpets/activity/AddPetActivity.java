@@ -94,7 +94,7 @@ public class AddPetActivity extends BaseFragmentActivity implements View.OnClick
         dp = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                tv_birthday.setText(year+"-"+month+"-"+dayOfMonth);
+                tv_birthday.setText(year+"-"+(month+1)+"-"+dayOfMonth);
             }
         },c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
         iv_head.setOnClickListener(this);

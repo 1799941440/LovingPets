@@ -74,6 +74,12 @@ public class GoodsList extends BaseFragmentActivity {
     @Override
     protected void initData() {
         user = new UserUtil(this).getUser();
+        if(getIntent().getBundleExtra("bundle")!=null){
+            Bundle b = getIntent().getBundleExtra("bundle");
+            condition = b.getString("condition");
+            et_goodsName.setText(condition);
+            classify = b.getString("classify");
+        }
         tv_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,7 +146,7 @@ public class GoodsList extends BaseFragmentActivity {
 
     private void buyGoods(Event event) {
         String[] strings = StringUtils.splitWithBlank((String) event.getData());
-        Observable<ListResponse> observable = HttpRequest.getApiservice().goodsToOrder(Integer.valueOf(strings[0]), user.getCommomAddressId(), user.getId(), Integer.valueOf(strings[1]));
+        Observable<ListResponse> observable = HttpRequest.getApiservice().goodsToOrder(Integer.valueOf(strings[0]), Integer.valueOf(strings[2]), user.getId(), Integer.valueOf(strings[1]));
         ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
             @Override
             public void onSuccess(ListResponse listResponse) {

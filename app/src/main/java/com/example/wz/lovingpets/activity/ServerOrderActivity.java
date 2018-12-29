@@ -154,6 +154,8 @@ public class ServerOrderActivity extends BaseFragmentActivity {
                     }
                 }
             });
+        }else if(event.getCode() == EventCodes.COMMENT_SERVER_ORDER){
+            getSO();
         }
     }
 

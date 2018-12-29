@@ -82,7 +82,8 @@ public class ConfirmOrderActivity extends BaseActivity {
             bt_commit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventBusUtils.sendEvent(new Event<String>(EventCodes.BUY_GOODS, data.getId()+" "+count));
+                    EventBusUtils.sendEvent(new Event<String>(EventCodes.BUY_GOODS, data.getId()+" "+count+" "+addressId));
+                    finish();
                 }
             });
         }else{
@@ -90,11 +91,14 @@ public class ConfirmOrderActivity extends BaseActivity {
             bt_commit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Observable<ListResponse> observable = api.cartToOrder(getSeletedItem(),user.getId(),2,addressId);
+                    Observable<ListResponse> observable = api.cartToOrder(getSeletedItem(),user.getId(),addressId,2);
                     ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse>() {
                         @Override
                         public void onSuccess(ListResponse listResponse) {
-                            showLongToast(listResponse.getMsg());
+                            if(listResponse.isSuccess()){
+                                showLongToast(listResponse.getMsg());
+                                finish();
+                            }
                         }
                     });
                 }
@@ -128,7 +132,13 @@ public class ConfirmOrderActivity extends BaseActivity {
         ObservableDecorator.decorate(observable, new ObservableDecorator.SuccessCall<ListResponse<Address>>() {
             @Override
             public void onSuccess(ListResponse<Address> listResponse) {
-                setAddressInfo(listResponse.getRows().get(0));
+                if(listResponse.isSuccess()){
+                    setAddressInfo(listResponse.getRows().get(0));
+                }else{
+                    showLongToast("请先添加一个地址并选为默认收货地址");
+                    intent2Activity(ManageAddressActivity.class);
+                    finish();
+                }
             }
         });
     }
